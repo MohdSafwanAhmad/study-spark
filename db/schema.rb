@@ -10,12 +10,12 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2025_06_03_164225) do
+ActiveRecord::Schema[7.1].define(version: 2025_06_03_195136) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
   create_table "expertises", force: :cascade do |t|
-    t.decimal "tutor_rate"
+    t.integer "tutor_rate"
     t.bigint "user_id", null: false
     t.bigint "subject_id", null: false
     t.datetime "created_at", null: false

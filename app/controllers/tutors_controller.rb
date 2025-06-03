@@ -1,6 +1,6 @@
 class TutorsController < ApplicationController
   def index
-    @tutors = User.tutors
+    @tutors = User.tutors.joins(:expertises).distinct
   end
 
   def show

@@ -1,4 +1,6 @@
 class User < ApplicationRecord
+  has_many :expertises
+  has_many :subjects, through: :expertises
 
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable

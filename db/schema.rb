@@ -43,7 +43,7 @@ ActiveRecord::Schema[7.1].define(version: 2025_06_03_203443) do
   end
 
   create_table "expertises", force: :cascade do |t|
-    t.decimal "tutor_rate"
+    t.integer "tutor_rate"
     t.bigint "user_id", null: false
     t.bigint "subject_id", null: false
     t.datetime "created_at", null: false

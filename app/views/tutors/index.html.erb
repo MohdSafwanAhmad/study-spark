@@ -1,5 +1,31 @@
-<h1>Tutors#index</h1>
-<p>Find me in app/views/tutors/index.html.erb</p>
-<% @tutors.each do |tutor| %>
-  <%= tutor.first_name %>
-<% end %>
+<%# Tutors Index Page %>
+<div class="container">
+  <h1>Our Tutors</h1>
+
+  <div class="tutors-grid">
+    <% @tutors.each do |tutor| %>
+      <div class="tutor-card">
+        <div class="tutor-info">
+          <h2><%= tutor.first_name %> <%= tutor.last_name %></h2>
+          <p class="email"><%= tutor.email %></p>
+          
+          <%# Display expertise subjects %>
+          <p class="expertise">
+            <strong>Expertise:</strong>
+            <%= tutor.subjects.map(&:name).to_sentence %>
+          </p>
+
+          <% if tutor.bio.present? %>
+            <p class="bio"><%= tutor.bio %></p>
+          <% end %>
+
+          <%= link_to "View Profile", tutor_path(tutor), class: "button" %>
+        </div>
+      </div>
+    <% end %>
+  </div>
+
+  <% if @tutors.empty? %>
+    <p class="no-tutors">No tutors available at the moment.</p>
+  <% end %>
+</div>

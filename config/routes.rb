@@ -12,4 +12,5 @@ Rails.application.routes.draw do
 
   # subjects#index
   get "subjects", to: "subjects#index"
+  get "mysubjects", to: "subjects#mysubjects"
 end

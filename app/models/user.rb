@@ -5,5 +5,8 @@ class User < ApplicationRecord
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
 
+  has_many :studies
+  has_many :subjects, through: :studies
+
   scope :tutors, -> { where(tutor: true) }
 end

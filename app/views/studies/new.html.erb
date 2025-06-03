@@ -4,13 +4,22 @@
       <div class="card shadow-sm p-4">
         <h3 class="mb-4">Start a New Study</h3>
 
-        <%= simple_form_for @study do |f| %>
+        <%= simple_form_for @study, html: { multipart: true } do |f| %>
           <%= f.input :learning_objective, label: "Your Learning Objectives", input_html: { class: 'form-control' } %>
-          <%= f.input :subject_id, collection: Subject.all.pluck(:name, :id),
-            prompt: "Select a Subject", label: "Subject", input_html: { class: 'form-select' } %>
+
+          <%= f.input :subject_id,
+                      collection: Subject.all.pluck(:name, :id),
+                      prompt: "Select a Subject",
+                      label: "Subject",
+                      input_html: { class: 'form-select' } %>
+
+          <div class="mb-3">
+            <%= f.label :course_materials, "Upload Course Materials", class: "form-label" %>
+            <%= f.file_field :course_materials, multiple: true, class: "form-control" %>
+          </div>
+
           <%= f.button :submit, "Start Studying", class: "btn btn-primary mt-3" %>
         <% end %>
-
       </div>
     </div>
   </div>

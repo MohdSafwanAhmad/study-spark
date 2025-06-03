@@ -1,0 +1,17 @@
+<div class="container mt-5">
+  <div class="row justify-content-center">
+    <div class="col-md-6">
+      <div class="card shadow-sm p-4">
+        <h3 class="mb-4">Create a New Subject</h3>
+
+        <%= simple_form_for @subject do |f| %>
+          <%= f.input :name, label: "Subject Name", input_html: { class: 'form-control' } %>
+          <%= f.input :grade_level,collection: (8..10).to_a, prompt: "Select Grade Level",
+              label: "Grade Level", input_html: { class: 'form-select' } %>
+          <%= f.button :submit, "Create Subject", class: "btn btn-primary mt-3" %>
+        <% end %>
+
+      </div>
+    </div>
+  </div>
+</div>

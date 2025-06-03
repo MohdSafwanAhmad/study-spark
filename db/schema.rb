@@ -10,15 +10,17 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2025_06_03_161324) do
+ActiveRecord::Schema[7.1].define(version: 2025_06_03_164225) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
   create_table "expertises", force: :cascade do |t|
     t.decimal "tutor_rate"
     t.bigint "user_id", null: false
+    t.bigint "subject_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["subject_id"], name: "index_expertises_on_subject_id"
     t.index ["user_id"], name: "index_expertises_on_user_id"
   end
 
@@ -36,8 +38,10 @@ ActiveRecord::Schema[7.1].define(version: 2025_06_03_161324) do
   create_table "studies", force: :cascade do |t|
     t.string "learning_objective"
     t.bigint "user_id", null: false
+    t.bigint "subject_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["subject_id"], name: "index_studies_on_subject_id"
     t.index ["user_id"], name: "index_studies_on_user_id"
   end
 
@@ -65,7 +69,9 @@ ActiveRecord::Schema[7.1].define(version: 2025_06_03_161324) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
+  add_foreign_key "expertises", "subjects"
   add_foreign_key "expertises", "users"
   add_foreign_key "materials", "studies"
+  add_foreign_key "studies", "subjects"
   add_foreign_key "studies", "users"
 end

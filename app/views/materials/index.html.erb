@@ -1,0 +1,25 @@
+<h2 class="mb-4">Materials for <%= @study.subject.name %> (<%= @study.subject.grade_level %>)</h2>
+<p><strong>Learning Objective:</strong> <%= @study.learning_objective %></p>
+
+<div class="row mt-4">
+  <% if @materials.any? %>
+    <% @materials.each do |material| %>
+      <div class="col-md-6 col-lg-4 mb-4">
+        <div class="card h-100 shadow-sm">
+          <div class="card-body">
+            <h5 class="card-title"><%= material.name %></h5>
+            <h6 class="card-subtitle text-muted mb-2"><%= material.format %></h6>
+            <p class="card-text"><strong>Description:</strong> <%= material.description %></p>
+            <p class="card-text"><strong>Summary:</strong> <%= material.summary %></p>
+          </div>
+        </div>
+      </div>
+    <% end %>
+  <% else %>
+    <div class="col-12">
+      <p>No materials have been added for this study yet.</p>
+    </div>
+  <% end %>
+</div>
+
+<%= link_to "Back to My Subjects", mysubjects_path, class: "btn btn-secondary mt-3" %>

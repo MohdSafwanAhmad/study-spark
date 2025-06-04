@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  get 'tutoring_sessions/new'
+  get 'tutoring_sessions/create'
   get 'sessions/new'
   get 'sessions/create'
   devise_for :users

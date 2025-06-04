@@ -7,7 +7,7 @@
           <div class="card-body">
             <h5 class="card-title"><%= study.subject.name %> (<%= study.subject.grade_level %>)</h5>
             <p class="card-text"><strong>Learning Objective:</strong> <%= study.learning_objective %></p>
-            <button class="btn btn-secondary mt-3">Upload Study Materials</button>
+            <%= link_to "Upload Study Materials", upload_materials_study_path(study), class: "btn btn-secondary mt-3" %>
             <%= link_to 'View Generated Materials', study_materials_path(study), class: "btn btn-secondary mt-3" %>
           </div>
         </div>

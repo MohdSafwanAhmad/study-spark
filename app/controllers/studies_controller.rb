@@ -2,15 +2,16 @@ class StudiesController < ApplicationController
   def mysubjects
     @studies = Study.includes(:subject).where(user: current_user)
   end
+
   def index
     @studies = Study.all
   end
 
-  def new
+  def upload_materials
     @study = Study.new(subject_id: params[:subject_id])
   end
 
-  def create
+  def attach_materials
     @study = Study.new(study_params)
     @study.user = current_user
 

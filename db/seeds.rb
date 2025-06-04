@@ -9,11 +9,14 @@
 #   end
 # Clear existing data
 puts "Cleaning database..."
+Session.destroy_all
+# TutoringSession.destroy_all
 Material.destroy_all
 Expertise.destroy_all
 Study.destroy_all
 Subject.destroy_all
 User.destroy_all
+
 
 puts "Creating subjects..."
 

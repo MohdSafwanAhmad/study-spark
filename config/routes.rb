@@ -7,7 +7,7 @@ Rails.application.routes.draw do
   resources :sessions, only: [:new, :create]
 
   root to: "pages#home"
-  create
+  
   resources :studies do
     member do
       get :upload_materials

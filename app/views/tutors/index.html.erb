@@ -2,6 +2,20 @@
 <div class="container">
   <h1>Our Tutors</h1>
 
+  <%= form_with url: tutors_path, method: :get, local: true do %>
+    <div>
+      <%= label_tag :subject_id, "Subject" %>
+      <%= select_tag :subject_id, options_from_collection_for_select(Subject.all, :id, :name, params[:subject_id]), include_blank: "All Subjects" %>
+    </div>
+    <div>
+      <%= label_tag :max_price, "Max Price ($)" %>
+      <%= number_field_tag :max_price, params[:max_price], min: 0 %>
+    </div>
+    <div>
+      <%= submit_tag "Filter", class: "btn btn-outline-purple" %>
+    </div>
+  <% end %>
+
   <div class="tutors-grid">
     <% @tutors.each do |tutor| %>
       <div class="tutor-card">
@@ -12,7 +26,25 @@
           <%# Display expertise subjects %>
           <p class="expertise">
             <strong>Expertise:</strong>
-            <%= tutor.subjects.map(&:name).to_sentence %>
+            <ul>
+              <% 
+                filtered_expertises = tutor.expertises.includes(:subject)
+                if params[:subject_id].present?
+                  filtered_expertises = filtered_expertises.where(subject_id: params[:subject_id])
+                end
+                if params[:max_price].present?
+                  filtered_expertises = filtered_expertises.where('tutor_rate <= ?', params[:max_price])
+                end
+              %>
+              <% filtered_expertises.each do |expertise| %>
+                <li>
+                  <%= expertise.subject.name %>
+                  <% if expertise.tutor_rate.present? %>
+                    - $<%= expertise.tutor_rate %>
+                  <% end %>
+                </li>
+              <% end %>
+            </ul>
           </p>
 
           <% if tutor.bio.present? %>

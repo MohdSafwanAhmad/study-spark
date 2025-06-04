@@ -1,13 +1,26 @@
 .button {
   display: inline-block;
   padding: 8px 16px;
-  background: #007bff;
+  background: $purple;
   color: white;
   text-decoration: none;
   border-radius: 4px;
   margin-top: 10px;
 
   &:hover {
-    background: #0056b3;
+    background: $light-purple;
+  }
+}
+
+.btn-purple {
+  @extend .btn;
+  background-color: $purple !important;
+  color: #fff !important;
+  border: none;
+
+  &:hover,
+  &:focus {
+    background-color: darken($purple, 10%) !important;
+    color: #fff !important;
   }
 } 

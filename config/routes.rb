@@ -1,8 +1,12 @@
 Rails.application.routes.draw do
+  get 'sessions/new'
+  get 'sessions/create'
   devise_for :users
 
+  resources :sessions, only: [:new, :create]
 
   root to: "pages#home"
+  get "/dashboard", to: "pages#dashboard"
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 
   # Reveal health status on /up that returns 200 if the app boots with no exceptions, otherwise 500.

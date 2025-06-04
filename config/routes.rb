@@ -4,8 +4,6 @@ Rails.application.routes.draw do
   resources :tutors, only: [:index, :show]
 
   root to: "pages#home"
-  resources :subjects
-  resources :users
   resources :studies do
   member do
     get :upload_materials

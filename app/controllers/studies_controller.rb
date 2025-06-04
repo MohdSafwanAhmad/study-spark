@@ -17,6 +17,6 @@ class StudiesController < ApplicationController
   private
 
   def study_params
-    params.require(:study).permit(:subject_id, :learning_objectives, course_materials: [])
+    params.require(:study).permit(:learning_objective, :subject_id, :grade_level, course_materials: [])
   end
 end

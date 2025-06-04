@@ -1,9 +1,13 @@
 Rails.application.routes.draw do
+  get 'sessions/new'
+  get 'sessions/create'
   devise_for :users
 
   resources :tutors, only: [:index, :show]
+  resources :sessions, only: [:new, :create]
 
   root to: "pages#home"
+  create
   resources :studies do
     member do
       get :upload_materials

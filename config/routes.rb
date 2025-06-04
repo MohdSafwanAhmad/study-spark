@@ -1,7 +1,10 @@
 Rails.application.routes.draw do
+  get 'sessions/new'
+  get 'sessions/create'
   devise_for :users
 
   resources :tutors, only: [:index, :show]
+  resources :sessions, only: [:new, :create]
 
   root to: "pages#home"
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html

@@ -1,4 +1,8 @@
 class StudiesController < ApplicationController
+  def index
+    @studies = Study.all
+  end
+
   def new
     @study = Study.new(subject_id: params[:subject_id])
   end

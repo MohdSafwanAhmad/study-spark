@@ -52,7 +52,7 @@
           <% end %>
 
           <%= link_to "View Profile", tutor_path(tutor), class: "button" %>
-          <%= link_to "Book Session", new_session_path(tutor_id: tutor.id), class: "button" %>
+          <%= link_to "Book Session", new_tutoring_session_path(tutor_id: tutor.id), class: "button" %>
         </div>
       </div>
     <% end %>

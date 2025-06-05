@@ -13,17 +13,6 @@
               class: "form-select" %>
         </div>
         <div class="col-md-4 d-flex align-items-end">
-          <%= hidden_field_tag :sort, params[:sort] || "price_asc" %>
-          <button type="button" id="sort-price-btn" class="btn btn-outline-purple ms-2">
-            Price
-            <% if params[:sort] == "price_desc" %>
-              <i class="fa-solid fa-sort-down"></i>
-            <% elsif params[:sort] == "price_asc" %>
-              <i class="fa-solid fa-sort-up"></i>
-            <% else %>
-              <i class="fa-solid fa-sort"></i>
-            <% end %>
-          </button>
           <%= submit_tag "Filter", class: "btn btn-purple w-100 ms-2" %>
         </div>
       </div>
@@ -43,7 +32,12 @@
           <p class="expertise">
             <strong>Expertise:</strong>
             <ul>
-              <% tutor.expertises.includes(:subject).each do |expertise| %>
+            <% if params[:subject_id].present? %>
+              <% expertises = tutor.expertises.includes(:subject).where(subject_id: params[:subject_id])%>
+            <% else %>
+              <% expertises = tutor.expertises.includes(:subject) %>
+            <% end %>
+              <% expertises.each do |expertise| %>
                 <li>
                   <%= expertise.subject.name %>
                   <% if expertise.tutor_rate.present? %>

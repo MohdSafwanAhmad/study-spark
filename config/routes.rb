@@ -1,12 +1,7 @@
 Rails.application.routes.draw do
-  get 'tutoring_sessions/new'
-  get 'tutoring_sessions/create'
-  get 'sessions/new'
-  get 'sessions/create'
   devise_for :users
-# resources :tutoring_sessions, only: [:new, :create]
   resources :tutors, only: [:index, :show]
-
+  resources :tutoring_sessions, only: [:new, :create, :index, :show]
   root to: "pages#home"
 
   resources :studies do

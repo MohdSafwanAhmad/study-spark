@@ -1,12 +1,7 @@
 Rails.application.routes.draw do
-  get 'tutoring_sessions/new'
-  get 'tutoring_sessions/create'
-  get 'sessions/new'
-  get 'sessions/create'
   devise_for :users
-
-  resources :sessions, only: [:new, :create]
-
+  resources :tutors, only: [:index, :show]
+  resources :tutoring_sessions, only: [:new, :create, :index, :show]
   root to: "pages#home"
 
   resources :studies do
@@ -30,8 +25,12 @@ Rails.application.routes.draw do
   # View Materials associated with a Study
   get 'studies/:study_id/materials', to: 'materials#index', as: 'study_materials'
 
+
   resources :expertises, only: [:new, :create]
-  get '/expertises', to: redirect('/expertises/new')
+
+  # Add study materials to an existing Study (subject)
+  get  'studies/:study_id/materials/new', to: 'materials#new', as: 'new_study_material'
+  post 'studies/:study_id/materials',     to: 'materials#create'
 
   # Index and show for tutors
   resources :tutors, only: %i[index show]

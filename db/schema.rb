@@ -10,9 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-
-ActiveRecord::Schema[7.1].define(version: 2025_06_04_192331) do
-
+ActiveRecord::Schema[7.1].define(version: 2025_06_04_211643) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -94,6 +92,18 @@ ActiveRecord::Schema[7.1].define(version: 2025_06_04_192331) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "tutoring_sessions", force: :cascade do |t|
+    t.datetime "start_time"
+    t.datetime "end_time"
+    t.string "status"
+    t.bigint "expertise_id", null: false
+    t.bigint "study_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["expertise_id"], name: "index_tutoring_sessions_on_expertise_id"
+    t.index ["study_id"], name: "index_tutoring_sessions_on_study_id"
+  end
+
   create_table "users", force: :cascade do |t|
     t.string "email", default: "", null: false
     t.string "encrypted_password", default: "", null: false
@@ -120,4 +130,6 @@ ActiveRecord::Schema[7.1].define(version: 2025_06_04_192331) do
   add_foreign_key "sessions", "studies"
   add_foreign_key "studies", "subjects"
   add_foreign_key "studies", "users"
+  add_foreign_key "tutoring_sessions", "expertises"
+  add_foreign_key "tutoring_sessions", "studies"
 end

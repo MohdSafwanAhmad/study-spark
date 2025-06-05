@@ -1,18 +1,28 @@
 <h2>My Subjects</h2>
 
 <div class="row mt-4">
-    <% @studies.each do |study| %>
-      <div class="col-md-6 col-lg-4 mb-4">
-        <div class="card h-100 shadow-sm">
-          <div class="card-body">
-            <h5 class="card-title"><%= study.subject.name %> (<%= study.subject.grade_level %>)</h5>
-            <p class="card-text"><strong>Learning Objective:</strong> <%= study.learning_objective %></p>
-            <button class="btn btn-secondary mt-3">Upload Study Materials</button>
-            <%= link_to 'View Generated Materials', study_materials_path(study), class: "btn btn-secondary mt-3" %>
-          </div>
+  <% @studies.each do |study| %>
+    <div class="col-md-6 col-lg-4 mb-4">
+      <div class="card h-100 shadow-sm">
+        <div class="card-body">
+          <h5 class="card-title">
+            <%= study.subject.name %> (<%= study.subject.grade_level %>)
+          </h5>
+
+          <p class="card-text">
+            <strong>Learning Objective:</strong> <%= study.learning_objective %>
+          </p>
+
+          <!-- Upload Materials for this specific Study -->
+          <%= link_to 'Upload Study Materials', new_study_material_path(study), class: "btn btn-secondary mt-3" %>
+
+          <!-- View Materials for this specific Study -->
+          <%= link_to 'View Generated Materials', study_materials_path(study), class: "btn btn-secondary mt-3" %>
         </div>
       </div>
-    <% end %>
+    </div>
+  <% end %>
 </div>
 
+<%= link_to "Add a New Subject", new_study_path, class: "btn btn-primary mt-3" %>
 <%= link_to "Back to My Dashboard", root_path, class: "btn btn-secondary mt-3" %>

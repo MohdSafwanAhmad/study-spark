@@ -6,7 +6,7 @@ class MaterialsController < ApplicationController
     @materials = @study.materials
   end
 
-   def new
+  def new
     @material = Material.new
   end
 

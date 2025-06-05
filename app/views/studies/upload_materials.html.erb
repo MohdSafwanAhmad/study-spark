@@ -1,0 +1,16 @@
+<div class="container">
+  <h1>Upload Materials for <%= @study.subject.name %></h1>
+
+  <%= form_with url: attach_materials_study_path(@study), method: :patch, multipart: true do |f| %>
+    <div class="mb-4">
+      <%= f.label :materials, "Select Files", class: "form-label" %>
+      <%= f.file_field :materials, multiple: true, class: "form-control", accept: ".pdf,.doc,.docx,.txt" %>
+      <small class="form-text text-muted">You can select multiple files. Supported formats: PDF, DOC, DOCX, TXT</small>
+    </div>
+
+    <div class="mb-4">
+      <%= f.submit "Upload Materials", class: "btn btn-purple" %>
+      <%= link_to "Back to Materials", study_materials_path(@study), class: "btn btn-outline-purple ms-2" %>
+    </div>
+  <% end %>
+</div> 

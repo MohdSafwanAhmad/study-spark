@@ -6,7 +6,7 @@
   <%# If there are multiple expertises, you can show a dropdown or let the user pick %>
 </p>
 
-<%= form_with model: @session, url: sessions_path, local: true do |f| %>
+<%= form_with model: @tutoring_session, url: tutoring_sessions_path, local: true do |f| %>
   <%# If multiple expertises, show a dropdown. If only one, use a hidden field. %>
   <% if @expertises.size > 1 %>
     <div>

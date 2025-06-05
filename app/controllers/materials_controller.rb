@@ -1,11 +1,12 @@
 class MaterialsController < ApplicationController
+  before_action :set_study
+
   def index
     @study = Study.find(params[:study_id])
     @materials = @study.materials
   end
 
-  def new
-    @study = Study.find(params[:study_id])
+   def new
     @material = Material.new
   end
 
@@ -16,11 +17,15 @@ class MaterialsController < ApplicationController
     if @material.save
       redirect_to study_materials_path(@study), notice: "Material uploaded successfully!"
     else
-      render :new, status: :unprocessable_entity
+      render :new
     end
   end
 
   private
+
+  def set_study
+    @study = Study.find(params[:study_id])
+  end
 
   def material_params
     params.require(:material).permit(:name, :description, :summary)

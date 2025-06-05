@@ -17,8 +17,4 @@ class TutorsController < ApplicationController
         .distinct
     end
   end
-
-  def show
-    @tutor = User.find(params[:id])
-  end
 end

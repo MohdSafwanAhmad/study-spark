@@ -1,0 +1,11 @@
+<h2>Create Your Tutor Profile</h2>
+
+<%= simple_form_for @tutor, url: expertises_path do |f| %>
+  <%= f.simple_fields_for :tutor_profile do |pf| %>
+    <%= pf.input :name %>
+    <%= pf.input :bio %>
+    <%= pf.input :experience %>
+  <% end %>
+
+   <%= f.button :submit, "Create Profile" %>
+<% end %>

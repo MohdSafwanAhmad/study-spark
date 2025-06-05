@@ -1,5 +1,5 @@
 class StudiesController < ApplicationController
-  def mysubjects
+  def dashboard
     @studies = Study.includes(:subject).where(user: current_user)
   end
   def index

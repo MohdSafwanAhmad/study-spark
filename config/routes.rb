@@ -25,7 +25,7 @@ Rails.application.routes.draw do
   get "subjects", to: "subjects#index"
 
   # Learner view to their subjects and learning objectives
-  get "mysubjects", to: "studies#mysubjects"
+  get "dashboard", to: "studies#dashboard"
 
   # View Materials associated with a Study
   get 'studies/:study_id/materials', to: 'materials#index', as: 'study_materials'

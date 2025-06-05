@@ -31,10 +31,10 @@ class TutoringSessionsController < ApplicationController
   end
 
   def create
-    expertise = Expertise.find(params[:session][:expertise_id])
+    expertise = Expertise.find(params[:tutoring_session][:expertise_id])
     study = current_user.studies.find_by(subject_id: expertise.subject_id)
 
-    time_str = params[:session][:time]
+    time_str = params[:tutoring_session][:time]
     start_time = Time.zone.parse("#{Date.today} #{time_str}")
 
     @tutoring_session = TutoringSession.new(

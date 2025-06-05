@@ -5,19 +5,26 @@
   <div class="filter-tabs mb-4">
     <%= form_with url: tutors_path, method: :get, local: true, class: "filter-form" do %>
       <div class="row align-items-end">
-        <div class="col-md-5">
+        <div class="col-md-8">
           <%= label_tag :subject_id, "Subject", class: "form-label" %>
           <%= select_tag :subject_id, 
               options_from_collection_for_select(Subject.all, :id, :name, params[:subject_id]), 
               include_blank: "All Subjects",
               class: "form-select" %>
         </div>
-        <div class="col-md-5">
-          <%= label_tag :max_price, "Max Price ($)", class: "form-label" %>
-          <%= number_field_tag :max_price, params[:max_price], min: 0, class: "form-control" %>
-        </div>
-        <div class="col-md-2">
-          <%= submit_tag "Filter", class: "btn btn-purple w-100" %>
+        <div class="col-md-4 d-flex align-items-end">
+          <%= hidden_field_tag :sort, params[:sort] || "price_asc" %>
+          <button type="button" id="sort-price-btn" class="btn btn-outline-purple ms-2">
+            Price
+            <% if params[:sort] == "price_desc" %>
+              <i class="fa-solid fa-sort-down"></i>
+            <% elsif params[:sort] == "price_asc" %>
+              <i class="fa-solid fa-sort-up"></i>
+            <% else %>
+              <i class="fa-solid fa-sort"></i>
+            <% end %>
+          </button>
+          <%= submit_tag "Filter", class: "btn btn-purple w-100 ms-2" %>
         </div>
       </div>
     <% end %>
@@ -62,3 +69,20 @@
     <p class="no-tutors">No tutors available at the moment.</p>
   <% end %>
 </div>
+
+<script>
+  document.addEventListener("DOMContentLoaded", function() {
+    const sortBtn = document.getElementById("sort-price-btn");
+    const sortField = document.querySelector("input[name='sort']");
+    if (sortBtn && sortField) {
+      sortBtn.addEventListener("click", function() {
+        if (sortField.value === "price_desc") {
+          sortField.value = "price_asc";
+        } else {
+          sortField.value = "price_desc";
+        }
+        this.form.submit();
+      });
+    }
+  });
+</script>

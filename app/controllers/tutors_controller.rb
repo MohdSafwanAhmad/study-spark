@@ -16,6 +16,21 @@ class TutorsController < ApplicationController
     if params[:max_price].present?
       @tutors = @tutors.joins(:expertises).where('expertises.tutor_rate <= ?', params[:max_price])
     end
+
+    # Sorting by price
+    if params[:sort] == "price_desc"
+      @tutors = @tutors
+        .joins(:expertises)
+        .select('users.*, MIN(expertises.tutor_rate) AS min_rate')
+        .group('users.id')
+        .order('min_rate DESC')
+    elsif params[:sort] == "price_asc"
+      @tutors = @tutors
+        .joins(:expertises)
+        .select('users.*, MIN(expertises.tutor_rate) AS min_rate')
+        .group('users.id')
+        .order('min_rate ASC')
+    end
   end
 
   def show

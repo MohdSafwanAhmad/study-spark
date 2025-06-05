@@ -1,8 +1,4 @@
 class ExpertisesController < ApplicationController
-  def index
-    @tutor = current_user
-  end
-
   def new
     @tutor = current_user
     @tutor.expertises.build if @tutor.expertises.empty?
@@ -11,19 +7,18 @@ class ExpertisesController < ApplicationController
   def create
     @tutor = current_user
     if @tutor.update(tutor_params)
-      redirect_to dashboard_path, notice: "Your tutor profile has been created!"
+      redirect_to dashboard_path, notice: "Expertise saved successfully!"
     else
+      @tutor.expertises.build if @tutor.expertises.empty?
       render :new
     end
   end
 
   private
 
-  def ensure_tutor!
-    redirect_to root_path, alert: "Access denied" unless current_user.tutor?
-  end
-
   def tutor_params
-    params.require(:user).permit(tutor_profile_attributes: [:id, :name, :bio, :experience])
+    params.require(:user).permit(
+      expertises_attributes: [:id, :subject_id, :tutor_rate, :_destroy]
+    )
   end
 end

@@ -30,7 +30,9 @@ Rails.application.routes.draw do
   # View Materials associated with a Study
   get 'studies/:study_id/materials', to: 'materials#index', as: 'study_materials'
 
+  resources :expertises, only: [:new, :create]
+  get '/expertises', to: redirect('/expertises/new')
+
   # Index and show for tutors
   resources :tutors, only: %i[index show]
-  resources :expertises, only: [:new, :create, :index]
 end

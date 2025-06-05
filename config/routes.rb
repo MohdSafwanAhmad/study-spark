@@ -5,10 +5,6 @@ Rails.application.routes.draw do
   get 'sessions/create'
   devise_for :users
 
-  resources :tutors, only: [:index, :show ]
-
-  root to: "pages#home"
-  resources :expertises, only: [:new, :create, :index]
   resources :sessions, only: [:new, :create]
 
   root to: "pages#home"
@@ -36,4 +32,5 @@ Rails.application.routes.draw do
 
   # Index and show for tutors
   resources :tutors, only: %i[index show]
+  resources :expertises, only: [:new, :create, :index]
 end

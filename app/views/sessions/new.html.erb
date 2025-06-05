@@ -1,0 +1,53 @@
+<h2>Book a Session with <%= @tutor.first_name %> <%= @tutor.last_name %></h2>
+
+<p>
+  <strong>Subject:</strong>
+  <%= @expertises.first.subject.name if @expertises.size == 1 %>
+  <%# If there are multiple expertises, you can show a dropdown or let the user pick %>
+</p>
+
+<%= form_with model: @session, url: sessions_path, local: true do |f| %>
+  <%# If multiple expertises, show a dropdown. If only one, use a hidden field. %>
+  <% if @expertises.size > 1 %>
+    <div>
+      <%= f.label :expertise_id, "Subject" %>
+      <%= f.collection_select :expertise_id, @expertises, :id, ->(e) { "#{e.subject.name} ($#{e.tutor_rate})" } %>
+    </div>
+  <% else %>
+    <%= f.hidden_field :expertise_id, value: @expertises.first.id %>
+  <% end %>
+
+  <div>
+    <label>Available Times</label>
+    <div id="time-buttons">
+      <% ["11:00 AM", "12:00 PM", "1:00 PM", "2:00 PM"].each do |time| %>
+        <button type="button" class="btn btn-outline-purple time-btn" data-time="<%= time %>"><%= time %></button>
+      <% end %>
+    </div>
+    <%= f.hidden_field :time, id: "selected_time" %>
+  </div>
+
+  <div>
+    <%= f.submit "Book Session", class: "btn btn-purple mt-3" %>
+  </div>
+<% end %>
+
+<script>
+  document.addEventListener("turbo:load", () => {
+    document.querySelectorAll(".time-btn").forEach(btn => {
+      btn.addEventListener("click", function() {
+        document.getElementById("selected_time").value = this.dataset.time;
+        document.querySelectorAll(".time-btn").forEach(b => b.classList.remove("active"));
+        this.classList.add("active");
+      });
+    });
+  });
+</script>
+
+<style>
+  .time-btn.active {
+    background: #714288;
+    color: #fff;
+    border-color: #714288;
+  }
+</style>

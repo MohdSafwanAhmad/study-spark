@@ -1,2 +1,19 @@
-<h1>Tutors#show</h1>
-<p>Find me in app/views/tutors/show.html.erb</p>
+<div class="container">
+  <h1><%= @tutor.first_name %> <%= @tutor.last_name %></h1>
+  <p><strong>Email:</strong> <%= @tutor.email %></p>
+  <p><strong>Bio:</strong> <%= @tutor.bio %></p>
+
+  <h2>Expertise</h2>
+  <ul>
+    <% @tutor.expertises.includes(:subject).each do |expertise| %>
+      <li>
+        <%= expertise.subject.name %>
+        <% if expertise.tutor_rate.present? %>
+          - $<%= expertise.tutor_rate %>
+        <% end %>
+      </li>
+    <% end %>
+  </ul>
+
+  <%# Add more details as needed, e.g. years of experience, reviews, etc. %>
+</div>

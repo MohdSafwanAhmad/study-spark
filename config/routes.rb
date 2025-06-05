@@ -31,7 +31,6 @@ Rails.application.routes.draw do
   get 'studies/:study_id/materials', to: 'materials#index', as: 'study_materials'
 
   resources :expertises, only: [:new, :create]
-  get '/expertises', to: redirect('/expertises/new')
 
   # Index and show for tutors
   resources :tutors, only: %i[index show]

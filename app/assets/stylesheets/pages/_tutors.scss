@@ -1,4 +1,37 @@
 // Tutors styles
+.filter-tabs {
+  background: #fff;
+  border-radius: 1.25rem;
+  border: 1.5px solid $light-purple;
+  padding: 1.5rem;
+  margin-bottom: 2rem;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+
+  .filter-form {
+    .form-label {
+      color: $purple;
+      font-weight: 500;
+      margin-bottom: 0.5rem;
+    }
+
+    .form-select,
+    .form-control {
+      border: 1.5px solid $light-purple;
+      border-radius: 0.75rem;
+      padding: 0.5rem 1rem;
+      
+      &:focus {
+        border-color: $purple;
+        box-shadow: 0 0 0 0.2rem rgba($purple, 0.25);
+      }
+    }
+
+    .btn-purple {
+      height: 38px;
+    }
+  }
+}
+
 .tutors-grid {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));

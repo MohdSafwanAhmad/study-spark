@@ -2,19 +2,26 @@
 <div class="container">
   <h1>Our Tutors</h1>
 
-  <%= form_with url: tutors_path, method: :get, local: true do %>
-    <div>
-      <%= label_tag :subject_id, "Subject" %>
-      <%= select_tag :subject_id, options_from_collection_for_select(Subject.all, :id, :name, params[:subject_id]), include_blank: "All Subjects" %>
-    </div>
-    <div>
-      <%= label_tag :max_price, "Max Price ($)" %>
-      <%= number_field_tag :max_price, params[:max_price], min: 0 %>
-    </div>
-    <div>
-      <%= submit_tag "Filter", class: "btn btn-outline-purple" %>
-    </div>
-  <% end %>
+  <div class="filter-tabs mb-4">
+    <%= form_with url: tutors_path, method: :get, local: true, class: "filter-form" do %>
+      <div class="row align-items-end">
+        <div class="col-md-5">
+          <%= label_tag :subject_id, "Subject", class: "form-label" %>
+          <%= select_tag :subject_id, 
+              options_from_collection_for_select(Subject.all, :id, :name, params[:subject_id]), 
+              include_blank: "All Subjects",
+              class: "form-select" %>
+        </div>
+        <div class="col-md-5">
+          <%= label_tag :max_price, "Max Price ($)", class: "form-label" %>
+          <%= number_field_tag :max_price, params[:max_price], min: 0, class: "form-control" %>
+        </div>
+        <div class="col-md-2">
+          <%= submit_tag "Filter", class: "btn btn-purple w-100" %>
+        </div>
+      </div>
+    <% end %>
+  </div>
 
   <div class="tutors-grid">
     <% learner_subject_ids = current_user.study_subjects.pluck(:id) %>

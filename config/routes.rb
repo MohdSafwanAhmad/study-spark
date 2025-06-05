@@ -8,7 +8,7 @@ Rails.application.routes.draw do
   resources :tutors, only: [:index, :show]
 
   root to: "pages#home"
-  
+
   resources :studies do
     member do
       get :upload_materials
@@ -29,6 +29,10 @@ Rails.application.routes.draw do
 
   # View Materials associated with a Study
   get 'studies/:study_id/materials', to: 'materials#index', as: 'study_materials'
+
+  # Add study materials to an existing Study (subject)
+  get  'studies/:study_id/materials/new', to: 'materials#new', as: 'new_study_material'
+  post 'studies/:study_id/materials',     to: 'materials#create'
 
   # Index and show for tutors
   resources :tutors, only: %i[index show]

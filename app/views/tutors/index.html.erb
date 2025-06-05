@@ -24,9 +24,9 @@
   </div>
 
   <div class="tutors-grid">
-    <% learner_subject_ids = current_user.study_subjects.pluck(:id) %>
+    <%# learner_subject_ids = current_user.study_subjects.pluck(:id) %>
     <% @tutors.each do |tutor| %>
-      <% matching_expertises = tutor.expertises.includes(:subject).where(subject_id: learner_subject_ids) %>
+      <%# matching_expertises = tutor.expertises.includes(:subject).where(subject_id: learner_subject_ids) %>
       <div class="tutor-card">
         <div class="tutor-info">
           <h2><%= tutor.first_name %> <%= tutor.last_name %></h2>
@@ -36,7 +36,7 @@
           <p class="expertise">
             <strong>Expertise:</strong>
             <ul>
-              <% matching_expertises.each do |expertise| %>
+              <% tutor.expertises.includes(:subject).each do |expertise| %>
                 <li>
                   <%= expertise.subject.name %>
                   <% if expertise.tutor_rate.present? %>

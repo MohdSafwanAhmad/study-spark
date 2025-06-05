@@ -2,6 +2,7 @@ class StudiesController < ApplicationController
   def dashboard
     @studies = Study.includes(:subject).where(user: current_user)
   end
+
   def index
     @studies = Study.all
   end

@@ -1,7 +1,6 @@
 <h1>Browse all subjects</h1>
 
 <p>**add filters to filter by grade level and subjet**</p>
-<a href="#" class="card-link">Browse all all tutors </a>
 
 <div class="container my-4">
   <div class="row">
@@ -12,7 +11,7 @@
             <h5 class="card-title"><%= subject.name %></h5>
             <h6 class="card-subtitle mb-2 text-body-secondary">Grade level: <%= subject.grade_level %></h6>
             <p>Short description about the subject</p>
-            <a href="#" class="card-link">Add to Dashboard</a>
+            <%= link_to "Add to Dashboard", new_study_path, class: "btn btn-secondary mt-3" %>
           </div>
         </div>
       </div>

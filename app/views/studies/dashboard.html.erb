@@ -37,6 +37,8 @@
         <div class="button-group mt-3 d-flex flex-column gap-2 align-items-center w-100">
           <%= link_to 'Upload Study Materials', new_study_material_path(study), class: "btn btn-purple btn-sm rounded-pill" %>
           <%= link_to 'View Generated Materials', study_materials_path(study), class: "btn btn-purple btn-sm rounded-pill" %>
+          <%= link_to 'View Details', study_path(study), class: "btn btn-purple btn-sm rounded-pill" %>
+
         </div>
       </div>
     <% end %>

@@ -32,7 +32,7 @@
               <ul class="dropdown-menu" aria-labelledby="mysubjectDropdown">
                 <% if current_user.studies.any? %>
                   <% current_user.studies.each do |study| %>
-                    <li><%= link_to "study.title", study_path(study), class: "dropdown-item" %></li>
+                    <%= link_to "Grade #{study.subject.grade_level} | #{study.subject.name}", study_path(study), class: "dropdown-item" %>
                   <% end %>
                 <% else %>
                   <li class="dropdown-item text-muted">No studies found</li>

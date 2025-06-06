@@ -31,5 +31,9 @@ Rails.application.routes.draw do
   post 'studies/:study_id/materials',     to: 'materials#create'
 
   # Index and show for tutors
+  # Index and show for a tutor to help a learner with study goals, etc.
+
   resources :tutors, only: %i[index show]
+  resources :learners, only: %i[index show]
+
 end

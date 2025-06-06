@@ -11,20 +11,20 @@
       <!-- Left side nav -->
       <ul class="navbar-nav me-auto mb-2 mb-lg-0">
         <% if user_signed_in? %>
-          <li class="nav-item">
-            <%= link_to "Home", root_path, class: "nav-link" %>
-          </li>
 
           <% if current_user.tutor.present? %>
             <!-- Tutor-specific placeholder links -->
             <li class="nav-item">
-              <%= link_to "My Learners", "#", class: "nav-link" %>
+              <%= link_to "Home", learners_path, class: "nav-link" %>
             </li>
             <li class="nav-item">
               <%= link_to "My Profile", "#", class: "nav-link" %>
             </li>
           <% else %>
             <!-- Learner-specific links -->
+            <li class="nav-item">
+              <%= link_to "Home", dashboard_path, class: "nav-link" %>
+            </li>
             <li class="nav-item dropdown">
               <a class="nav-link dropdown-toggle" href="#" id="mysubjectDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                 My Studies

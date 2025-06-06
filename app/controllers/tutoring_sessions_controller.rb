@@ -27,6 +27,12 @@ class TutoringSessionsController < ApplicationController
     @tutor = User.find(params[:tutor_id])
     learner_subject_ids = current_user.study_subjects.pluck(:id)
     @expertises = @tutor.expertises.where(subject_id: learner_subject_ids)
+    
+    if @expertises.empty?
+      redirect_to tutors_path, alert: "No matching subjects found for this tutor."
+      return
+    end
+    
     @tutoring_session = TutoringSession.new
   end
 
@@ -34,8 +40,9 @@ class TutoringSessionsController < ApplicationController
     expertise = Expertise.find(params[:tutoring_session][:expertise_id])
     study = current_user.studies.find_by(subject_id: expertise.subject_id)
 
-    time_str = params[:tutoring_session][:time]
-    start_time = Time.zone.parse("#{Date.today} #{time_str}")
+    date_str = params[:tutoring_session][:date] # e.g., "2024-06-17"
+    time_str = params[:tutoring_session][:time] # e.g., "11:00 AM"
+    start_time = Time.zone.parse("#{date_str} #{time_str}")
 
     @tutoring_session = TutoringSession.new(
       expertise_id: expertise.id,
@@ -44,7 +51,7 @@ class TutoringSessionsController < ApplicationController
     )
 
     if @tutoring_session.save
-      redirect_to root_path, notice: "Session booked!"
+      redirect_to dashboard_path, notice: "Session booked!"
     else
       flash.now[:alert] = "Could not book session."
       render :new

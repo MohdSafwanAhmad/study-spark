@@ -21,7 +21,9 @@
         <div class="tutor-info">
           <div class="d-flex justify-content-between align-items-center mb-3">
             <h2 class="mb-0">Study Materials</h2>
-            <%= link_to "Upload New Material", new_study_material_path(@study), class: "btn btn-purple btn-sm rounded-pill" %>
+            <% if @materials.any? %>
+              <%= link_to "Upload New Material", new_study_material_path(@study), class: "btn btn-purple btn-sm rounded-pill" %>
+            <% end %>
           </div>
           <% if @materials.any? %>
             <div class="d-flex flex-column gap-3">

@@ -2,7 +2,7 @@
   <h2 class="mb-4">Add Your Expertise</h2>
 <ul>
 <% @expertises.each do |expertise| %>
-<li><%= expertise.subject.name %> / $<%= expertise.tutor_rate %>h </li>
+<li><%= expertise.subject&.name %> / $<%= expertise.tutor_rate %>h </li>
 <% end %>
 </ul>
   <%= simple_form_for @expertise do |f| %>

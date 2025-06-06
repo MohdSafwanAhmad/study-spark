@@ -1,0 +1,73 @@
+<h2>Book a Session with <%= @tutor.first_name %> <%= @tutor.last_name %></h2>
+
+<% if @expertises.any? %>
+  <p>
+    <strong>Subject:</strong>
+    <%= @expertises.first.subject.name if @expertises.size == 1 %>
+  </p>
+
+  <%= form_with model: @tutoring_session, url: tutoring_sessions_path, local: true do |f| %>
+    <% if @expertises.size > 1 %>
+      <div>
+        <%= f.label :expertise_id, "Subject" %>
+        <%= f.collection_select :expertise_id, @expertises, :id, ->(e) { "#{e.subject.name} ($#{e.tutor_rate})" } %>
+      </div>
+    <% else %>
+      <%= f.hidden_field :expertise_id, value: @expertises.first.id %>
+    <% end %>
+
+    <div>
+      <label>Upcoming Availability</label>
+      <div id="date-buttons" class="mb-3">
+        <button type="button" class="btn btn-outline-purple date-btn" data-date="2024-06-17">June 17</button>
+        <button type="button" class="btn btn-outline-purple date-btn" data-date="2024-06-18">June 18</button>
+        <button type="button" class="btn btn-outline-purple date-btn" data-date="2024-06-19">June 19</button>
+      </div>
+      <%= f.hidden_field :date, id: "selected_date" %>
+    </div>
+
+    <div>
+      <label>Available Times</label>
+      <div id="time-buttons">
+        <% ["11:00 AM", "12:00 PM", "1:00 PM", "2:00 PM"].each do |time| %>
+          <button type="button" class="btn btn-outline-purple time-btn" data-time="<%= time %>"><%= time %></button>
+        <% end %>
+      </div>
+      <%= f.hidden_field :time, id: "selected_time" %>
+    </div>
+
+    <div>
+      <%= f.submit "Book Session", class: "btn btn-purple mt-3" %>
+    </div>
+  <% end %>
+
+  <script>
+    document.addEventListener("turbo:load", () => {
+      document.querySelectorAll(".date-btn").forEach(btn => {
+        btn.addEventListener("click", function() {
+          document.getElementById("selected_date").value = this.dataset.date;
+          document.querySelectorAll(".date-btn").forEach(b => b.classList.remove("active"));
+          this.classList.add("active");
+        });
+      });
+      document.querySelectorAll(".time-btn").forEach(btn => {
+        btn.addEventListener("click", function() {
+          document.getElementById("selected_time").value = this.dataset.time;
+          document.querySelectorAll(".time-btn").forEach(b => b.classList.remove("active"));
+          this.classList.add("active");
+        });
+      });
+    });
+  </script>
+
+  <style>
+    .date-btn.active, .time-btn.active {
+      background: #714288;
+      color: #fff;
+      border-color: #714288;
+    }
+  </style>
+<% else %>
+  <p>No matching subjects found for this tutor.</p>
+  <%= link_to "Back to Tutors", tutors_path, class: "btn btn-purple" %>
+<% end %>

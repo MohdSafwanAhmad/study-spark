@@ -1,0 +1,30 @@
+<h2>My Learners</h2>
+
+<div class="row mt-4">
+  <% @tutoring_sessions.each do |session| %>
+    <div class="col-md-6 col-lg-4 mb-4">
+      <div class="card h-100 shadow-sm">
+        <div class="card-body">
+          <h5 class="card-title">
+            <%= session.study.user.first_name %> <%= session.study.user.last_name %>
+          </h5>
+          <p class="card-text">
+            <strong>Subject:</strong> <%= session.study.subject.name %> (<%= session.study.subject.grade_level %>)<br>
+            <strong>Learning Objective:</strong> <%= session.study.learning_objective %><br>
+            <strong>Session Date:</strong> <%= session.start_time.strftime("%B %d, %Y") %><br>
+            <strong>Session Time:</strong> <%= session.start_time.strftime("%I:%M %p") %>
+          </p>
+
+          <% if session.study.materials.any? %>
+            <h6>Materials:</h6>
+            <ul>
+              <% session.study.materials.each do |material| %>
+                <li><%= material.name %> - <%= material.description %></li>
+              <% end %>
+            </ul>
+          <% end %>
+        </div>
+      </div>
+    </div>
+  <% end %>
+</div>

@@ -12,7 +12,7 @@ class TutorsController < ApplicationController
     # if params[:max_price].present?
     #   @tutors = @tutors.joins(:expertises).where('expertises.tutor_rate <= ?', params[:max_price])
     # end
-    
+
   #   # Sorting by price
   #   if params[:sort] == "price_desc"
   #     @tutors = @tutors
@@ -31,12 +31,5 @@ class TutorsController < ApplicationController
 
   def show
     @tutor = User.find(params[:id])
-  end
-
-  def learners
-    # Find all sessions where current_user is the tutor
-    @sessions = TutoringSession.joins(:expertise)
-      .where(expertises: { user_id: current_user.id })
-      .includes(study: [:user, :subject, :materials])
   end
 end

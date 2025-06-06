@@ -10,14 +10,11 @@
 # Clear existing data
 puts "Cleaning database..."
 TutoringSession.destroy_all
-# TutoringSession.destroy_all
 Material.destroy_all
 Expertise.destroy_all
 Study.destroy_all
 User.destroy_all
 Subject.destroy_all
-
-
 
 puts "Creating subjects..."
 
@@ -310,7 +307,6 @@ materials_avery_physics_momentum_and_collisions_quizzes.file.attach(io: physics_
 materials_avery_physics_momentum_and_collisions_quizzes.save
 
 # ---------------------
-
 
 puts "Created #{Material.count} materials"
 

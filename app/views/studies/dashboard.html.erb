@@ -1,5 +1,5 @@
 <div class="container">
-  <h2>My Subjects</h2>
+  <h2>My Dashboard</h2>
 
   <div class="tutors-grid">
     <% @studies.each do |study| %>
@@ -36,7 +36,6 @@
         </div>
         <div class="button-group mt-3 d-flex flex-column gap-2 align-items-center w-100">
           <%= link_to 'Upload Study Materials', new_study_material_path(study), class: "btn btn-purple btn-sm rounded-pill" %>
-          <%= link_to 'View Generated Materials', study_materials_path(study), class: "btn btn-purple btn-sm rounded-pill" %>
           <%= link_to 'View Details', study_path(study), class: "btn btn-purple btn-sm rounded-pill" %>
 
         </div>

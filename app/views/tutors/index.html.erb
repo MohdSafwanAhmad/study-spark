@@ -7,10 +7,10 @@
       <div class="row align-items-end">
         <div class="col-md-8">
           <%= label_tag :subject_id, "Subject", class: "form-label" %>
-          <%= select_tag :subject_id, 
-              options_from_collection_for_select(Subject.all, :id, :name, params[:subject_id]), 
-              include_blank: "All Subjects",
-              class: "form-select" %>
+          <%= select_tag :subject_id, options_for_select([
+            ["All Subjects", ""],
+            ["My Subjects", "my_subjects"]
+          ] + Subject.all.map { |s| [s.name, s.id] }, params[:subject_id]), class: "form-select" %>
         </div>
         <div class="col-md-4 d-flex align-items-end">
           <%= submit_tag "Filter", class: "btn btn-purple w-100 ms-2" %>
@@ -32,11 +32,17 @@
           <p class="expertise">
             <strong>Expertise:</strong>
             <ul>
-            <% if params[:subject_id].present? %>
-              <% expertises = tutor.expertises.includes(:subject).where(subject_id: params[:subject_id])%>
-            <% else %>
-              <% expertises = tutor.expertises.includes(:subject) %>
-            <% end %>
+              <% 
+                # Determine which expertises to show
+                if params[:subject_id] == "my_subjects" && user_signed_in?
+                  learner_subject_ids = current_user.study_subjects.pluck(:id)
+                  expertises = tutor.expertises.includes(:subject).where(subject_id: learner_subject_ids)
+                elsif params[:subject_id].present? && params[:subject_id] != ""
+                  expertises = tutor.expertises.includes(:subject).where(subject_id: params[:subject_id])
+                else
+                  expertises = tutor.expertises.includes(:subject)
+                end
+              %>
               <% expertises.each do |expertise| %>
                 <li>
                   <%= expertise.subject.name %>

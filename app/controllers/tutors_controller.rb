@@ -1,15 +1,11 @@
 class TutorsController < ApplicationController
   def index
-    @tutors = User.all
+    @tutors = User.tutors
 
-    # if user_signed_in? && current_user.study_subjects.any?
-    #   learner_subject_ids = current_user.study_subjects.pluck(:id)
-    #   @tutors = @tutors.joins(:expertises)
-    #                    .where(expertises: { subject_id: learner_subject_ids })
-    #                    .distinct
-    # end
-
-    if params[:subject_id].present?
+    if params[:subject_id] == "my_subjects" && user_signed_in?
+      learner_subject_ids = current_user.study_subjects.pluck(:id)
+      @tutors = @tutors.joins(:expertises).where(expertises: { subject_id: learner_subject_ids }).distinct
+    elsif params[:subject_id].present? && params[:subject_id] != ""
       @tutors = @tutors.joins(:expertises).where(expertises: { subject_id: params[:subject_id] })
     end
 

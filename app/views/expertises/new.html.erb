@@ -1,48 +1,22 @@
-<div class="container mt-4">
+<div class="container mt-4" data-controller="expertise">
   <h2 class="mb-4">Add Your Expertise</h2>
-
-  <%= simple_form_for @tutor, url: expertises_path do |f| %>
-    <div id="expertises-container">
-      <%= f.simple_fields_for :expertises do |ef| %>
-        <div class="border p-3 mb-3 bg-light rounded expertise-fields">
-          <div class="form-group mb-2">
-            <%= ef.input :subject_id,
-                        as: :select,
-                        collection: Subject.all.pluck(:name, :id),
-                        prompt: "Select Subject",
-                        input_html: { class: "form-select" },
-                        label: "Subject" %>
-          </div>
-
-          <div class="form-group mb-2">
-            <%= ef.input :tutor_rate,
-                        label: "Hourly Rate ($)",
-                        input_html: { class: "form-control", min: 0 } %>
-          </div>
-        </div>
-      <% end %>
-    </div>
-
-    <button type="button" id="add-expertise-btn">Add Another Expertise</button>
-
-<%= f.submit "Save Expertise" %>
+<ul>
+<% @expertises.each do |expertise| %>
+<li><%= expertise.subject.name %> / $<%= expertise.tutor_rate %>h </li>
 <% end %>
-</div>
+</ul>
+  <%= simple_form_for @expertise do |f| %>
+    <div id="expertises-container" data-expertise-target="container">
 
-<div id="expertise-template" style="display: none;">
-  <div class="expertise-fields">
-    <div>
-      <label for="">Subject</label>
-      <select name="tutor[expertises_attributes][INDEX][subject_id]">
-        <% Subject.all.each do |subject| %>
-          <option value="<%= subject.id %>"><%= subject.name %></option>
-        <% end %>
-      </select>
+        <div class="border p-3 mb-3 bg-light rounded expertise-fields">
+          <%= f.input :subject_id, as: :select, collection: Subject.all.pluck(:name, :id), prompt: "Select Subject",
+               input_html: { class: "form-select" }, label: "Subject" %>
+
+          <%= f.input :tutor_rate, label: "Hourly Rate ($)", input_html: { class: "form-control", min: 0 } %>
+        </div>
+
     </div>
 
-    <div>
-      <label for="">Hourly Rate ($)</label>
-      <input type="number" name="tutor[expertises_attributes][INDEX][tutor_rate]" min="0" />
-    </div>
-  </div>
+    <%= f.submit "Add Expertise", class: "btn btn-primary" %>
+  <% end %>
 </div>

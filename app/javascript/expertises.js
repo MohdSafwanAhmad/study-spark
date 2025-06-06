@@ -1,15 +1,18 @@
-document.addEventListener("DOMContentLoaded", () => {
-  const addBtn = document.getElementById("add-expertise-btn");
-  const container = document.getElementById("expertises-container");
-  const template = document.getElementById("expertise-template");
+import { Controller } from "@hotwired/stimulus"
 
-  if (!addBtn || !container || !template) return;
+export default class extends Controller {
+  static targets = ["container"]
 
-  let index = container.children.length;
+  connect() {
+    this.index = this.containerTarget.children.length
+  }
 
-  addBtn.addEventListener("click", () => {
-    const newFields = template.innerHTML.replace(/INDEX/g, index);
-    container.insertAdjacentHTML("beforeend", newFields);
-    index++;
-  });
-});
+  add() {
+    fetch(`/expertises/new_field?index=${this.index}`)
+      .then(response => response.text())
+      .then(html => {
+        this.containerTarget.insertAdjacentHTML("beforeend", html)
+        this.index++
+      })
+  }
+}

@@ -1,6 +1,6 @@
 class TutorsController < ApplicationController
   def index
-    # @tutors = User.tutors
+    @tutors = User.all
 
     # if user_signed_in? && current_user.study_subjects.any?
     #   learner_subject_ids = current_user.study_subjects.pluck(:id)

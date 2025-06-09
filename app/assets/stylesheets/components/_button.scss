@@ -41,4 +41,65 @@
     background-color: darken($purple, 10%) !important;
     color: #fff !important;
   }
+}
+
+.secondary-button {
+  background-color: #6B2DBA;
+  color: #ffffff;
+  padding: 10px 20px;
+  border-radius: 9999px;
+  font-weight: 600;
+  font-size: 1rem;
+  border: none;
+  cursor: pointer;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  transition: background-color 0.2s ease, transform 0.1s ease;
+}
+
+.secondary-button:hover {
+  background-color: #5a24a0;
+  transform: translateY(-1px);
+}
+
+.secondary-button:active {
+  background-color: #4b1d86;
+  transform: scale(0.98);
+}
+
+.button, .button-white {
+  border-radius: 9999px;
+  font-size: 14px;
+  min-width: 110px;
+  padding: 8px 20px;
+  text-align: center;
+}
+
+.button + .button, .button-white + .button-white, .button + .button-white, .button-white + .button {
+  margin-left: 8px;
+}
+
+.button-pink {
+  background: $tannish-pink;
+  color: $purple;
+  border: none;
+  border-radius: 9999px;
+  font-weight: 600;
+  font-size: 1rem;
+  padding: 10px 24px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  transition: background 0.2s, color 0.2s, box-shadow 0.2s;
+  box-shadow: 0 2px 8px rgba(255, 204, 204, 0.12);
+}
+.button-pink:hover, .button-pink:focus {
+  background: darken($tannish-pink, 7%);
+  color: $purple;
+  box-shadow: 0 4px 16px rgba(255, 204, 204, 0.18);
+}
+.button-pink:active {
+  background: darken($tannish-pink, 14%);
+  color: $purple;
 } 

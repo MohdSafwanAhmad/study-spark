@@ -4,4 +4,9 @@ class Study < ApplicationRecord
   belongs_to :subject
   has_many :materials
   has_many :tutoring_sessions
+
+  def fake_percent_complete
+    require 'zlib'
+    ((Zlib.crc32(id.to_s) % 71) + 20)
+  end
 end

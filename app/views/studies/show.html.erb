@@ -9,7 +9,6 @@
       <h4 class="fw-bold mb-2">Learning Objective</h4>
       <p class="mb-0 text-base"><%= @study.learning_objective %></p>
     </div>
-    <%= link_to "Back to Dashboard", dashboard_path, class: "btn btn-purple btn-sm rounded-pill mt-3" %>
   </div>
 
   <div class="row g-4 align-items-start">
@@ -41,8 +40,8 @@
                 </div>
                 <% if material.file.attached? %>
                   <div class="d-flex justify-content-end gap-2 mt-2">
-                    <%= link_to "Download", rails_blob_path(material.file, disposition: "attachment"), class: "btn btn-primary btn-sm rounded-pill" %>
-                    <%= link_to "View", rails_blob_path(material.file), target: "_blank", class: "btn btn-outline-primary btn-sm rounded-pill" %>
+                    <%= link_to "Download", rails_blob_path(material.file, disposition: "attachment"), class: "btn btn-purple btn-sm rounded-pill" %>
+                    <%= link_to "View", rails_blob_path(material.file), target: "_blank", class: "btn btn-purple btn-sm rounded-pill" %>
                   </div>
                 <% end %>
               </div>
@@ -51,7 +50,7 @@
         <% else %>
           <div class="text-center py-4 text-muted">
             <p>No materials yet. Get started by uploading your first study material.</p>
-            <%= link_to "Upload Material", new_study_material_path(@study), class: "btn btn-primary btn-sm rounded-pill mt-2" %>
+            <%= link_to "Upload Material", new_study_material_path(@study), class: "btn btn-purple btn-sm rounded-pill mt-2" %>
           </div>
         <% end %>
       </div>
@@ -68,9 +67,16 @@
             <% if @assigned_tutor.bio.present? %>
               <p class="mb-2 text-base"><%= @assigned_tutor.bio %></p>
             <% end %>
-            <div class="d-flex flex-column gap-2 mt-2">
-              <%= link_to "Book Session", new_tutoring_session_path(tutor_id: @assigned_tutor.id), class: "btn btn-primary btn-sm rounded-pill w-100" %>
-            </div>
+            <% if @upcoming_session %>
+              <div class="mb-2">
+                <span class="fw-semibold">Upcoming Session:</span>
+                <span class="fw-bold d-block mt-1"><%= @upcoming_session.start_time.strftime('%A, %b %d at %I:%M %p') %></span>
+              </div>
+            <% else %>
+              <div class="d-flex flex-column gap-2 mt-2">
+                <%= link_to "Book Session", new_tutoring_session_path(tutor_id: @assigned_tutor.id), class: "btn btn-purple btn-sm rounded-pill w-100" %>
+              </div>
+            <% end %>
           </div>
         </div>
       <% else %>
@@ -87,7 +93,7 @@
                     <p class="mb-2 text-base"><%= tutor.bio %></p>
                   <% end %>
                   <div class="d-flex flex-column gap-2 mt-2">
-                    <%= link_to "Book Session", new_tutoring_session_path(tutor_id: tutor.id), class: "btn btn-primary btn-sm rounded-pill w-100" %>
+                    <%= link_to "Book Session", new_tutoring_session_path(tutor_id: tutor.id), class: "btn btn-purple btn-sm rounded-pill w-100" %>
                   </div>
                 </div>
               <% end %>
@@ -103,25 +109,11 @@
       <!-- Study Progress Card -->
       <div class="subject-card p-4 mt-4">
         <h5 class="fw-bold mb-3 text-purple">Study Progress</h5>
-        <div class="mb-2 d-flex justify-content-between">
-          <span>Materials Reviewed</span>
-          <span><%= @materials.count %> items</span>
+        <% percent_complete = @study.fake_percent_complete %>
+        <div class="progress mb-2">
+          <div class="progress-bar bg-purple" role="progressbar" style="width: <%= percent_complete %>%"></div>
         </div>
-        <div class="progress mb-3">
-          <div class="progress-bar bg-purple" role="progressbar" style="width: 45%"></div>
-        </div>
-        <div class="mb-2 d-flex justify-content-between">
-          <span>Total Materials:</span>
-          <span><%= @materials.count %></span>
-        </div>
-        <div class="mb-2 d-flex justify-content-between">
-          <span>Available Tutors:</span>
-          <span><%= @available_tutors.count %></span>
-        </div>
-        <div class="mb-2 d-flex justify-content-between">
-          <span>Started:</span>
-          <span><%= @study.created_at.strftime("%b %d, %Y") %></span>
-        </div>
+        <div class="fw-bold fs-5 text-center mt-2"><%= percent_complete %>% complete</div>
       </div>
     </div>
   </div>

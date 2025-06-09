@@ -8,11 +8,22 @@
 
     <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
     <%= javascript_importmap_tags %>
+    <%= javascript_include_tag "application", "data-turbo-track": "reload", defer: true %>
+
   </head>
 
-  <body><%= render "shared/navbar" %>
-<%= render "shared/flashes" %>
+  <body>
 
+  <% if user_signed_in? %>
+    <%= render 'shared/sidebar' %>
+    <div class="content-wrapper" style="margin-left: 250px;">
+      <%= yield %>
+      <%= render "shared/flashes" %>
+    </div>
+    <% else %>
     <%= yield %>
+  <% end %>
+
+
   </body>
 </html>

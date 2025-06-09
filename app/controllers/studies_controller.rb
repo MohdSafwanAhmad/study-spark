@@ -11,11 +11,19 @@ class StudiesController < ApplicationController
 
   def show
     # @study is set by before_action
+
     @materials = @study.materials
-    @available_tutors = User.joins(:expertises)
-                           .where(tutor: true, expertises: { subject_id: @study.subject_id })
-                           .includes(:expertises)
-                           .distinct
+    @assigned_tutor = @study.tutoring_sessions.last&.expertise&.user
+    @upcoming_session = @study.tutoring_sessions.order(start_time: :desc).first
+    if @assigned_tutor
+      @available_tutors = []
+    else
+      @available_tutors = User.joins(:expertises)
+                             .where(tutor: true, expertises: { subject_id: @study.subject_id })
+                             .includes(:expertises)
+                             .distinct
+    end
+
   end
 
   def new

@@ -1,10 +1,6 @@
 <div class="container mt-4" data-controller="expertise">
   <h2 class="mb-4">Add Your Expertise</h2>
-<ul>
-<% @expertises.each do |expertise| %>
-<li><%= expertise.subject&.name %> / $<%= expertise.tutor_rate %>h </li>
-<% end %>
-</ul>
+
   <%= simple_form_for @expertise do |f| %>
     <div id="expertises-container" data-expertise-target="container">
 

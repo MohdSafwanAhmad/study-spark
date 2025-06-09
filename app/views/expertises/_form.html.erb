@@ -1,0 +1,18 @@
+<%= form_with(model: expertise, local: false) do |form| %>
+  <div class="mb-3">
+    <%= form.label :subject_id, "Subject" %>
+    <%= form.collection_select :subject_id, Subject.all, :id, :name, {}, class: "form-select" %>
+  </div>
+
+  <div class="mb-3">
+    <%= form.label :tutor_rate, "Hourly Rate ($)" %>
+    <%= form.number_field :tutor_rate, step: 0.01, class: "form-control" %>
+  </div>
+
+  <div class="d-flex justify-content-between">
+    <%= form.submit "Save", class: "btn btn-primary" %>
+    <%= link_to "Cancel", tutor_path(current_user),
+                data: { turbo_frame: "_top" },
+                class: "btn btn-secondary" %>
+  </div>
+<% end %>

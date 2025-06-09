@@ -1,0 +1,58 @@
+<% if user_signed_in? %>
+  <nav id="sidebarMenu" class="d-flex flex-column flex-shrink-0 p-3 bg-light position-fixed" style="width: 250px; height: 100vh; z-index: 1040;">
+    <div class="d-flex justify-content-between align-items-center mb-3">
+      <h2>StudySpark</h2>
+      <button class="btn d-md-none" type="button" data-bs-toggle="collapse" data-bs-target="#sidebarCollapseContent" aria-expanded="false" aria-controls="sidebarCollapseContent">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+    </div>
+
+    <div class="collapse d-md-block" id="sidebarCollapseContent">
+      <ul class="nav flex-column mb-auto list-unstyled">
+        <!-- Tutor Sidebar -->
+        <% if current_user.tutor.present? %>
+          <li>
+            <%= link_to "Dashboard", learners_path, class: "nav-link" %>
+          </li>
+          <li>
+            <%= link_to "My Profile", "#", class: "nav-link" %>
+          </li>
+        <!--Learner Sidebar-->
+        <% else %>
+          <li>
+            <%= link_to "Dashboard", dashboard_path, class: "nav-link" %>
+          </li>
+          <!-- My Studies Dropdown -->
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" id="studiesDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+              My Studies
+            </a>
+            <ul class="dropdown-menu dropdown-menu-end list-unstyled ps-3" aria-labelledby="studiesDropdown" style="width: 100%;">
+              <% if current_user.studies.any? %>
+                <% current_user.studies.each do |study| %>
+                  <li>
+                    <%= link_to "Grade #{study.subject.grade_level} | #{study.subject.name}", study_path(study), class: "dropdown-item" %>
+                  </li>
+                <% end %>
+              <% else %>
+                <li class="dropdown-item text-muted">No studies found</li>
+              <% end %>
+            </ul>
+          </li>
+
+          <li>
+            <%= link_to "Browse Tutors", tutors_path, class: "nav-link" %>
+          </li>
+          <li>
+            <%= link_to "Browse Subjects", subjects_path, class: "nav-link" %>
+          </li>
+        <% end %>
+      </ul>
+
+      <hr>
+      <div>
+        <%= link_to "Log out", destroy_user_session_path, data: { turbo_method: :delete }, class: "nav-link text-danger" %>
+      </div>
+    </div>
+  </nav>
+<% end %>

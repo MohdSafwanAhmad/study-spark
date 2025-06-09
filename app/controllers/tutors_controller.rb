@@ -31,5 +31,7 @@ class TutorsController < ApplicationController
 
   def show
     @tutor = User.find(params[:id])
+    expertise_ids = @tutor.expertises.pluck(:id)
+    @learners = User.joins(studies: :tutoring_sessions).where(tutoring_sessions: { expertise_id: expertise_ids }).distinct
   end
 end

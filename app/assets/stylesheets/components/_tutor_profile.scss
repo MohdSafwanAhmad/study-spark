@@ -1,0 +1,62 @@
+// app/assets/stylesheets/components/_tutor_profile.scss
+
+.tutor-card {
+  background: #fff;
+  border-radius: 1.25rem;
+  border: 1.5px solid $light-purple;
+  padding: 2rem 1.5rem;
+  margin-bottom: 2rem;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+  transition: border-color 0.2s;
+
+  &:hover {
+    border-color: $purple;
+  }
+
+  .tutor-info h1 {
+    font-size: 1.75rem;
+    font-weight: bold;
+    color: $purple;
+  }
+
+  .email {
+    color: $gray;
+    font-size: 1rem;
+    margin-bottom: 0.5rem;
+  }
+
+  .bio {
+    color: #444;
+    font-size: 0.95rem;
+    margin-bottom: 1rem;
+  }
+
+  .card-title {
+    font-size: 1.2rem;
+    font-weight: 600;
+  }
+
+  .card-text {
+    font-size: 1rem;
+  }
+
+  .btn-sm {
+    margin-left: 0.25rem;
+  }
+
+  .btn-purple {
+    background-color: $purple;
+    color: white;
+    border: none;
+    padding: 0.5rem 1rem;
+    border-radius: 0.5rem;
+
+    &:hover {
+      background-color: darken($purple, 10%);
+    }
+  }
+}
+
+.text-purple {
+  color: $purple;
+}

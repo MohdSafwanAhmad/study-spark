@@ -1,4 +1,6 @@
 class ExpertisesController < ApplicationController
+  before_action :authenticate_user!
+  before_action :set_expertise, only: [:edit, :update, :destroy]
   def new
     @expertises = current_user.expertises
     @tutor = current_user

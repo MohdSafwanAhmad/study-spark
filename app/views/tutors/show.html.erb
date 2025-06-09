@@ -1,68 +1,90 @@
 <div class="container my-5">
   <div class="tutor-card">
     <div class="tutor-info">
-      <h1><%= @tutor.first_name %> <%= @tutor.last_name %></h1>
+      <h1 class="text-purple"><%= @tutor.first_name %> <%= @tutor.last_name %></h1>
       <p class="email"><strong>Email:</strong> <%= @tutor.email %></p>
 
       <% if @tutor.bio.present? %>
         <p class="bio"><strong>Bio:</strong> <%= @tutor.bio %></p>
       <% end %>
+    </div>
 
-      <hr>
+    <hr>
 
-      <h2>Expertise</h2>
-      <div class="row">
-        <% @tutor.expertises.includes(:subject).each do |expertise| %>
-          <turbo-frame id="expertise_<%= expertise.id %>" class="col-md-4 mb-3">
-            <% if params[:edit_id].to_i == expertise.id %>
-              <!-- Edit form -->
-              <%= form_with(model: expertise, local: false) do |form| %>
-                <div class="card h-100">
-                  <div class="card-body d-flex flex-column">
-                    <div class="mb-3">
-                      <%= form.label :subject_id, "Subject" %>
-                      <%= form.collection_select :subject_id, Subject.all, :id, :name, {}, class: "form-select" %>
-                    </div>
-
-                    <div class="mb-3">
-                      <%= form.label :tutor_rate, "Hourly Rate ($)" %>
-                      <%= form.number_field :tutor_rate, step: 0.01, class: "form-control" %>
-                    </div>
-
-                    <div class="mt-auto d-flex justify-content-between">
-                      <%= form.submit "Save", class: "btn btn-primary" %>
-                      <%= link_to "Cancel", tutor_path(current_user), data: { turbo_frame: "_top" }, class: "btn btn-secondary" %>
-                    </div>
-                  </div>
-                </div>
-              <% end %>
-            <% else %>
+    <h2 class="text-purple">Expertise</h2>
+    <div class="row">
+      <% @tutor.expertises.includes(:subject).each do |expertise| %>
+        <turbo-frame id="expertise_<%= expertise.id %>" class="col-md-4 mb-3">
+          <% if current_user == @tutor && params[:edit_id].to_i == expertise.id %>
+            <%= form_with(model: expertise, local: false) do |form| %>
               <div class="card h-100">
                 <div class="card-body d-flex flex-column">
-                  <h5 class="card-title"><%= expertise.subject.name %></h5>
-
-                  <% if expertise.tutor_rate.present? %>
-                    <p class="card-text">$<%= expertise.tutor_rate %> / hour</p>
-                  <% else %>
-                    <p class="card-text text-muted">Rate not provided</p>
-                  <% end %>
-
-                  <div class="mt-auto d-flex align-items-center justify-content-end">
-                    <%= link_to "Edit", edit_expertise_path(expertise), data: { turbo_frame: "expertise_#{expertise.id}" }, class: "btn btn-sm btn-outline-primary me-2" %>
-
-                    <%= button_to "Delete", expertise_path(expertise), method: :delete, data: { turbo_confirm: "Are you sure you want to delete this expertise?" },
-                      class: "btn btn-sm btn-outline-danger" %>
+                  <div class="mb-3">
+                    <%= form.label :subject_id, "Subject" %>
+                    <%= form.collection_select :subject_id, Subject.all, :id, :name, {}, class: "form-select" %>
+                  </div>
+                  <div class="mb-3">
+                    <%= form.label :tutor_rate, "Hourly Rate ($)" %>
+                    <%= form.number_field :tutor_rate, step: 0.01, class: "form-control" %>
+                  </div>
+                  <div class="mt-auto d-flex justify-content-between">
+                    <%= form.submit "Save", class: "btn btn-primary" %>
+                    <%= link_to "Cancel", tutor_path(current_user), data: { turbo_frame: "_top" }, class: "btn btn-secondary" %>
                   </div>
                 </div>
               </div>
             <% end %>
-          </turbo-frame>
-        <% end %>
-      </div>
+          <% else %>
+            <div class="card h-100">
+              <div class="card-body d-flex flex-column">
+                <h5 class="card-title"><%= expertise.subject.name %></h5>
+                <% if expertise.tutor_rate.present? %>
+                  <p class="card-text">$<%= expertise.tutor_rate %> / hour</p>
+                <% else %>
+                  <p class="card-text text-muted">Rate not provided</p>
+                <% end %>
 
-      <div class="mt-4">
-        <%= link_to "Add Expertise", new_expertise_path, class: "btn btn-primary" %>
-      </div>
+                <% if current_user == @tutor %>
+                  <div class="mt-auto d-flex align-items-center justify-content-end">
+                    <%= link_to "Edit", edit_expertise_path(expertise), data: { turbo_frame: "expertise_#{expertise.id}" }, class: "btn btn-sm btn-outline-primary me-2" %>
+                    <%= button_to "Delete", expertise_path(expertise), method: :delete, data: { turbo_confirm: "Are you sure?" }, class: "btn btn-sm btn-outline-danger" %>
+                  </div>
+                <% end %>
+              </div>
+            </div>
+          <% end %>
+        </turbo-frame>
+      <% end %>
     </div>
+
+    <% if current_user == @tutor %>
+      <div class="mt-4">
+        <%= link_to "Add Expertise", new_expertise_path, class: "btn btn-purple" %>
+      </div>
+    <% end %>
+
+    <% if current_user == @tutor %>
+      <hr class="my-5">
+
+      <h2 class="text-purple">My Learners</h2>
+
+      <% if @learners.any? %>
+        <div class="row">
+          <% @learners.each do |learner| %>
+            <div class="col-md-4 mb-3">
+              <div class="card">
+                <div class="card-body">
+                  <h5 class="card-title"><%= learner.first_name %> <%= learner.last_name %></h5>
+                  <p class="card-text"><strong>Email:</strong> <%= learner.email %></p>
+                  <%= link_to "View Profile", learner_path(learner), class: "btn btn-outline-primary btn-sm" %>
+                </div>
+              </div>
+            </div>
+          <% end %>
+        </div>
+      <% else %>
+        <p class="text-muted">You haven't had any learners yet.</p>
+      <% end %>
+    <% end %>
   </div>
 </div>

@@ -32,6 +32,15 @@ gem "ostruct"
 # Cloudinary
 gem "cloudinary"
 
+#Open AI
+gem "ruby-openai"
+
+# PDF Reader
+gem "pdf-reader"
+
+# MarkDown Renderer
+gem 'redcarpet'
+
 # Use Redis adapter to run Action Cable in production
 # gem "redis", ">= 4.0.1"
 

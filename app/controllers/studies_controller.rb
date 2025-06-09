@@ -11,7 +11,7 @@ class StudiesController < ApplicationController
 
   def show
     # @study is set by before_action
-    @materials = @study.materials.with_attached_file
+    @materials = @study.materials
     @available_tutors = User.joins(:expertises)
                            .where(tutor: true, expertises: { subject_id: @study.subject_id })
                            .includes(:expertises)

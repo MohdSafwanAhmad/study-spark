@@ -18,12 +18,6 @@
             label: "Subject",
             input_html: { class: 'form-select' } %>
 
-
-          <div class="mb-3">
-            <%= f.label :course_materials, "Upload Course Materials", class: "form-label" %>
-            <%= f.file_field :course_materials, multiple: true, class: "form-control" %>
-          </div>
-
           <%= f.button :submit, "Start Studying", class: "btn btn-primary mt-3" %>
         <% end %>
       </div>

@@ -32,7 +32,7 @@ class StudiesController < ApplicationController
     @study.user = current_user
 
     if @study.save
-      redirect_to mysubjects_path, notice: "Subject added to your studies!"
+      redirect_to dashboard_path, notice: "Subject added to your studies!"
     else
       render :new
     end

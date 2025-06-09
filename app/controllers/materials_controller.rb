@@ -20,7 +20,7 @@ class MaterialsController < ApplicationController
     first_page = reader.pages.first
     content = first_page.text
     # Make a call to OpenAI to get the summary of the PDF
-    client = OpenAI::Client.new
+    client = OpenAI::Client.new(access_token: ENV["OPENAI_ACCESS_TOKEN"])
     response = client.chat(parameters: {
       "model": "gpt-4o-mini",
       "messages": 
@@ -31,7 +31,13 @@ class MaterialsController < ApplicationController
         },
         {
           role: "user",
-                    content: "Could you extract the concepts from the following content and create a summary of the concepts as the Raw Markdown with no text around it and no code block? The idea is to help the learner understand the core concepts presented directly or with examples in the PDF. The whole summary should make sense when read together. Content: #{content}"
+          content: "Extract and summarize only the core educational concepts from the following educational content. Present the summary in raw Markdown.
+
+            Identify the main concepts discussed in the content. For each main concept, provide a clear, concise explanation and relevant examples if present in the text. Break down main concepts into sub-concepts if appropriate.
+
+            Ensure no introductory text, wrap-up phrases, or external references (like lesson numbers or review questions) are included. The entire output must be purely the concept summary in Markdown.
+
+            Content: #{content}"
         }
       ]
     })
@@ -40,7 +46,7 @@ class MaterialsController < ApplicationController
 
 
     if @material.save
-      redirect_to study_materials_path(@study), notice: "Material uploaded successfully!"
+      redirect_to study_path(@study), notice: "Material uploaded successfully!"
     else
       render :new
     end

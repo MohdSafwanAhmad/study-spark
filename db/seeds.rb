@@ -51,6 +51,7 @@ puts "Created #{Subject.count} subjects"
 puts "Creating users..."
 
 # Create tutors
+tutor_developer = User.create!(first_name: "Test Tutor", last_name: "Dev", email: "tutor@test.com", password: "password123", tutor: true, date_of_birth: "1995-03-15", bio: "Math tutor with 5+ years experience" )
 tutor_sarah_johnson = User.create!(first_name: "Sarah", last_name: "Johnson", email: "sarah.johnson@studyspark.com", password: "password123", tutor: true, date_of_birth: "1995-03-15", bio: "Math tutor with 5+ years experience" )
 tutor_michael_chen = User.create!(first_name: "Michael", last_name: "Chen", email: "michael.chen@studyspark.com", password: "password123", tutor: true, date_of_birth: "1992-07-22", bio: "Biology PhD student, passionate about science education" )
 tutor_emily_rodriguez = User.create!(first_name: "Emily", last_name: "Rodriguez", email: "emily.rodriguez@studyspark.com", password: "password123", tutor: true, date_of_birth: "1988-11-08", bio: "Former high school English teacher" )
@@ -63,6 +64,7 @@ tutor_amanda_garcia = User.create!(first_name: "Amanda", last_name: "Garcia", em
 tutor_daniel_brown = User.create!(first_name: "Daniel", last_name: "Brown", email: "daniel.brown@studyspark.com", password: "password123", tutor: true, date_of_birth: "1987-06-07", bio: "Experienced in multiple subjects, patient teaching style" )
 
 # Create learners
+learner_developer = User.create!(first_name: "Test Learner", last_name: "Dev", email: "learner@test.com", password: "password123", tutor: true, date_of_birth: "1995-03-15", bio: "Math tutor with 5+ years experience" )
 learner_alex_smith = User.create!(first_name: "Alex", last_name: "Smith", email: "alex.smith@student.studyspark.com", password: "password123", tutor: false, date_of_birth: "2008-03-15" )
 learner_jordan_johnson = User.create!(first_name: "Jordan", last_name: "Johnson", email: "jordan.johnson@student.studyspark.com", password: "password123", tutor: false, date_of_birth: "2009-07-22" )
 learner_taylor_williams = User.create!(first_name: "Taylor", last_name: "Williams", email: "taylor.williams@student.studyspark.com", password: "password123", tutor: false, date_of_birth: "2008-11-08" )

@@ -26,10 +26,15 @@ Rails.application.routes.draw do
   # View Materials associated with a Study
   get 'studies/:study_id/materials', to: 'materials#index', as: 'study_materials'
 
-  resources :expertises, only: [:new, :create]
+
+  resources :expertises, only: [:new, :create, :edit, :update, :destroy] do
+    get :new_field, on: :collection
+  end
+
   # Add study materials to an existing Study (subject)
   get  'studies/:study_id/materials/new', to: 'materials#new', as: 'new_study_material'
   post 'studies/:study_id/materials',     to: 'materials#create'
+
 
   # Index and show for tutors
   # Index and show for a tutor to help a learner with study goals, etc.

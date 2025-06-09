@@ -1,4 +1,4 @@
 class Material < ApplicationRecord
   belongs_to :study
-  has_one_attached(:file)
+  attr_accessor :file
 end

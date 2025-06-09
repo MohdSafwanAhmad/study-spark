@@ -11,11 +11,19 @@ class StudiesController < ApplicationController
 
   def show
     # @study is set by before_action
-    @materials = @study.materials.with_attached_file
-    @available_tutors = User.joins(:expertises)
-                           .where(tutor: true, expertises: { subject_id: @study.subject_id })
-                           .includes(:expertises)
-                           .distinct
+
+    @materials = @study.materials
+    @assigned_tutor = @study.tutoring_sessions.last&.expertise&.user
+    @upcoming_session = @study.tutoring_sessions.order(start_time: :desc).first
+    if @assigned_tutor
+      @available_tutors = []
+    else
+      @available_tutors = User.joins(:expertises)
+                             .where(tutor: true, expertises: { subject_id: @study.subject_id })
+                             .includes(:expertises)
+                             .distinct
+    end
+
   end
 
   def new
@@ -27,7 +35,7 @@ class StudiesController < ApplicationController
     @study.user = current_user
 
     if @study.save
-      redirect_to mysubjects_path, notice: "Subject added to your studies!"
+      redirect_to dashboard_path, notice: "Subject added to your studies!"
     else
       render :new
     end

@@ -10,14 +10,11 @@
 # Clear existing data
 puts "Cleaning database..."
 TutoringSession.destroy_all
-# TutoringSession.destroy_all
 Material.destroy_all
 Expertise.destroy_all
 Study.destroy_all
 User.destroy_all
 Subject.destroy_all
-
-
 
 puts "Creating subjects..."
 
@@ -54,6 +51,7 @@ puts "Created #{Subject.count} subjects"
 puts "Creating users..."
 
 # Create tutors
+tutor_developer = User.create!(first_name: "Test Tutor", last_name: "Dev", email: "tutor@test.com", password: "password123", tutor: true, date_of_birth: "1995-03-15", bio: "Math tutor with 5+ years experience" )
 tutor_sarah_johnson = User.create!(first_name: "Sarah", last_name: "Johnson", email: "sarah.johnson@studyspark.com", password: "password123", tutor: true, date_of_birth: "1995-03-15", bio: "Math tutor with 5+ years experience" )
 tutor_michael_chen = User.create!(first_name: "Michael", last_name: "Chen", email: "michael.chen@studyspark.com", password: "password123", tutor: true, date_of_birth: "1992-07-22", bio: "Biology PhD student, passionate about science education" )
 tutor_emily_rodriguez = User.create!(first_name: "Emily", last_name: "Rodriguez", email: "emily.rodriguez@studyspark.com", password: "password123", tutor: true, date_of_birth: "1988-11-08", bio: "Former high school English teacher" )
@@ -66,6 +64,7 @@ tutor_amanda_garcia = User.create!(first_name: "Amanda", last_name: "Garcia", em
 tutor_daniel_brown = User.create!(first_name: "Daniel", last_name: "Brown", email: "daniel.brown@studyspark.com", password: "password123", tutor: true, date_of_birth: "1987-06-07", bio: "Experienced in multiple subjects, patient teaching style" )
 
 # Create learners
+learner_developer = User.create!(first_name: "Test Learner", last_name: "Dev", email: "learner@test.com", password: "password123", tutor: true, date_of_birth: "1995-03-15", bio: "Math tutor with 5+ years experience" )
 learner_alex_smith = User.create!(first_name: "Alex", last_name: "Smith", email: "alex.smith@student.studyspark.com", password: "password123", tutor: false, date_of_birth: "2008-03-15" )
 learner_jordan_johnson = User.create!(first_name: "Jordan", last_name: "Johnson", email: "jordan.johnson@student.studyspark.com", password: "password123", tutor: false, date_of_birth: "2009-07-22" )
 learner_taylor_williams = User.create!(first_name: "Taylor", last_name: "Williams", email: "taylor.williams@student.studyspark.com", password: "password123", tutor: false, date_of_birth: "2008-11-08" )
@@ -260,64 +259,9 @@ river_studies_grade8_world_history = Study.create!(user: learner_river_robinson,
 
 puts "Created #{Study.count} studies"
 
-puts "Creating materials..."
-
-# Materials for Alex's Pre-Algebra study
-materials_alex_pre_algebra_linear_equations = Material.new(name: "Linear Equations Practice", description: "Step-by-step practice problems for solving equations", format: "PDF", study: alex_studies_grade8_pre_algebra)
-linear_equations_file = File.open("./db/files/alex_pre_algebra/linear_equations.pdf") # Assuming this file exists
-materials_alex_pre_algebra_linear_equations.file.attach(io: linear_equations_file, filename: "linear_equation.pdf", content_type: "application/pdf")
-materials_alex_pre_algebra_linear_equations.save
-
-# Materials for Avery's Physics study
-# -------------------------------------
-materials_avery_physics_momentum_and_collisions1 = Material.new(name: "Momentum and Collision 1", description: "Understanding momentum and collision", format: "PDF", study: avery_studies_grade10_physics)
-physics_momentum_and_collisions1_file = File.open("./db/files/avery_collisions/Momentum and Collisions 1.pdf") # Assuming this file exists
-materials_avery_physics_momentum_and_collisions1.file.attach(io: physics_momentum_and_collisions1_file, filename: "Momentum and Collisions 1.pdf", content_type: "application/pdf")
-materials_avery_physics_momentum_and_collisions1.save
-
-
-materials_avery_physics_momentum_and_collisions2 = Material.new(name: "Momentum and Collision 3", description: "Understanding momentum and collision", format: "PDF", study: avery_studies_grade10_physics)
-physics_momentum_and_collisions2_file = File.open("./db/files/avery_collisions/Momentum and Collisions 2.pdf") # Assuming this file exists
-materials_avery_physics_momentum_and_collisions2.file.attach(io: physics_momentum_and_collisions2_file, filename: "Momentum and Collisions 2.pdf", content_type: "application/pdf")
-materials_avery_physics_momentum_and_collisions2.save
-
-materials_avery_physics_momentum_and_collisions3 = Material.new(name: "Momentum and Collision 3", description: "Understanding momentum and collision", format: "PDF", study: avery_studies_grade10_physics)
-physics_momentum_and_collisions3_file = File.open("./db/files/avery_collisions/Momentum and Collisions 3.pdf") # Assuming this file exists
-materials_avery_physics_momentum_and_collisions3.file.attach(io: physics_momentum_and_collisions3_file, filename: "Momentum and Collisions 3.pdf", content_type: "application/pdf")
-materials_avery_physics_momentum_and_collisions3.save
-
-
-materials_avery_physics_momentum_and_collisions4 = Material.new(name: "Momentum and Collision 4", description: "Understanding momentum and collision", format: "PDF", study: avery_studies_grade10_physics)
-physics_momentum_and_collisions4_file = File.open("./db/files/avery_collisions/Momentum and Collisions 4.pdf") # Assuming this file exists
-materials_avery_physics_momentum_and_collisions4.file.attach(io: physics_momentum_and_collisions4_file, filename: "Momentum and Collisions 4.pdf", content_type: "application/pdf")
-materials_avery_physics_momentum_and_collisions4.save
-
-materials_avery_physics_momentum_and_collisions5 = Material.new(name: "Momentum and Collision 5", description: "Understanding momentum and collision", format: "PDF", study: avery_studies_grade10_physics)
-physics_momentum_and_collisions5_file = File.open("./db/files/avery_collisions/Momentum and Collisions 5.pdf") # Assuming this file exists
-materials_avery_physics_momentum_and_collisions5.file.attach(io: physics_momentum_and_collisions5_file, filename: "Momentum and Collisions 5.pdf", content_type: "application/pdf")
-materials_avery_physics_momentum_and_collisions5.save
-
-
-materials_avery_physics_momentum_and_collisions_applications = Material.new(name: "Momentum and Collision Applications", description: "Understanding momentum and collision", format: "PDF", study: avery_studies_grade10_physics)
-physics_momentum_and_collisions_applications_file = File.open("./db/files/avery_collisions/Momentum and Collisions Applications.pdf") # Assuming this file exists
-materials_avery_physics_momentum_and_collisions_applications.file.attach(io: physics_momentum_and_collisions_applications_file, filename: "Momentum and Collisions 5.pdf", content_type: "application/pdf")
-materials_avery_physics_momentum_and_collisions_applications.save
-
-
-materials_avery_physics_momentum_and_collisions_quizzes = Material.new(name: "Momentum and Collision Quizzes", description: "Understanding momentum and collision", format: "PDF", study: avery_studies_grade10_physics)
-physics_momentum_and_collisions_quizzes_file = File.open("./db/files/avery_collisions/Momentum and Collisions quizzes.pdf") # Assuming this file exists
-materials_avery_physics_momentum_and_collisions_quizzes.file.attach(io: physics_momentum_and_collisions_quizzes_file, filename: "Momentum and Collisions 5.pdf", content_type: "application/pdf")
-materials_avery_physics_momentum_and_collisions_quizzes.save
-
-# ---------------------
-
-
-puts "Created #{Material.count} materials"
-
 puts "\n=== SEEDING COMPLETED ==="
 puts "#{User.where(tutor: true).count} tutors created"
 puts "#{User.where(tutor: false).count} learners created"
 puts "#{Subject.count} subjects created"
 puts "#{Expertise.count} expertises created"
 puts "#{Study.count} studies created"
-puts "#{Material.count} materials created"

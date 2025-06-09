@@ -12,6 +12,24 @@
   }
 }
 
+.button-white {
+  display: inline-block;
+  padding: 4px 12px;
+  background: #fff;
+  color: $purple;
+  border: 2px solid $purple;
+  border-radius: 4px;
+  font-weight: 600;
+  font-size: 1rem;
+  text-decoration: none;
+  transition: background 0.2s, color 0.2s;
+
+  &:hover, &:focus {
+    background: $purple;
+    color: #fff;
+  }
+}
+
 .btn-purple {
   @extend .btn;
   background-color: $purple !important;

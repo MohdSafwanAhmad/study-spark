@@ -1,15 +1,11 @@
 <div class="container">
   <div class="d-flex justify-content-between align-items-center mb-4">
     <h2 class="mb-0" style="color: #714288;">Welcome back! Here are your subjects</h2>
-    <%= link_to new_study_path, class: "button-white d-flex align-items-center gap-2" do %>
-      <span class="fs-5">&#43;</span>
-      <span>New Subject</span>
-    <% end %>
   </div>
   <div class="row">
     <% @studies.each do |study| %>
       <% most_recent_session = study.tutoring_sessions.order(start_time: :desc).first %>
-      <% percent_complete = [42, 67, 87, 23, 95, 58, 76, 34, 81, 53].sample %>
+      <% percent_complete = study.fake_percent_complete %>
       <div class="col-md-4 mb-4">
         <%= link_to study_path(study), class: "text-decoration-none text-dark" do %>
           <div class="subject-card card p-3 mb-3 d-flex flex-column h-100">
@@ -19,13 +15,15 @@
                   <div class="fw-bold fs-5"> <%= study.subject.name %> <%= study.subject.grade_level %></div>
                   <div class="text-muted small mb-2">with <%= most_recent_session&.expertise&.user ? "#{most_recent_session.expertise.user.first_name} #{most_recent_session.expertise.user.last_name}" : "No tutor assigned" %></div>
                 </div>
-                <div class="badge rounded-pill align-self-start fs-6 px-3 py-2"><%= percent_complete %>%</div>
               </div>
               <div class="d-flex align-items-center mt-2 mb-1">
                 <i class="bi bi-calendar-event me-2"></i>
-                <span class="me-2"><%= study.tutoring_sessions.count %> sessions completed</span>
-                <span class="text-secondary mx-2">•</span>
-                <span class="fw-semibold text-purple"> <%= most_recent_session ? most_recent_session.start_time.strftime("%A, %b %d at %I:%M %p") : "No upcoming session" %> </span>
+                <div>
+                  <div class="text-muted small" style="letter-spacing: 0.5px;">Upcoming Session:</div>
+                  <div class="fw-bold fs-5 mt-1">
+                    <%= most_recent_session ? most_recent_session.start_time.strftime("%A, %b %d at %I:%M %p") : "No upcoming session" %>
+                  </div>
+                </div>
               </div>
             </div>
             <div class="flex-grow-1"></div>
@@ -41,5 +39,13 @@
         <% end %>
       </div>
     <% end %>
+    <div class="col-md-4 mb-4">
+      <%= link_to new_study_path, class: "text-decoration-none" do %>
+        <div class="subject-card card p-3 mb-3 d-flex flex-column h-100 justify-content-center align-items-center" style="min-height: 220px; border: 2px dashed #caabd8; background: #faf7fc;">
+          <div class="display-4 mb-2" style="color: #714288; font-size: 3rem;">&#43;</div>
+          <div class="fw-bold fs-5" style="color: #714288;">Add a Subject</div>
+        </div>
+      <% end %>
+    </div>
   </div>
 </div>

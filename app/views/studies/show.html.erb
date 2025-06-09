@@ -1,82 +1,93 @@
 <div class="container py-4">
-  <!-- Header Section -->
-  <div class="tutor-card mb-4">
-    <div class="tutor-info">
-      <h1 class="mb-2"><%= @study.subject.name %></h1>
-      <div class="mb-2">
-        <span class="badge bg-light-purple text-purple">Grade <%= @study.subject.grade_level %></span>
-      </div>
-      <div class="mb-3">
-        <h3 class="mb-1">Learning Objective:</h3>
-        <p><%= @study.learning_objective %></p>
-      </div>
-      <%= link_to "Back to Dashboard", dashboard_path, class: "btn btn-purple btn-sm rounded-pill mb-2" %>
+  <!-- Combined Subject Name and Learning Objective Card -->
+  <div class="subject-card p-4 mb-4">
+    <div class="d-flex justify-content-between align-items-center mb-2">
+      <h1 class="display-5 fw-bold mb-0" style="color: #714288;"><%= @study.subject.name %></h1>
+      <span class="badge bg-light-purple text-purple">Grade <%= @study.subject.grade_level %></span>
     </div>
+    <div>
+      <h4 class="fw-bold mb-2">Learning Objective</h4>
+      <p class="mb-0 text-base"><%= @study.learning_objective %></p>
+    </div>
+    <%= link_to "Back to Dashboard", dashboard_path, class: "btn btn-purple btn-sm rounded-pill mt-3" %>
   </div>
 
-  <div class="row">
-    <!-- Materials Section -->
-    <div class="col-lg-8 mb-4">
-      <div class="tutor-card">
-        <div class="tutor-info">
-          <div class="d-flex justify-content-between align-items-center mb-3">
-            <h2 class="mb-0">Study Materials</h2>
-            <% if @materials.any? %>
-              <%= link_to "Upload New Material", new_study_material_path(@study), class: "btn btn-purple btn-sm rounded-pill" %>
-            <% end %>
-          </div>
+  <div class="row g-4 align-items-start">
+    <!-- Study Materials Card -->
+    <div class="col-lg-8">
+      <div class="subject-card p-4 h-100">
+        <div class="d-flex justify-content-between align-items-center mb-3">
+          <h2 class="h4 fw-bold mb-0">Study Materials</h2>
           <% if @materials.any? %>
-            <div class="d-flex flex-column gap-3">
-              <% @materials.each do |material| %>
-                <div class="tutor-card p-3 mb-2">
-                  <div class="tutor-info">
-                    <h3 class="mb-1"><%= material.name %></h3>
-                    <% if material.description.present? %>
-                      <p class="mb-2"><%= material.description %></p>
-                    <% end %>
-                    <div class="mb-2">
-                      <span class="badge bg-light-purple text-purple"><%= material.format&.upcase || 'N/A' %></span>
-                      <% if material.file.attached? %>
-                        <span class="ms-2"><%= number_to_human_size(material.file.byte_size) %></span>
-                      <% end %>
-                    </div>
-                    <% if material.file.attached? %>
-                      <%= link_to "Download", rails_blob_path(material.file, disposition: "attachment"), class: "btn btn-purple btn-sm rounded-pill me-2" %>
-                      <%= link_to "View", rails_blob_path(material.file), target: "_blank", class: "btn btn-outline-purple btn-sm rounded-pill" %>
-                    <% end %>
-                  </div>
-                </div>
-              <% end %>
-            </div>
-          <% else %>
-            <div class="text-center py-4 text-muted">
-              <p>No materials yet. Get started by uploading your first study material.</p>
-              <%= link_to "Upload Material", new_study_material_path(@study), class: "btn btn-purple btn-sm rounded-pill mt-2" %>
-            </div>
+            <%= link_to new_study_material_path(@study), class: "btn btn-outline-purple btn-sm d-flex align-items-center gap-1" do %>
+              <span class="fs-5">&#43;</span>
+              <span>Upload New Material</span>
+            <% end %>
           <% end %>
         </div>
+        <% if @materials.any? %>
+          <div class="d-flex flex-column gap-3">
+            <% @materials.each do |material| %>
+              <div class="subject-card p-3 mb-2">
+                <div class="fw-bold fs-5 mb-1"><%= material.name %></div>
+                <% if material.description.present? %>
+                  <p class="mb-2 text-base"><%= material.description %></p>
+                <% end %>
+                <div class="mb-2">
+                  <span class="badge bg-light-purple text-purple"><%= material.format&.upcase || 'N/A' %></span>
+                  <% if material.file.attached? %>
+                    <span class="ms-2"><%= number_to_human_size(material.file.byte_size) %></span>
+                  <% end %>
+                </div>
+                <% if material.file.attached? %>
+                  <div class="d-flex justify-content-end gap-2 mt-2">
+                    <%= link_to "Download", rails_blob_path(material.file, disposition: "attachment"), class: "btn btn-primary btn-sm rounded-pill" %>
+                    <%= link_to "View", rails_blob_path(material.file), target: "_blank", class: "btn btn-outline-primary btn-sm rounded-pill" %>
+                  </div>
+                <% end %>
+              </div>
+            <% end %>
+          </div>
+        <% else %>
+          <div class="text-center py-4 text-muted">
+            <p>No materials yet. Get started by uploading your first study material.</p>
+            <%= link_to "Upload Material", new_study_material_path(@study), class: "btn btn-primary btn-sm rounded-pill mt-2" %>
+          </div>
+        <% end %>
       </div>
     </div>
 
-    <!-- Available Tutors Section -->
-    <div class="col-lg-4 mb-4">
-      <div class="tutor-card">
-        <div class="tutor-info">
-          <h2 class="mb-3">Available Tutors</h2>
+    <!-- Your Tutor Card or Available Tutors Card -->
+    <div class="col-lg-4">
+      <% if @assigned_tutor %>
+        <div class="subject-card p-4 mb-4">
+          <h5 class="fw-bold mb-3 text-purple">Your Tutor for this Subject</h5>
+          <div class="subject-card p-3 mb-2">
+            <div class="fw-bold fs-5 mb-1"><%= @assigned_tutor.first_name %> <%= @assigned_tutor.last_name %></div>
+            <div class="text-muted small mb-2"><%= @assigned_tutor.email %></div>
+            <% if @assigned_tutor.bio.present? %>
+              <p class="mb-2 text-base"><%= @assigned_tutor.bio %></p>
+            <% end %>
+            <div class="d-flex flex-column gap-2 mt-2">
+              <%= link_to "Book Session", new_tutoring_session_path(tutor_id: @assigned_tutor.id), class: "btn btn-primary btn-sm rounded-pill w-100" %>
+            </div>
+          </div>
+        </div>
+      <% else %>
+        <div class="subject-card p-4 mb-4">
+          <h5 class="fw-bold mb-3 text-purple">Available Tutors</h5>
           <% if @available_tutors.any? %>
             <div class="d-flex flex-column gap-3">
               <% @available_tutors.each do |tutor| %>
                 <% expertise = tutor.expertises.find_by(subject: @study.subject) %>
-                <div class="tutor-card p-3 mb-2">
-                  <div class="tutor-info">
-                    <h3 class="mb-1"><%= tutor.first_name %> <%= tutor.last_name %></h3>
-                    <p class="text-purple mb-1">
-                      $<%= number_with_precision(expertise.tutor_rate / 100.0, precision: 2) %>/hour
-                    </p>
-                    <% if tutor.bio.present? %>
-                      <p class="mb-2"><%= tutor.bio %></p>
-                    <% end %>
-                    <%= link_to "Book Session", new_tutoring_session_path(tutor_id: tutor.id), class: "btn btn-purple btn-sm rounded-pill w-100" %>
+                <div class="subject-card p-3 mb-2">
+                  <div class="fw-bold fs-5 mb-1"><%= tutor.first_name %> <%= tutor.last_name %></div>
+                  <div class="text-muted small mb-2"><%= tutor.email %></div>
+                  <% if tutor.bio.present? %>
+                    <p class="mb-2 text-base"><%= tutor.bio %></p>
+                  <% end %>
+                  <div class="d-flex flex-column gap-2 mt-2">
+                    <%= link_to "Book Session", new_tutoring_session_path(tutor_id: tutor.id), class: "btn btn-primary btn-sm rounded-pill w-100" %>
                   </div>
                 </div>
               <% end %>
@@ -87,31 +98,29 @@
             </div>
           <% end %>
         </div>
-      </div>
+      <% end %>
 
-      <!-- Study Progress Section -->
-      <div class="tutor-card mt-4">
-        <div class="tutor-info">
-          <h2 class="mb-3">Study Progress</h2>
-          <div class="mb-2 d-flex justify-content-between">
-            <span>Materials Reviewed</span>
-            <span><%= @materials.count %> items</span>
-          </div>
-          <div class="progress mb-3">
-            <div class="progress-bar bg-purple" role="progressbar" style="width: 45%"></div>
-          </div>
-          <div class="mb-2 d-flex justify-content-between">
-            <span>Total Materials:</span>
-            <span><%= @materials.count %></span>
-          </div>
-          <div class="mb-2 d-flex justify-content-between">
-            <span>Available Tutors:</span>
-            <span><%= @available_tutors.count %></span>
-          </div>
-          <div class="mb-2 d-flex justify-content-between">
-            <span>Started:</span>
-            <span><%= @study.created_at.strftime("%b %d, %Y") %></span>
-          </div>
+      <!-- Study Progress Card -->
+      <div class="subject-card p-4 mt-4">
+        <h5 class="fw-bold mb-3 text-purple">Study Progress</h5>
+        <div class="mb-2 d-flex justify-content-between">
+          <span>Materials Reviewed</span>
+          <span><%= @materials.count %> items</span>
+        </div>
+        <div class="progress mb-3">
+          <div class="progress-bar bg-purple" role="progressbar" style="width: 45%"></div>
+        </div>
+        <div class="mb-2 d-flex justify-content-between">
+          <span>Total Materials:</span>
+          <span><%= @materials.count %></span>
+        </div>
+        <div class="mb-2 d-flex justify-content-between">
+          <span>Available Tutors:</span>
+          <span><%= @available_tutors.count %></span>
+        </div>
+        <div class="mb-2 d-flex justify-content-between">
+          <span>Started:</span>
+          <span><%= @study.created_at.strftime("%b %d, %Y") %></span>
         </div>
       </div>
     </div>

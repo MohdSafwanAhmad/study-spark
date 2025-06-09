@@ -1,0 +1,40 @@
+.subject-card {
+  border-radius: 16px;
+  background: #fff;
+  border: none;
+  box-shadow: 0 0 0 4px #f8d7da33, 0 2px 8px rgba(220, 53, 69, 0.04);
+  transition: box-shadow 0.2s, border-color 0.2s;
+
+  &:hover, &:focus {
+    box-shadow: 0 0 0 6px #caabd899, 0 4px 16px rgba(113, 66, 136, 0.10);
+    border: 1.5px solid #71428833;
+    cursor: pointer;
+  }
+
+  a {
+    text-decoration: none; color: black;
+  }
+
+  .badge {
+    font-size: 1rem;
+    border: 2px solid #20c997;
+    color: #20c997;
+    background: #fff;
+    font-weight: 600;
+  }
+
+  .progress {
+    background: #eafaf3;
+    height: 5px;
+    border-radius: 4px;
+  }
+
+  .progress-bar {
+    background: linear-gradient(90deg, #20c997 0%, #38ef7d 100%);
+    box-shadow: 0 1px 4px #20c99733;
+  }
+
+  .text-danger {
+    color: #d7263d !important;
+  }
+} 

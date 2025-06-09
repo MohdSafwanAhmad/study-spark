@@ -15,7 +15,7 @@ class MaterialsController < ApplicationController
     @material.study = @study
 
     if @material.save
-      redirect_to study_materials_path(@study), notice: "Material uploaded successfully!"
+      redirect_to study_path(@study), notice: "Material uploaded successfully!"
     else
       render :new
     end

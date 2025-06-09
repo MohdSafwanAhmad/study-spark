@@ -5,12 +5,6 @@
   box-shadow: 0 0 0 4px #f8d7da33, 0 2px 8px rgba(220, 53, 69, 0.04);
   transition: box-shadow 0.2s, border-color 0.2s;
 
-  &:hover, &:focus {
-    box-shadow: 0 0 0 6px #caabd899, 0 4px 16px rgba(113, 66, 136, 0.10);
-    border: 1.5px solid #71428833;
-    cursor: pointer;
-  }
-
   a {
     text-decoration: none; color: black;
   }

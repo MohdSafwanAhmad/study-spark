@@ -11,7 +11,8 @@ class StudiesController < ApplicationController
 
   def show
     # @study is set by before_action
-    @materials = @study.materials.with_attached_file
+
+    @materials = @study.materials
     @assigned_tutor = @study.tutoring_sessions.last&.expertise&.user
     @upcoming_session = @study.tutoring_sessions.order(start_time: :desc).first
     if @assigned_tutor
@@ -22,6 +23,7 @@ class StudiesController < ApplicationController
                              .includes(:expertises)
                              .distinct
     end
+
   end
 
   def new

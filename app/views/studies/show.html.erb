@@ -27,23 +27,26 @@
         <% if @materials.any? %>
           <div class="d-flex flex-column gap-3">
             <% @materials.each do |material| %>
-              <div class="subject-card p-3 mb-2">
-                <div class="fw-bold fs-5 mb-1"><%= material.name %></div>
-                <% if material.description.present? %>
-                  <p class="mb-2 text-base"><%= material.description %></p>
-                <% end %>
-                <div class="mb-2">
-                  <span class="badge bg-light-purple text-purple"><%= material.format&.upcase || 'N/A' %></span>
-                  <% if material.file.attached? %>
-                    <span class="ms-2"><%= number_to_human_size(material.file.byte_size) %></span>
-                  <% end %>
-                </div>
-                <% if material.file.attached? %>
-                  <div class="d-flex justify-content-end gap-2 mt-2">
-                    <%= link_to "Download", rails_blob_path(material.file, disposition: "attachment"), class: "btn btn-purple btn-sm rounded-pill" %>
-                    <%= link_to "View", rails_blob_path(material.file), target: "_blank", class: "btn btn-purple btn-sm rounded-pill" %>
+              <div class="border border-gray-200 rounded-lg p-4 hover:shadow-md transition duration-200">
+                <div class="flex items-start justify-between">
+                  <div class="flex-1">
+                    <h3 class="text-lg font-semibold text-gray-800 mb-2">
+                      <%= material.name %>
+                    </h3>
+                    <% if material.description.present? %>
+                      <p class="text-gray-600 mb-3">
+                        Description: <%= material.description %>
+                      </p>
+                      <% end %>
+                      <% if material.summary.present? %>
+                        <div class="material-summary">
+                          <% p markdown(material.summary) %>
+                          <% p material.summary %>
+                          Summary: <%= markdown(material.summary) %>
+                        </div>
+                      <% end %>
                   </div>
-                <% end %>
+                </div>
               </div>
             <% end %>
           </div>
@@ -55,6 +58,7 @@
         <% end %>
       </div>
     </div>
+
 
     <!-- Your Tutor Card or Available Tutors Card -->
     <div class="col-lg-4">

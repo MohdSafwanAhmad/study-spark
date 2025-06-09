@@ -1,0 +1,62 @@
+.sidebar-logo {
+  padding: 12px;
+  text-align: center;
+  border-bottom: 1px solid #eee;
+}
+
+.mascot-circle {
+  background: #fef9ff;
+  border-radius: 50%;
+  padding: 18px;
+  box-shadow: 0 0 8px rgba(0,0,0,0.05);
+  width: 160px;
+  height: 160px;
+  margin: 0 auto 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.mascot-circle img {
+  width: 220px;
+  height: 220px;
+  object-fit: contain;
+}
+
+.sidebar-logo h2 {
+  font-size: 1.1rem;
+  letter-spacing: 1px;
+  margin-bottom: 0;
+}
+
+.sidebar-link {
+  display: block;
+  padding: 12px 20px;
+  color: #333;
+  text-decoration: none;
+  font-weight: 500;
+  border-radius: 8px;
+  transition: all 0.2s ease-in-out;
+}
+
+.sidebar-link:hover,
+.sidebar-link.active {
+  background-color: #f3ebff;
+  color: #6c4eb6;
+}
+
+.sidebar-section-title {
+  letter-spacing: 1px;
+  font-size: 0.85rem;
+  margin-bottom: 0.5rem;
+  margin-top: 1.5rem;
+}
+
+.nav .sidebar-link {
+  margin-bottom: 2px;
+}
+
+.rotate-180 {
+  transform: rotate(180deg);
+  transition: transform 0.2s;
+} 

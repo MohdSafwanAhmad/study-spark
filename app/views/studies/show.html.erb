@@ -47,12 +47,6 @@
                       <% end %>
                   </div>
                 </div>
-                <% if material.file.attached? %>
-                  <div class="d-flex justify-content-end gap-2 mt-2">
-                    <%= link_to "Download", rails_blob_path(material.file, disposition: "attachment"), class: "btn btn-purple btn-sm rounded-pill" %>
-                    <%= link_to "View", rails_blob_path(material.file), target: "_blank", class: "btn btn-purple btn-sm rounded-pill" %>
-                  </div>
-                <% end %>
               </div>
             <% end %>
           </div>

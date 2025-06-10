@@ -6,3 +6,4 @@ import "bootstrap"
 // importing turbo frame for my form on /expertise/new.html.erb
 import { Turbo } from "@hotwired/turbo-rails"
 Turbo.session.drive = true
+import "./landing"

@@ -42,4 +42,6 @@ Rails.application.routes.draw do
   resources :tutors, only: %i[index show]
   resources :learners, only: %i[index show]
 
+  # AI chatbot
+  resources :chatbot_messages, only: %i[index create]
 end

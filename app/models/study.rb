@@ -4,6 +4,7 @@ class Study < ApplicationRecord
   belongs_to :subject
   has_many :materials
   has_many :tutoring_sessions
+  has_many :chatbot_messages
 
   def fake_percent_complete
     require 'zlib'

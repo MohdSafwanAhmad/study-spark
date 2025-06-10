@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2025_06_04_211643) do
+ActiveRecord::Schema[7.1].define(version: 2025_06_10_154702) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -42,6 +42,16 @@ ActiveRecord::Schema[7.1].define(version: 2025_06_04_211643) do
     t.index ["blob_id", "variation_digest"], name: "index_active_storage_variant_records_uniqueness", unique: true
   end
 
+  create_table "chatbot_messages", force: :cascade do |t|
+    t.text "user_question"
+    t.string "ai_response"
+    t.string "text"
+    t.bigint "study_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["study_id"], name: "index_chatbot_messages_on_study_id"
+  end
+
   create_table "expertises", force: :cascade do |t|
     t.integer "tutor_rate"
     t.bigint "user_id", null: false
@@ -61,6 +71,39 @@ ActiveRecord::Schema[7.1].define(version: 2025_06_04_211643) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["study_id"], name: "index_materials_on_study_id"
+  end
+
+  create_table "sessions", force: :cascade do |t|
+    t.datetime "start_time"
+    t.datetime "end_time"
+    t.string "status"
+    t.bigint "expertise_id", null: false
+    t.bigint "study_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["expertise_id"], name: "index_sessions_on_expertise_id"
+    t.index ["study_id"], name: "index_sessions_on_study_id"
+  end
+
+  create_table "solid_cable_messages", force: :cascade do |t|
+    t.text "channel"
+    t.text "payload"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["channel"], name: "index_solid_cable_messages_on_channel"
+    t.index ["created_at"], name: "index_solid_cable_messages_on_created_at"
+  end
+
+  create_table "solid_queue_blocked_executions", force: :cascade do |t|
+    t.bigint "job_id", null: false
+    t.string "queue_name", null: false
+    t.integer "priority", default: 0, null: false
+    t.string "concurrency_key", null: false
+    t.datetime "expires_at", null: false
+    t.datetime "created_at", null: false
+    t.index ["concurrency_key", "priority", "job_id"], name: "index_solid_queue_blocked_executions_for_release"
+    t.index ["expires_at", "concurrency_key"], name: "index_solid_queue_blocked_executions_for_maintenance"
+    t.index ["job_id"], name: "index_solid_queue_blocked_executions_on_job_id", unique: true
   end
 
   create_table "studies", force: :cascade do |t|
@@ -111,9 +154,12 @@ ActiveRecord::Schema[7.1].define(version: 2025_06_04_211643) do
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
+  add_foreign_key "chatbot_messages", "studies"
   add_foreign_key "expertises", "subjects"
   add_foreign_key "expertises", "users"
   add_foreign_key "materials", "studies"
+  add_foreign_key "sessions", "expertises"
+  add_foreign_key "sessions", "studies"
   add_foreign_key "studies", "subjects"
   add_foreign_key "studies", "users"
   add_foreign_key "tutoring_sessions", "expertises"

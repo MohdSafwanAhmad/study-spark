@@ -1,0 +1,11 @@
+<div class="tab-pane fade show active" id="summary-<%= index %>" role="tabpanel">
+  <div class="subject-card p-3">
+    <% if material.summary.present? %>
+      <%= markdown(material.summary) %>
+    <% else %>
+      <div class="text-center py-4 text-muted">
+        <p>No summary available for this material yet.</p>
+      </div>
+    <% end %>
+  </div>
+</div>

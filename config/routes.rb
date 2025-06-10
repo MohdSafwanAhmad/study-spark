@@ -33,8 +33,12 @@ Rails.application.routes.draw do
 
   # Add study materials to an existing Study (subject)
 
-  post 'studies/:study_id/materials',     to: 'materials#create'
+  post 'studies/:study_id/materials', to: 'materials#create'
 
+  # Flashcards routes nested under materials
+  resources :materials, only: [] do
+    resources :flashcards, only: [:index, :create, :update]
+  end
 
   # Index and show for tutors
   # Index and show for a tutor to help a learner with study goals, etc.

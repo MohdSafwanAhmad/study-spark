@@ -1,0 +1,147 @@
+<!-- _flashcards_section.html.erb -->
+<div class="tab-pane fade" id="flashcards-<%= index %>" role="tabpanel">
+  <div class="subject-card p-3">
+    <% if material.flashcards.any? %>
+      <!-- Generate More Button -->
+      <div class="d-flex justify-content-between align-items-center mb-3">
+        <h6 class="fw-bold mb-0">Study with Flashcards</h6>
+        <%= form_with url: material_flashcards_path(material), method: :post, local: true, class: "d-inline" do |form| %>
+          <%= form.submit "Generate More", class: "btn btn-outline-purple btn-sm" %>
+        <% end %>
+      </div>
+
+      <!-- Flashcards Progress -->
+      <% solved_count = material.flashcards.where(solved: true).count %>
+      <% total_count = material.flashcards.count %>
+      <div class="mb-3">
+        <div class="d-flex justify-content-between align-items-center mb-1">
+          <small class="text-muted">Progress</small>
+          <small class="fw-bold" id="progress-text-<%= index %>"><%= solved_count %>/<%= total_count %> mastered</small>
+        </div>
+        <div class="progress" style="height: 6px;">
+          <div class="progress-bar bg-purple" id="progress-bar-<%= index %>" style="width: <%= total_count > 0 ? (solved_count.to_f / total_count * 100) : 0 %>%"></div>
+        </div>
+      </div>
+
+      <!-- Single Flashcard Container -->
+      <div class="flashcard-study-container" id="flashcard-container-<%= index %>" data-material-id="<%= material.id %>">
+        <!-- Navigation Controls -->
+        <div class="d-flex justify-content-between align-items-center mb-3">
+          <span class="text-muted">Card <span id="card-counter-<%= index %>">1</span> of <%= total_count %></span>
+          <div class="btn-group btn-group-sm">
+            <button class="btn btn-outline-secondary" 
+                    id="prev-btn-<%= index %>" 
+                    onclick="window.previousCard(<%= index %>)" 
+                    type="button"
+                    disabled>
+              <i class="fas fa-chevron-left"></i> Previous
+            </button>
+            <button class="btn btn-outline-secondary" 
+                    id="next-btn-<%= index %>" 
+                    onclick="window.nextCard(<%= index %>)"
+                    type="button">
+              Next <i class="fas fa-chevron-right"></i>
+            </button>
+          </div>
+        </div>
+
+        <!-- Single Flashcard Display -->
+        <% material.flashcards.each_with_index do |flashcard, card_index| %>
+          <div class="flashcard-wrapper <%= 'active' if card_index == 0 %>" 
+               data-flashcard-id="<%= flashcard.id %>" 
+               data-card-index="<%= card_index %>"
+               id="flashcard-<%= index %>-<%= card_index %>"
+               style="<%= 'display: none;' unless card_index == 0 %>">
+            <div class="flashcard <%= 'solved' if flashcard.solved %>">
+              <!-- Question Side (Always Visible Initially) -->
+              <div class="flashcard-question" id="question-<%= index %>-<%= card_index %>">
+                <div class="flashcard-content">
+                  <h6 class="fw-bold mb-2 text-purple">Question <%= card_index + 1 %></h6>
+                  <p class="mb-3"><%= flashcard.question %></p>
+                  <button class="btn btn-primary btn-sm" 
+                          onclick="window.revealAnswer(<%= index %>, <%= card_index %>)"
+                          id="reveal-btn-<%= index %>-<%= card_index %>"
+                          type="button">
+                    <i class="fas fa-eye"></i> Reveal Answer
+                  </button>
+                </div>
+              </div>
+              
+              <!-- Answer Side (Hidden Initially) -->
+              <div class="flashcard-answer" 
+                   id="answer-<%= index %>-<%= card_index %>" 
+                   style="display: none;">
+                <div class="flashcard-content">
+                  <h6 class="fw-bold mb-2 text-success">Answer</h6>
+                  <p class="mb-3"><%= flashcard.answer %></p>
+                  <div class="flashcard-actions d-flex gap-2 justify-content-center">
+                    <button class="btn btn-success btn-sm" 
+                            onclick="window.markSolved(event, <%= flashcard.id %>, true, <%= index %>)"
+                            type="button">
+                      <i class="fas fa-check"></i> Got it!
+                    </button>
+                    <button class="btn btn-outline-secondary btn-sm" 
+                            onclick="window.markSolved(event, <%= flashcard.id %>, false, <%= index %>)"
+                            type="button">
+                      <i class="fas fa-redo"></i> Need practice
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        <% end %>
+
+        <!-- Completion Message (initially hidden) -->
+        <div class="completion-message text-center py-4" id="completion-<%= index %>" style="display: none;">
+          <i class="fas fa-trophy fs-1 mb-3 d-block text-warning"></i>
+          <h5 class="fw-bold mb-2">Great job!</h5>
+          <p class="text-muted mb-3">You've completed all flashcards for this material.</p>
+          <button class="btn btn-purple rounded-pill" 
+                  onclick="window.restartFlashcards(<%= index %>)"
+                  type="button">
+            <i class="fas fa-refresh"></i> Review Again
+          </button>
+        </div>
+      </div>
+
+    <% else %>
+      <!-- No Flashcards State -->
+      <div class="text-center py-4">
+        <i class="fas fa-cards-blank fs-1 mb-3 d-block text-muted"></i>
+        <h6 class="fw-bold mb-2">Ready to create flashcards?</h6>
+        <p class="text-muted mb-3">Generate interactive flashcards from your study material to improve retention.</p>
+        <%= form_with url: material_flashcards_path(material), method: :post, local: true do |form| %>
+          <%= form.submit "Generate Flashcards", class: "btn btn-purple rounded-pill" %>
+        <% end %>
+      </div>
+    <% end %>
+  </div>
+</div>
+
+<script>
+// Initialize flashcards when this tab becomes active
+document.addEventListener('DOMContentLoaded', function() {
+  const flashcardsTab = document.getElementById('flashcards-tab-<%= index %>');
+  if (flashcardsTab) {
+    flashcardsTab.addEventListener('shown.bs.tab', function() {
+      console.log('Flashcards tab shown for material <%= index %>');
+      setTimeout(() => {
+        if (typeof window.initializeFlashcards === 'function') {
+          window.initializeFlashcards(<%= index %>);
+        }
+      }, 100);
+    });
+  }
+  
+  // Initialize immediately if this is the active material
+  const materialDiv = document.getElementById('material-<%= index %>');
+  if (materialDiv && materialDiv.style.display !== 'none') {
+    setTimeout(() => {
+      if (typeof window.initializeFlashcards === 'function') {
+        window.initializeFlashcards(<%= index %>);
+      }
+    }, 300);
+  }
+});
+</script>

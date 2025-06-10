@@ -1,0 +1,48 @@
+<!-- _tutor_section.html.erb -->
+<% if @assigned_tutor %>
+  <div class="subject-card p-4 mb-4">
+    <h5 class="fw-bold mb-3 text-purple">Your Tutor for this Subject</h5>
+    <div class="subject-card p-3 mb-2">
+      <div class="fw-bold fs-5 mb-1"><%= @assigned_tutor.first_name %> <%= @assigned_tutor.last_name %></div>
+      <div class="text-muted small mb-2"><%= @assigned_tutor.email %></div>
+      <% if @assigned_tutor.bio.present? %>
+        <p class="mb-2 text-base"><%= @assigned_tutor.bio %></p>
+      <% end %>
+      <% if @upcoming_session %>
+        <div class="mb-2">
+          <span class="fw-semibold">Upcoming Session:</span>
+          <span class="fw-bold d-block mt-1"><%= @upcoming_session.start_time.strftime('%A, %b %d at %I:%M %p') %></span>
+        </div>
+      <% else %>
+        <div class="d-flex flex-column gap-2 mt-2">
+          <%= link_to "Book Session", new_tutoring_session_path(tutor_id: @assigned_tutor.id), class: "btn btn-purple btn-sm rounded-pill w-100" %>
+        </div>
+      <% end %>
+    </div>
+  </div>
+<% else %>
+  <div class="subject-card p-4 mb-4">
+    <h5 class="fw-bold mb-3 text-purple">Available Tutors</h5>
+    <% if @available_tutors.any? %>
+      <div class="d-flex flex-column gap-3">
+        <% @available_tutors.each do |tutor| %>
+          <% expertise = tutor.expertises.find_by(subject: @study.subject) %>
+          <div class="subject-card p-3 mb-2">
+            <div class="fw-bold fs-5 mb-1"><%= tutor.first_name %> <%= tutor.last_name %></div>
+            <div class="text-muted small mb-2"><%= tutor.email %></div>
+            <% if tutor.bio.present? %>
+              <p class="mb-2 text-base"><%= tutor.bio %></p>
+            <% end %>
+            <div class="d-flex flex-column gap-2 mt-2">
+              <%= link_to "Book Session", new_tutoring_session_path(tutor_id: tutor.id), class: "btn btn-purple btn-sm rounded-pill w-100" %>
+            </div>
+          </div>
+        <% end %>
+      </div>
+    <% else %>
+      <div class="text-center py-4 text-muted">
+        <p>No tutors available for this subject yet.</p>
+      </div>
+    <% end %>
+  </div>
+<% end %>

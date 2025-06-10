@@ -1,0 +1,59 @@
+<div class="subject-card p-4 h-100">
+  <div class="d-flex justify-content-between align-items-center mb-3">
+    <h2 class="h4 fw-bold mb-0">Study Materials</h2>
+    <% if @materials.any? %>
+      <%= render 'upload_button' %>
+    <% end %>
+  </div>
+
+  <% if @materials.any? %>
+    <!-- Material Filter Dropdown -->
+    <div class="mb-4">
+      <label for="materialSelect" class="form-label fw-semibold">Select Material:</label>
+      <select class="form-select" id="materialSelect" onchange="showMaterialTabs(this.value)">
+        <% @materials.each_with_index do |material, index| %>
+          <option value="<%= index %>" <%= 'selected' if index == 0 %>><%= material.name %></option>
+        <% end %>
+      </select>
+    </div>
+
+    <!-- Material Tabs Container -->
+    <% @materials.each_with_index do |material, index| %>
+      <div id="material-<%= index %>" class="material-tabs" style="<%= 'display: none;' unless index == 0 %>">
+        <%= render 'material_info', material: material %>
+        <%= render 'material_tabs', material: material, index: index %>
+      </div>
+    <% end %>
+
+    <!-- JavaScript for Material Selection -->
+    <script>
+      function showMaterialTabs(selectedIndex) {
+        console.log(`Switching to material ${selectedIndex}`);
+        
+        // Hide all material tabs
+        document.querySelectorAll('.material-tabs').forEach(function(tab, index) {
+          tab.style.display = 'none';
+        });
+        
+        // Show selected material tabs
+        const selectedTab = document.getElementById('material-' + selectedIndex);
+        if (selectedTab) {
+          selectedTab.style.display = 'block';
+          
+          // Initialize flashcards for this material after a short delay
+          setTimeout(() => {
+            if (typeof window.initializeFlashcards === 'function') {
+              window.initializeFlashcards(parseInt(selectedIndex));
+            }
+          }, 200);
+        }
+      }
+      
+      // Make function globally available
+      window.showMaterialTabs = showMaterialTabs;
+    </script>
+
+  <% else %>
+    <%= render 'no_materials_state' %>
+  <% end %>
+</div>

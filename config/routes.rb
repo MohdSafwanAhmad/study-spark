@@ -5,6 +5,7 @@ Rails.application.routes.draw do
   root to: "pages#home"
 
   resources :studies do
+    resources :chats, only: %i[index create]
     member do
       get :upload_materials
       patch :attach_materials
@@ -42,4 +43,5 @@ Rails.application.routes.draw do
   resources :tutors, only: %i[index show]
   resources :learners, only: %i[index show]
 
+  # AI chatbot
 end

@@ -1,8 +1,76 @@
 <div class="container chatbot">
-  <h1>Chat with us</h1>
+  <div class="chat-header mb-4">
+    <h2 style="font-weight: bold;">
+      <%= @study.subject.name %> Study Session
+    </h2>
+    <div style="color: #666;">
+      with
+      <%= @study.user.first_name %> <%= @study.user.last_name %>
+      <% if @study.tutoring_sessions.any? && @study.tutoring_sessions.last.expertise&.user %>
+        &amp; <%= @study.tutoring_sessions.last.expertise.user.first_name %> <%= @study.tutoring_sessions.last.expertise.user.last_name %>
+      <% end %>
+      &amp; Sparky AI
+    </div>
+    <div class="participants mt-2" style="display: flex; gap: 1.5rem;">
+      <div style="display: flex; align-items: center;">
+        <div class="avatar" style="background: #FFD966; border-radius: 50%; width: 36px; height: 36px; display: flex; align-items: center; justify-content: center; font-weight: bold; color: #333; margin-right: 8px;">
+          <%= @study.user.first_name.first %>
+        </div>
+        <div>
+          <strong><%= @study.user.first_name %> <%= @study.user.last_name %></strong>
+          <span style="color: #4CAF50; font-size: 0.9em;">You</span>
+        </div>
+      </div>
+      <% if @study.tutoring_sessions.any? && @study.tutoring_sessions.last.expertise&.user %>
+        <% tutor = @study.tutoring_sessions.last.expertise.user %>
+        <div style="display: flex; align-items: center;">
+          <div class="avatar" style="background: #FFB6B6; border-radius: 50%; width: 36px; height: 36px; display: flex; align-items: center; justify-content: center; font-weight: bold; color: #fff; margin-right: 8px;">
+            <%= tutor.first_name.first %><%= tutor.last_name.first %>
+          </div>
+          <div>
+            <strong><%= tutor.first_name %> <%= tutor.last_name %></strong>
+          </div>
+        </div>
+      <% end %>
+      <div style="display: flex; align-items: center;">
+        <div class="avatar" style="background: #B39DDB; border-radius: 50%; width: 36px; height: 36px; display: flex; align-items: center; justify-content: center; font-weight: bold; color: #fff; margin-right: 8px;">
+          <i class="fas fa-robot"></i>
+        </div>
+        <div>
+          <strong>Sparky AI</strong>
+          <span style="color: #8e24aa; font-size: 0.9em;">AI Assistant</span>
+        </div>
+      </div>
+    </div>
+  </div>
+  <%= turbo_stream_from "chats_study_#{@study.id}" %>
   <div id="chats">
     <%= render @chats %>
   </div>
 
   <%= render "form", chat: @chat, study: @study %>
 </div>
+
+<script>
+  function scrollChatsToBottom() {
+    var chats = document.getElementById("chats");
+    if (chats) chats.scrollTop = chats.scrollHeight;
+  }
+
+  // Scroll on page load
+  document.addEventListener("turbo:load", scrollChatsToBottom);
+
+  // Scroll when a Turbo Stream updates the chat list
+  document.addEventListener("turbo:frame-load", scrollChatsToBottom);
+
+  // Use MutationObserver to scroll when new messages are added
+  document.addEventListener("DOMContentLoaded", function() {
+    var chats = document.getElementById("chats");
+    if (chats) {
+      var observer = new MutationObserver(function(mutationsList, observer) {
+        scrollChatsToBottom();
+      });
+      observer.observe(chats, { childList: true, subtree: true });
+    }
+  });
+</script>

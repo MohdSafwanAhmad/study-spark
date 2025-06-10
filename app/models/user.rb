@@ -9,8 +9,9 @@ class User < ApplicationRecord
          :recoverable, :rememberable, :validatable
 
   has_many :studies
+  has_many :chats, through: :studies
+
   has_many :study_subjects, through: :studies, source: :subject
-  has_many :chatbot_messages, through: :studies
 
   scope :tutors, -> { where(tutor: true) }
 end

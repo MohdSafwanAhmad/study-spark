@@ -1,0 +1,6 @@
+<%= simple_form_for [study, chat] do |f| %>
+  <div class="input-group mb-3 w-100">
+    <%= f.input :user_question, label: false, placeholder: "Type your question..." %>
+    <%= f.submit "Ask", id: "new-chat-button", class: "btn btn-primary" %>
+  </div>
+<% end %>

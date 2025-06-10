@@ -6,12 +6,8 @@ class MaterialsController < ApplicationController
     @materials = @study.materials
   end
 
-  def new
-    @material = Material.new
-  end
-
   def create
-    @material = Material.new(material_params)
+    @material = Material.new
     @material.study = @study
 
     file = params[:material][:file].tempfile
@@ -21,7 +17,43 @@ class MaterialsController < ApplicationController
     content = first_page.text
     # Make a call to OpenAI to get the summary of the PDF
     client = OpenAI::Client.new(access_token: ENV["OPENAI_ACCESS_TOKEN"])
-    response = client.chat(parameters: {
+    
+    # Create a Name for the uploaded PDF
+    title_response = client.chat(parameters: {
+      "model": "gpt-4o-mini",
+      "messages": 
+      [
+        {
+          role: "system", 
+          content: "You are an expert academic tutor creating comprehensive study materials. Your task is to analyze the content and create a suitable title for the content."
+        },
+        {
+          role: "user",
+          content: "Read the content and generate a one to three word title for the content that is reflective of the contents in the PDF. Just return back raw text in Camel Case, not the markdown format. Content: #{content}"
+        }
+      ]
+    })
+    @material.name = title_response["choices"][0]["message"]["content"]
+
+    # Create a Description for the uploaded PDF
+    description_response = client.chat(parameters: {
+      "model": "gpt-4o-mini",
+      "messages": 
+      [
+        {
+          role: "system", 
+          content: "You are an expert academic tutor creating comprehensive study materials. Your task is to analyze the content and create a suitable description for the content."
+        },
+        {
+          role: "user",
+          content: "Read the content and generate a short sentence description of the content. The description should be reflective of the contents in the PDF and not more than 20 words. Just return back one sentence, not in the markdown format. Content: #{content}"
+        }
+      ]
+    })
+    @material.description = description_response["choices"][0]["message"]["content"]
+
+    # Create a summary of materials
+    summary_response = client.chat(parameters: {
       "model": "gpt-4o-mini",
       "messages": 
       [
@@ -40,13 +72,13 @@ class MaterialsController < ApplicationController
       ]
     })
     
-    @material.summary = response["choices"][0]["message"]["content"]
+    @material.summary = summary_response["choices"][0]["message"]["content"]
 
 
     if @material.save
       redirect_to study_path(@study), notice: "Material uploaded successfully!"
     else
-      render :new
+      redirect_to study_path(@study), alert: "Failed to upload material. Please try again."
     end
   end
 

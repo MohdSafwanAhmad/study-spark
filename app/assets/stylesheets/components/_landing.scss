@@ -1,19 +1,16 @@
-// app/assets/stylesheets/components/_landing.scss
 
-// — Soft Pastel Palette (Logo-Inspired) —
 $bg-paper:        #EDF4FA;
 $soft-purple:     #D8C3EF;
 $med-purple:      #B79CE2;
-$deep-purple:     #8B5CF6;
+$deep-purple:     #513F64; // ✅ Updated deep purple
 $text-light:      #ffffff;
 $text-dark:       #1F2937;
 
-// — Button Palette —
+
 $btn-bg:          $med-purple;
 $btn-bg-hover:    darken($med-purple, 10%);
 $btn-radius:      1rem;
 
-// — Base & Dynamic Background —
 body {
   background-color: $bg-paper;
   color: $text-dark;
@@ -23,7 +20,8 @@ body {
   &::before {
     content: "";
     position: absolute;
-    top: 50%; left: 50%;
+    top: 50%;
+    left: 50%;
     transform: translate(-50%, -50%);
     width: 60vw;
     background: url('/assets/Transparent Logo.png') no-repeat center;
@@ -33,14 +31,16 @@ body {
   }
 }
 
-// — Keyframes for Morphing Gradient —
+h1, h2, h3, h4 {
+  color: $deep-purple !important;
+}
+
 @keyframes gradientShift {
   0%   { background-position: 0% 50%; }
   50%  { background-position: 100% 50%; }
   100% { background-position: 0% 50%; }
 }
 
-// — Dynamic Navbar Styling —
 .glass-nav {
   background: linear-gradient(
     90deg,
@@ -50,11 +50,12 @@ body {
   );
   backdrop-filter: blur(24px);
   -webkit-backdrop-filter: blur(24px);
-  border-radius: 1rem;
-  max-width: 1200px;
-  margin: 0.5rem auto;
-  padding: 0.75rem 1.5rem;
-  box-shadow: 0 4px 12px rgba(139, 92, 246, 0.05);
+  border-radius: 0 !important;
+  width: 100% !important;
+  max-width: 100% !important;
+  margin: 0 !important;
+  padding: 0.75rem 2rem !important;
+  box-shadow: 0 4px 12px rgba(81, 63, 100, 0.05);
   border: 1px solid rgba(255, 255, 255, 0.2);
   position: fixed;
   top: 0;
@@ -67,16 +68,14 @@ body {
 
 .glass-nav.scrolled {
   background: rgba(255, 255, 255, 0.85);
-  box-shadow: 0 2px 6px rgba(139, 92, 246, 0.06);
+  box-shadow: 0 2px 6px rgba(81, 63, 100, 0.06);
 }
 
-// Slide-down Navbar animation
 @keyframes slideDownNav {
   from { transform: translateY(-100%); }
   to   { transform: translateY(0); }
 }
 
-// Staggered Nav-Item Reveal on Load
 .navbar-nav .nav-item {
   opacity: 0;
   transform: translateY(-10px);
@@ -87,12 +86,11 @@ body {
     animation-delay: #{0.1 * $i}s;
   }
 }
-
 @keyframes navFadeIn {
   to { opacity: 1; transform: translateY(0); }
 }
 
-// — Animated Hero Section —
+
 .hero-section {
   background: linear-gradient(-45deg, $soft-purple, $med-purple, $bg-paper, $soft-purple);
   background-size: 600% 600%;
@@ -104,18 +102,27 @@ body {
 }
 
 .hero-tagline {
-  margin-bottom: 2rem;
+  margin-bottom: 2.5rem;
   color: rgba($text-dark, 0.8);
 }
 
-// — Button Styles —
+.hero-cta {
+  display: inline-flex;
+  gap: 1rem;
+  padding: 1.5rem 0 !important;
+  margin-bottom: 4rem !important;
+  position: relative;
+  z-index: 1;
+}
+
+
 .btn {
   border-radius: $btn-radius !important;
   background-color: $btn-bg !important;
   color: $text-light !important;
   border: none !important;
   font-weight: 600;
-  padding: 0.75rem 2rem !important;
+  padding: 0.75rem 1.5rem !important;
   transition: background 0.2s ease, transform 0.2s ease;
   display: inline-flex;
   align-items: center;
@@ -126,18 +133,24 @@ body {
   }
 
   &::after {
-    content: '→';
-    margin-left: 0.5rem;
+    display: none !important; // ✅ Remove arrow
   }
 }
 
-.hero-cta {
-  display: inline-flex;
-  gap: 1rem;
-  padding: 1rem;
-  margin: 0 auto 3rem;
-  position: relative;
-  z-index: 1;
+.btn-outline-warning {
+  background-color: transparent !important;
+  color: $deep-purple !important;
+  border: 2px solid $med-purple !important;
+
+  &:hover {
+    background-color: $med-purple !important;
+    color: $text-light !important;
+  }
+}
+
+// ✅ Extra spacing between Features and Login
+.navbar .btn-outline-warning.me-4 {
+  margin-right: 2rem !important;
 }
 
 // — Features Section —
@@ -146,23 +159,23 @@ body {
   padding: 5rem 0;
 }
 
-// — Glass Cards —
+
 .glass-card {
-  background: rgba(255,255,255,0.6);
+  background: rgba(255, 255, 255, 0.6);
   backdrop-filter: blur(12px);
   border-radius: 16px;
   padding: 2rem;
   color: $text-dark;
-  box-shadow: 0 2px 8px rgba(0,0,0,0.06), 0 4px 16px rgba(0,0,0,0.08);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06), 0 4px 16px rgba(0, 0, 0, 0.08);
   transition: transform 0.3s ease, box-shadow 0.3s ease;
 
   &:hover {
     transform: translateY(-5px);
-    box-shadow: 0 6px 20px rgba(0,0,0,0.1), 0 8px 30px rgba(0,0,0,0.12);
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1), 0 8px 30px rgba(0, 0, 0, 0.12);
   }
 }
 
-// — Fade-in Animations —
+
 .fade-in-section {
   opacity: 0;
   transform: translateY(30px);
@@ -173,7 +186,6 @@ body {
   transform: none;
 }
 
-// — Scroll Hide/Reveal Navbar —
 .glass-nav {
   transition: transform 0.3s ease;
 }
@@ -184,7 +196,6 @@ body {
   transform: translateY(0);
 }
 
-// — Hover-Triggered Indicator —
 .nav-link {
   position: relative;
   overflow: hidden;
@@ -210,17 +221,7 @@ body {
   }
 }
 
-// — Logo Color Override —
+
 .navbar-brand {
   color: $deep-purple !important;
-}
-
-// — Hero Spacing Adjustments —
-.hero-tagline {
-  margin-bottom: 2.5rem;
-}
-
-.hero-cta {
-  padding: 1.5rem 0 !important;
-  margin-bottom: 4rem !important;
 }

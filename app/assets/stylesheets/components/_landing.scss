@@ -1,49 +1,226 @@
 // app/assets/stylesheets/components/_landing.scss
 
-// ✅ Move these to the very top
-$primary-gradient: linear-gradient(135deg, #667eea, #764ba2);
-$accent-yellow: #fbbf24;
-$accent-orange: #f59e0b;
+// — Soft Pastel Palette (Logo-Inspired) —
+$bg-paper:        #EDF4FA;
+$soft-purple:     #D8C3EF;
+$med-purple:      #B79CE2;
+$deep-purple:     #8B5CF6;
+$text-light:      #ffffff;
+$text-dark:       #1F2937;
 
-.fade-in-section {
-  opacity: 0;
-  transform: translateY(20px);
-  transition: opacity 1s ease-out, transform 1s ease-out;
-  will-change: opacity, transform;
+// — Button Palette —
+$btn-bg:          $med-purple;
+$btn-bg-hover:    darken($med-purple, 10%);
+$btn-radius:      1rem;
 
-  &.in-view {
-    opacity: 1;
-    transform: none;
+// — Base & Dynamic Background —
+body {
+  background-color: $bg-paper;
+  color: $text-dark;
+  font-family: 'Segoe UI', sans-serif;
+  position: relative;
+
+  &::before {
+    content: "";
+    position: absolute;
+    top: 50%; left: 50%;
+    transform: translate(-50%, -50%);
+    width: 60vw;
+    background: url('/assets/Transparent Logo.png') no-repeat center;
+    background-size: contain;
+    opacity: 0.05;
+    z-index: -1;
   }
 }
 
-.site-footer {
-  background-color: #f3f4f6;
-  color: #4b5563;
-  padding: 2rem 1rem;
+// — Keyframes for Morphing Gradient —
+@keyframes gradientShift {
+  0%   { background-position: 0% 50%; }
+  50%  { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+// — Dynamic Navbar Styling —
+.glass-nav {
+  background: linear-gradient(
+    90deg,
+    rgba(255, 255, 255, 0.75),
+    rgba($soft-purple, 0.2),
+    rgba(255, 255, 255, 0.75)
+  );
+  backdrop-filter: blur(24px);
+  -webkit-backdrop-filter: blur(24px);
+  border-radius: 1rem;
+  max-width: 1200px;
+  margin: 0.5rem auto;
+  padding: 0.75rem 1.5rem;
+  box-shadow: 0 4px 12px rgba(139, 92, 246, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 200;
+  transition: background 0.3s ease, box-shadow 0.3s ease, transform 0.3s ease;
+  animation: slideDownNav 0.6s ease-out forwards;
+}
+
+.glass-nav.scrolled {
+  background: rgba(255, 255, 255, 0.85);
+  box-shadow: 0 2px 6px rgba(139, 92, 246, 0.06);
+}
+
+// Slide-down Navbar animation
+@keyframes slideDownNav {
+  from { transform: translateY(-100%); }
+  to   { transform: translateY(0); }
+}
+
+// Staggered Nav-Item Reveal on Load
+.navbar-nav .nav-item {
+  opacity: 0;
+  transform: translateY(-10px);
+  animation: navFadeIn 0.5s forwards;
+}
+@for $i from 1 through 5 {
+  .navbar-nav .nav-item:nth-child(#{$i}) {
+    animation-delay: #{0.1 * $i}s;
+  }
+}
+
+@keyframes navFadeIn {
+  to { opacity: 1; transform: translateY(0); }
+}
+
+// — Animated Hero Section —
+.hero-section {
+  background: linear-gradient(-45deg, $soft-purple, $med-purple, $bg-paper, $soft-purple);
+  background-size: 600% 600%;
+  animation: gradientShift 20s ease infinite;
+  color: $text-dark;
+  padding: 6rem 0;
   text-align: center;
-  font-size: 0.9rem;
+  position: relative;
+}
 
-  .footer-logo-img {
-    width: 60px;
-    margin-bottom: 1rem;
+.hero-tagline {
+  margin-bottom: 2rem;
+  color: rgba($text-dark, 0.8);
+}
+
+// — Button Styles —
+.btn {
+  border-radius: $btn-radius !important;
+  background-color: $btn-bg !important;
+  color: $text-light !important;
+  border: none !important;
+  font-weight: 600;
+  padding: 0.75rem 2rem !important;
+  transition: background 0.2s ease, transform 0.2s ease;
+  display: inline-flex;
+  align-items: center;
+
+  &:hover {
+    background-color: $btn-bg-hover !important;
+    transform: translateY(-2px);
   }
 
-  .footer-links {
-    margin-top: 1rem;
-    list-style: none;
-    padding: 0;
-    display: flex;
-    justify-content: center;
-    gap: 1.5rem;
-
-    a {
-      color: #6b7280;
-      text-decoration: none;
-
-      &:hover {
-        color: #111827;
-      }
-    }
+  &::after {
+    content: '→';
+    margin-left: 0.5rem;
   }
+}
+
+.hero-cta {
+  display: inline-flex;
+  gap: 1rem;
+  padding: 1rem;
+  margin: 0 auto 3rem;
+  position: relative;
+  z-index: 1;
+}
+
+// — Features Section —
+#features {
+  background-color: $bg-paper;
+  padding: 5rem 0;
+}
+
+// — Glass Cards —
+.glass-card {
+  background: rgba(255,255,255,0.6);
+  backdrop-filter: blur(12px);
+  border-radius: 16px;
+  padding: 2rem;
+  color: $text-dark;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.06), 0 4px 16px rgba(0,0,0,0.08);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+
+  &:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 6px 20px rgba(0,0,0,0.1), 0 8px 30px rgba(0,0,0,0.12);
+  }
+}
+
+// — Fade-in Animations —
+.fade-in-section {
+  opacity: 0;
+  transform: translateY(30px);
+  transition: all 0.6s ease-out;
+}
+.fade-in-section.in-view {
+  opacity: 1;
+  transform: none;
+}
+
+// — Scroll Hide/Reveal Navbar —
+.glass-nav {
+  transition: transform 0.3s ease;
+}
+.glass-nav.scroll-down {
+  transform: translateY(-100%);
+}
+.glass-nav.scroll-up {
+  transform: translateY(0);
+}
+
+// — Hover-Triggered Indicator —
+.nav-link {
+  position: relative;
+  overflow: hidden;
+
+  &::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    width: 0;
+    height: 3px;
+    background: $deep-purple;
+    transition: width 0.3s ease, left 0.3s ease;
+  }
+
+  &:hover::after {
+    width: 80%;
+    left: 10%;
+  }
+
+  &:hover {
+    color: $med-purple !important;
+  }
+}
+
+// — Logo Color Override —
+.navbar-brand {
+  color: $deep-purple !important;
+}
+
+// — Hero Spacing Adjustments —
+.hero-tagline {
+  margin-bottom: 2.5rem;
+}
+
+.hero-cta {
+  padding: 1.5rem 0 !important;
+  margin-bottom: 4rem !important;
 }

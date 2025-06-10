@@ -1,9 +1,14 @@
-document.addEventListener("DOMContentLoaded", () => {
-  const buttons = document.querySelectorAll(".btn-warning");
+// landing.js
 
-  buttons.forEach((btn) => {
-    btn.addEventListener("click", () => {
-      alert("Welcome to StudySpark!");
-    });
+document.addEventListener("DOMContentLoaded", () => {
+  const nav = document.querySelector(".glass-nav");
+
+  // Add/remove the 'scrolled' class when page scroll passes 50px
+  window.addEventListener("scroll", () => {
+    if (window.scrollY > 50) {
+      nav.classList.add("scrolled");
+    } else {
+      nav.classList.remove("scrolled");
+    }
   });
 });

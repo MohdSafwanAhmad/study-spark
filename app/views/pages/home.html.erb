@@ -1,122 +1,167 @@
-<body>
-  <header>
-    <nav class="container">
-      <div class="logo">
-        <span class="align-middle">STUDYSPARK</span>
+<body data-bs-theme="light">
+
+  <!-- Navbar -->
+  <header class="navbar sticky-top navbar-expand-lg glass-nav shadow-sm border-bottom py-2">
+    <div class="container position-relative d-flex align-items-center">
+
+      <!-- Left: Login -->
+      <div class="order-0">
+        <%= link_to "Login", "/users/sign_in", class: "btn btn-warning text-white fw-semibold" %>
       </div>
-      <ul class="nav-links">
-        <li><a href="/users/sign_in">Login</a></li>
-        <li><a href="#features">Features</a></li>
-      </ul>
-      <a href="/users/sign_up" class="cta-button">Get Started</a>
-    </nav>
+
+      <!-- Center: Brand -->
+      <%= link_to root_path, class: "navbar-brand mx-auto order-1 fw-bold text-primary fs-4" do %>
+        StudySpark
+      <% end %>
+
+      <!-- Right: Get Started -->
+      <div class="order-2">
+        <%= link_to "Get Started", "/users/sign_up", class: "btn btn-warning text-white fw-semibold" %>
+      </div>
+
+      <!-- Mobile toggler -->
+      <button
+        class="navbar-toggler position-absolute end-0"
+        type="button"
+        data-bs-toggle="collapse"
+        data-bs-target="#navbarNav"
+      >
+        <span class="navbar-toggler-icon"></span>
+      </button>
+    </div>
   </header>
 
-  <section class="hero hero-section fade-in-section">
-    <div class="floating-shapes">
-      <div class="shape"></div>
-      <div class="shape"></div>
-      <div class="shape"></div>
-    </div>
+  <!-- Hero -->
+  <section
+    class="hero-section fade-in-section d-flex align-items-center justify-content-center text-center"
+    style="min-height: 90vh;"
+  >
     <div class="container">
-      <div class="hero-content">
-        <h1>Learn Smart, Achieve More</h1>
-        <p class="hero-tagline">
-          AI-Enhanced tutoring that connects the right students with the right tutors, while keeping parents informed every step of the way.
-        </p>
-        <div class="hero-cta">
-          <a href="/users/sign_up" class="btn-primary btn-warning">Start Learning Today</a>
-          <a href="#demo" class="btn-secondary">Watch Demo</a>
-        </div>
+      <h1 class="display-4 fw-bold">Learn Smart, Achieve More</h1>
+      <p class="hero-tagline fs-5 mt-3">
+        AI-Enhanced tutoring that connects the right students with the right tutors, while keeping parents informed every step of the way.
+      </p>
+      <div class="hero-cta mt-4">
+        <%= link_to "Start Learning Today", "/users/sign_up", class: "btn btn-warning text-white fw-semibold btn-lg me-3" %>
+        <%= link_to "Features", "#features", class: "btn btn-light text-primary fw-semibold btn-lg" %>
       </div>
     </div>
   </section>
 
-  <section class="features fade-in-section" id="features">
+  <!-- Features -->
+  <section class="features fade-in-section py-5 bg-white" id="features">
     <div class="container">
-      <h2 class="section-title">Designed for Everyone</h2>
-      <div class="features-grid">
-        <div class="feature-card fade-in">
-          <div class="feature-icon learner-icon">🎓</div>
-          <h3>For Learners</h3>
-          <ul class="feature-list">
-            <li>AI-Assisted Tutoring Sessions</li>
-            <li>Adaptive Learning Paths</li>
-            <li>On-Demand Tutor Access</li>
-            <li>Structured Practice Materials</li>
-            <li>Clear Progress Tracking</li>
-          </ul>
+      <h2 class="section-title text-center mb-5 text-dark">Designed for Everyone</h2>
+      <div class="row g-4 justify-content-center">
+
+        <!-- Learners -->
+        <div class="col-md-6 col-lg-4">
+          <div class="glass-card p-4 h-100 text-start">
+            <h3 class="fw-semibold">🎓 For Learners</h3>
+            <ul class="feature-list mt-2">
+              <li>AI-Assisted Tutoring Sessions</li>
+              <li>Adaptive Learning Paths</li>
+              <li>On-Demand Tutor Access</li>
+              <li>Structured Practice Materials</li>
+              <li>Clear Progress Tracking</li>
+            </ul>
+          </div>
         </div>
 
-        <div class="feature-card fade-in">
-          <div class="feature-icon tutor-icon">👨‍🏫</div>
-          <h3>For Tutors</h3>
-          <ul class="feature-list">
-            <li>Automated Lesson Briefs</li>
-            <li>Data-Driven Student Matching</li>
-            <li>Flexible Scheduling Tools</li>
-            <li>Smart Resource Preparation</li>
-            <li>Performance Analytics</li>
-          </ul>
+        <!-- Tutors -->
+        <div class="col-md-6 col-lg-4">
+          <div class="glass-card p-4 h-100 text-start">
+            <h3 class="fw-semibold">👨‍🏫 For Tutors</h3>
+            <ul class="feature-list mt-2">
+              <li>Automated Lesson Briefs</li>
+              <li>Data-Driven Student Matching</li>
+              <li>Flexible Scheduling Tools</li>
+              <li>Smart Resource Preparation</li>
+              <li>Performance Analytics</li>
+            </ul>
+          </div>
         </div>
+
       </div>
     </div>
   </section>
 
-  <section class="problem-solution fade-in-section">
+  <!-- Problem & Solution -->
+  <section id="problem-solution" class="fade-in-section py-5">
     <div class="container">
-      <div class="ps-grid">
-        <div class="problem-side">
-          <h2>The Problems We Solve</h2>
-          <div class="pain-point">
-            <h4>For Learners</h4>
-            <p>Difficulty accessing quality help, unstructured practice, and opaque progress tracking.</p>
-          </div>
-          <div class="pain-point">
-            <h4>For Tutors</h4>
-            <p>Time-consuming prep work, poor student-tutor matches, and scheduling struggles.</p>
-          </div>
-          <div class="pain-point">
-            <h4>For Parents</h4>
-            <p>Lack of visibility into progress and uncertain return on investment.</p>
+      <div class="row g-5">
+
+        <!-- Problems -->
+        <div class="col-md-6">
+          <h2 class="section-title title-problems mb-4">The Problems We Solve</h2>
+          <div class="d-grid gap-3">
+            <div class="glass-card p-4 text-start">
+              <h4 class="fw-semibold">For Learners</h4>
+              <p>Difficulty accessing quality help, unstructured practice, and opaque progress tracking.</p>
+            </div>
+            <div class="glass-card p-4 text-start">
+              <h4 class="fw-semibold">For Tutors</h4>
+              <p>Time-consuming prep work, poor student-tutor matches, and scheduling struggles.</p>
+            </div>
+            <div class="glass-card p-4 text-start">
+              <h4 class="fw-semibold">For Parents</h4>
+              <p>Lack of visibility into progress and uncertain return on investment.</p>
+            </div>
           </div>
         </div>
 
-        <div class="solution-side">
-          <h2>Our AI-Enhanced Solutions</h2>
-          <div class="solution-point">
-            <h4>Scalable Learning Support</h4>
-            <p>AI-powered assistance ensures every student gets the help they need, when they need it.</p>
-          </div>
-          <div class="solution-point">
-            <h4>Intelligent Matching</h4>
-            <p>Data-driven algorithms pair students with the perfect tutors based on learning style and needs.</p>
-          </div>
-          <div class="solution-point">
-            <h4>Complete Transparency</h4>
-            <p>Real-time dashboards and analytics give everyone clear insight into progress and outcomes.</p>
+        <!-- Solutions -->
+        <div class="col-md-6">
+          <h2 class="section-title title-solutions mb-4">Our AI-Enhanced Solutions</h2>
+          <div class="d-grid gap-3">
+            <div class="glass-card p-4 text-start">
+              <h4 class="fw-semibold">Scalable Learning Support</h4>
+              <p>AI-powered assistance ensures every student gets the help they need, when they need it.</p>
+            </div>
+            <div class="glass-card p-4 text-start">
+              <h4 class="fw-semibold">Intelligent Matching</h4>
+              <p>Data-driven algorithms pair students with the perfect tutors based on learning style and needs.</p>
+            </div>
+            <div class="glass-card p-4 text-start">
+              <h4 class="fw-semibold">Complete Transparency</h4>
+              <p>Real-time dashboards and analytics give everyone clear insight into progress and outcomes.</p>
+            </div>
           </div>
         </div>
+
       </div>
     </div>
   </section>
 
-  <section class="final-cta fade-in-section">
+  <!-- Final CTA -->
+  <section class="final-cta fade-in-section text-center py-5" style="background: linear-gradient(135deg, #E7DFF2 0%, #EDF4FA 100%);">
     <div class="container">
-      <h2>Ready to Transform Learning?</h2>
-      <p>Join thousands of students, tutors, and parents who are already achieving more with StudySpark.</p>
-      <a href="/users/sign_up" class="btn-primary btn-warning">Get Started Free</a>
+      <h2 class="fw-bold mb-3">Ready to Transform Learning?</h2>
+      <p class="mb-4 text-dark">Join thousands of students, tutors, and parents who are already achieving more with StudySpark.</p>
+      <%= link_to "Get Started Free", "/users/sign_up", class: "btn btn-warning btn-lg text-white fw-semibold" %>
     </div>
   </section>
 
-  <footer class="site-footer">
+  <!-- Footer -->
+  <footer class="site-footer text-center py-4 bg-white border-top">
     <div class="container">
       <p>&copy; <%= Time.current.year %> StudySpark. All rights reserved.</p>
-      <ul class="footer-links">
-        <li><a href="#">Privacy Policy</a></li>
-        <li><a href="#">Terms of Service</a></li>
-        <li><a href="#features">Features</a></li>
+      <ul class="list-inline mt-2">
+        <li class="list-inline-item"><a href="#" class="text-muted">Privacy Policy</a></li>
+        <li class="list-inline-item"><a href="#" class="text-muted">Terms of Service</a></li>
+        <li class="list-inline-item"><a href="#features" class="text-muted">Features</a></li>
       </ul>
     </div>
   </footer>
+
+  <!-- JS -->
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      document.querySelectorAll('.fade-in-section').forEach(section => {
+        new IntersectionObserver(entries => {
+          entries.forEach(e => e.isIntersecting && e.target.classList.add('in-view'));
+        }, { threshold: 0.1 }).observe(section);
+      });
+    });
+  </script>
 </body>

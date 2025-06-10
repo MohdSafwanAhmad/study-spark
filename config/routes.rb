@@ -33,7 +33,7 @@ Rails.application.routes.draw do
   end
 
   # Add study materials to an existing Study (subject)
-  get  'studies/:study_id/materials/new', to: 'materials#new', as: 'new_study_material'
+
   post 'studies/:study_id/materials',     to: 'materials#create'
 
 

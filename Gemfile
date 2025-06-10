@@ -24,7 +24,7 @@ gem "turbo-rails"
 gem "stimulus-rails"
 
 # Build JSON APIs with ease [https://github.com/rails/jbuilder]
-gem "jbuilder"
+# gem "jbuilder"
 
 # Ostruct
 gem "ostruct"
@@ -40,6 +40,12 @@ gem "pdf-reader"
 
 # MarkDown Renderer
 gem 'redcarpet'
+
+# Turbo Streams
+gem "solid_cable", "~> 1.0.3"
+
+# Backround Jobs
+gem "solid_queue"
 
 # Use Redis adapter to run Action Cable in production
 # gem "redis", ">= 4.0.1"

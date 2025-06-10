@@ -64,7 +64,7 @@ tutor_amanda_garcia = User.create!(first_name: "Amanda", last_name: "Garcia", em
 tutor_daniel_brown = User.create!(first_name: "Daniel", last_name: "Brown", email: "daniel.brown@studyspark.com", password: "password123", tutor: true, date_of_birth: "1987-06-07", bio: "Experienced in multiple subjects, patient teaching style" )
 
 # Create learners
-learner_developer = User.create!(first_name: "Test Learner", last_name: "Dev", email: "learner@test.com", password: "password123", tutor: true, date_of_birth: "1995-03-15", bio: "Math tutor with 5+ years experience" )
+learner_developer = User.create!(first_name: "Test Learner", last_name: "Dev", email: "learner@test.com", password: "password123", tutor: false, date_of_birth: "1995-03-15", bio: "Math tutor with 5+ years experience" )
 learner_alex_smith = User.create!(first_name: "Alex", last_name: "Smith", email: "alex.smith@student.studyspark.com", password: "password123", tutor: false, date_of_birth: "2008-03-15" )
 learner_jordan_johnson = User.create!(first_name: "Jordan", last_name: "Johnson", email: "jordan.johnson@student.studyspark.com", password: "password123", tutor: false, date_of_birth: "2009-07-22" )
 learner_taylor_williams = User.create!(first_name: "Taylor", last_name: "Williams", email: "taylor.williams@student.studyspark.com", password: "password123", tutor: false, date_of_birth: "2008-11-08" )

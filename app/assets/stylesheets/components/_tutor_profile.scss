@@ -96,3 +96,31 @@
     margin: 0 0.25rem;
   }
 }
+.tutor-card {
+  position: relative;
+  background: #fff;
+  border-radius: 1.25rem;
+  border: 1.5px solid $light-purple;
+  padding: 2rem 1.5rem;
+  margin-bottom: 2rem;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+  transition: border-color 0.2s;
+
+  &:hover {
+    border-color: $purple;
+  }
+}
+
+.book-session-float {
+  position: absolute;
+  bottom: 1.5rem;
+  right: 1.5rem;
+  z-index: 10;
+
+  .btn {
+    font-size: 0.95rem;
+    padding: 0.5rem 1rem;
+    border-radius: 0.6rem;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+  }
+}

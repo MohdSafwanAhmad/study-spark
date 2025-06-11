@@ -13,14 +13,14 @@
 
   <body>
 
-  <% if user_signed_in? %>
+  <% if params[:controller] == "pages" &&  params[:action] == "home" %>
+    <%= yield %>
+  <% else %>
     <%= render 'shared/sidebar' %>
     <div class="content-wrapper" style="margin-left: 300px;">
-    <%= yield %>
+      <%= yield %>
       <%= render "shared/flashes" %>
     </div>
-    <% else %>
-    <%= yield %>
   <% end %>
 
 

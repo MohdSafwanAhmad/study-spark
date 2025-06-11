@@ -2,8 +2,7 @@
   <!-- Combined Subject Name and Learning Objective Card -->
   <div class="subject-card p-4 mb-4">
     <div class="d-flex justify-content-between align-items-center mb-2">
-      <h1 class="display-5 fw-bold mb-0" style="color: #714288;"><%= @study.subject.name %></h1>
-      <span class="badge bg-light-purple text-purple">Grade <%= @study.subject.grade_level %></span>
+      <h2 class="fw-bold text-purple mb-0" style="font-size: 2.2rem; line-height: 1.1;">Grade <%= @study.subject.grade_level %> | <%= @study.subject.name %></h2>
     </div>
     <div>
       <h4 class="fw-bold mb-2">Learning Objective</h4>
@@ -21,7 +20,7 @@
     <div class="col-lg-4">
       <% if @assigned_tutor %>
         <div class="subject-card p-4 mb-4">
-          <h5 class="fw-bold mb-3 text-purple">Your Tutor for this Subject</h5>
+          <h5 class="fw-bold mb-3" style="color: #8e24aa;">Your Tutor for this Subject</h5>
           <div class="subject-card p-3 mb-2">
             <div class="fw-bold fs-5 mb-1"><%= @assigned_tutor.first_name %> <%= @assigned_tutor.last_name %></div>
             <div class="text-muted small mb-2"><%= @assigned_tutor.email %></div>

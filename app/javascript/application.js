@@ -3,6 +3,7 @@ import "@hotwired/turbo-rails"
 import "controllers"
 import "@popperjs/core"
 import "bootstrap"
+import "./flashcards"
 // importing turbo frame for my form on /expertise/new.html.erb
 import { Turbo } from "@hotwired/turbo-rails"
 Turbo.session.drive = true

@@ -13,25 +13,25 @@
             <i class="fa-solid fa-wand-magic-sparkles me-2"></i>            <span>My Dashboard</span>
           <% end %>
         </li>
-        <li class="my-studies-toggle" data-bs-toggle="collapse" data-bs-target="#studiesCollapse" aria-expanded="true" aria-controls="studiesCollapse">
+        <li class="my-studies-toggle" data-bs-toggle="collapse" data-bs-target="#studiesCollapse" aria-expanded="true" aria-controls="studiesCollapse" style="display: flex; align-items: center; gap: 0.5rem; cursor: pointer;">
+          <i class="fa-solid fa-book me-2"></i>
           <span>My Studies</span>
-          <i class="fa-solid fa-book me-2"></i>        </li>
-          <ul class="collapse show my-studies-list list-unstyled" id="studiesCollapse" style="list-style: none;">
-            <% if current_user.studies.any? %>
-            <% current_user.studies.each do |study| %>
-              <li>
-                <%= link_to study_path(study), class: "sidebar-link #{'active' if current_page?(study_path(study)) || request.path == study_chats_path(study)}" do %>
-                  <i class="fa-solid fa-book me-2"></i>
-                    <span>Grade <%= study.subject.grade_level %> | <%= study.subject.name %></span>
-                <% end %>
-              </li>
-            <% end %>
-          <% else %>
-            <li class="sidebar-link text-muted px-3">No studies found</li>
+          <i class="fa-solid fa-circle-chevron-down" id="studiesCollapseArrow" style="transition: transform 0.2s;"></i>
+        </li>
+        <ul class="collapse show my-studies-list list-unstyled" id="studiesCollapse" style="list-style: none;">
+          <% if current_user.studies.any? %>
+          <% current_user.studies.each do |study| %>
+            <li>
+              <%= link_to study_path(study), class: "sidebar-link #{'active' if current_page?(study_path(study)) || request.path == study_chats_path(study)}" do %>
+                <i class="fa-solid fa-book me-2"></i>
+                  <span>Grade <%= study.subject.grade_level %> | <%= study.subject.name %></span>
+              <% end %>
+            </li>
           <% end %>
-        </ul>
+        <% else %>
+          <li class="sidebar-link text-muted px-3">No studies found</li>
+        <% end %>
       </ul>
-      <hr>
       <ul class="sidebar-nav list-unstyled">
         <li>
           <%= link_to tutors_path, class: "sidebar-link #{'active' if controller_name == 'tutors'}" do %>

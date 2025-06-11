@@ -12,7 +12,7 @@
           </div>
           <div style="display: flex; flex-direction: column; min-width: 0;">
             <strong><%= @study.user.first_name %> <%= @study.user.last_name %></strong>
-            <span style="color: #4CAF50; font-size: 0.9em;">You</span>
+            <span style="color: #836301; font-size: 0.9em;">You</span>
           </div>
         </div>
         <% if @study.tutoring_sessions.any? && @study.tutoring_sessions.last.expertise&.user %>
@@ -23,7 +23,7 @@
             </div>
             <div style="display: flex; flex-direction: column; min-width: 0;">
               <strong><%= tutor.first_name %> <%= tutor.last_name %></strong>
-              <span style="color: #e57373; font-size: 0.9em;">Tutor</span>
+              <span style="color: #7a000a; font-size: 0.9em;">Tutor</span>
             </div>
           </div>
         <% end %>

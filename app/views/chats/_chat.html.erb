@@ -1,8 +1,7 @@
 <div id="<%= dom_id(chat) %>" class="chat">
   <%= turbo_stream_from dom_id(chat) %>
-
   <p class="sender"><%= chat.user.first_name %>:</p>
-  <p class="user-question"><%= chat.user_question %></p>
+  <p class="<%= chat.user == chat.study.user ? 'user-question' : 'tutor-question' %>"><%= chat.user_question %></p>  
   <% if chat.ai_answer.present? %>
     <p class="sender">AI:</p>
     <p class="ai-answer"><%= chat.ai_answer %></p>

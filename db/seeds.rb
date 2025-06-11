@@ -51,17 +51,171 @@ puts "Created #{Subject.count} subjects"
 puts "Creating users..."
 
 # Create tutors
-tutor_developer = User.create!(first_name: "Test Tutor", last_name: "Dev", email: "tutor@test.com", password: "password123", tutor: true, date_of_birth: "1995-03-15", bio: "Math tutor with 5+ years experience" )
-tutor_sarah_johnson = User.create!(first_name: "Sarah", last_name: "Johnson", email: "sarah.johnson@studyspark.com", password: "password123", tutor: true, date_of_birth: "1995-03-15", bio: "Math tutor with 5+ years experience" )
-tutor_michael_chen = User.create!(first_name: "Michael", last_name: "Chen", email: "michael.chen@studyspark.com", password: "password123", tutor: true, date_of_birth: "1992-07-22", bio: "Biology PhD student, passionate about science education" )
-tutor_emily_rodriguez = User.create!(first_name: "Emily", last_name: "Rodriguez", email: "emily.rodriguez@studyspark.com", password: "password123", tutor: true, date_of_birth: "1988-11-08", bio: "Former high school English teacher" )
-tutor_david_thompson = User.create!(first_name: "David", last_name: "Thompson", email: "david.thompson@studyspark.com", password: "password123", tutor: true, date_of_birth: "1994-01-30", bio: "Engineering student, physics and math specialist" )
-tutor_jessica_kim = User.create!(first_name: "Jessica", last_name: "Kim", email: "jessica.kim@studyspark.com", password: "password123", tutor: true, date_of_birth: "1990-05-12", bio: "Native Spanish speaker with education degree" )
-tutor_robert_martinez = User.create!(first_name: "Robert", last_name: "Martinez", email: "robert.martinez@studyspark.com", password: "password123", tutor: true, date_of_birth: "1993-09-03", bio: "Chemistry major with lab research experience" )
-tutor_ashley_davis = User.create!(first_name: "Ashley", last_name: "Davis", email: "ashley.davis@studyspark.com", password: "password123", tutor: true, date_of_birth: "1991-12-18", bio: "History enthusiast with Master's degree" )
-tutor_christopher_wilson = User.create!(first_name: "Christopher", last_name: "Wilson", email: "christopher.wilson@studyspark.com", password: "password123", tutor: true, date_of_birth: "1996-04-25", bio: "Computer Science graduate working in tech" )
-tutor_amanda_garcia = User.create!(first_name: "Amanda", last_name: "Garcia", email: "amanda.garcia@studyspark.com", password: "password123", tutor: true, date_of_birth: "1989-08-14", bio: "Psychology major with tutoring certification" )
-tutor_daniel_brown = User.create!(first_name: "Daniel", last_name: "Brown", email: "daniel.brown@studyspark.com", password: "password123", tutor: true, date_of_birth: "1987-06-07", bio: "Experienced in multiple subjects, patient teaching style" )
+require "open-uri"
+
+puts 'Creating tutor users...'
+
+# Sarah Johnson
+tutor_sarah_johnson = User.create!(
+  first_name: "Sarah",
+  last_name: "Johnson",
+  email: "sarah.johnson@studyspark.com",
+  password: "password123",
+  tutor: true,
+  date_of_birth: "1995-03-15",
+  bio: "Math tutor with 5+ years experience"
+)
+tutor_sarah_johnson.profile_picture.attach(
+  io: URI.open("https://res.cloudinary.com/dirgjwkty/image/upload/v1749644057/cveneziani_kireew.jpg"),
+  filename: "sarah_johnson.jpg",
+  content_type: "image/jpeg"
+)
+
+# Emily Rodriguez
+tutor_emily_rodriguez = User.create!(
+  first_name: "Emily",
+  last_name: "Rodriguez",
+  email: "emily.rodriguez@studyspark.com",
+  password: "password123",
+  tutor: true,
+  date_of_birth: "1988-11-08",
+  bio: "Former high school English teacher"
+)
+tutor_emily_rodriguez.profile_picture.attach(
+  io: URI.open("https://res.cloudinary.com/dirgjwkty/image/upload/v1749613888/73177352_edulwi.jpg"),
+  filename: "emily_rodriguez.jpg",
+  content_type: "image/jpeg"
+)
+
+# Jessica Kim
+tutor_jessica_kim = User.create!(
+  first_name: "Jessica",
+  last_name: "Kim",
+  email: "jessica.kim@studyspark.com",
+  password: "password123",
+  tutor: true,
+  date_of_birth: "1990-05-12",
+  bio: "Native Spanish speaker with education degree"
+)
+tutor_jessica_kim.profile_picture.attach(
+  io: URI.open("https://res.cloudinary.com/dirgjwkty/image/upload/v1749613888/207014929_cruzve.png"),
+  filename: "jessica_kim.png",
+  content_type: "image/png"
+)
+
+# Amanda Garcia
+tutor_amanda_garcia = User.create!(
+  first_name: "Amanda",
+  last_name: "Garcia",
+  email: "amanda.garcia@studyspark.com",
+  password: "password123",
+  tutor: true,
+  date_of_birth: "1989-08-14",
+  bio: "Psychology major with tutoring certification"
+)
+tutor_amanda_garcia.profile_picture.attach(
+  io: URI.open("https://res.cloudinary.com/dirgjwkty/image/upload/v1749613888/IMG_2893.jpg_thltt6.jpg"),
+  filename: "amanda_garcia.jpg",
+  content_type: "image/jpeg"
+)
+
+# Ashley Davis
+tutor_ashley_davis = User.create!(
+  first_name: "Ashley",
+  last_name: "Davis",
+  email: "ashley.davis@studyspark.com",
+  password: "password123",
+  tutor: true,
+  date_of_birth: "1991-12-18",
+  bio: "History enthusiast with Master's degree"
+)
+tutor_ashley_davis.profile_picture.attach(
+  io: URI.open("https://res.cloudinary.com/dirgjwkty/image/upload/v1749643837/28513469_c8kjpj.jpg"),
+  filename: "ashley_davis.jpg",
+  content_type: "image/jpeg"
+)
+
+# Michael Chen
+tutor_michael_chen = User.create!(
+  first_name: "Michael",
+  last_name: "Chen",
+  email: "michael.chen@studyspark.com",
+  password: "password123",
+  tutor: true,
+  date_of_birth: "1992-07-22",
+  bio: "Biology PhD student, passionate about science education"
+)
+tutor_michael_chen.profile_picture.attach(
+  io: URI.open("https://res.cloudinary.com/dirgjwkty/image/upload/v1749613888/38663325_dbvaz9.jpg"),
+  filename: "michael_chen.jpg",
+  content_type: "image/jpeg"
+)
+
+# Robert Martinez
+tutor_robert_martinez = User.create!(
+  first_name: "Robert",
+  last_name: "Martinez",
+  email: "robert.martinez@studyspark.com",
+  password: "password123",
+  tutor: true,
+  date_of_birth: "1993-09-03",
+  bio: "Chemistry major with lab research experience"
+)
+tutor_robert_martinez.profile_picture.attach(
+  io: URI.open("https://res.cloudinary.com/dirgjwkty/image/upload/v1749613888/33919848_rplef6.jpg"),
+  filename: "robert_martinez.jpg",
+  content_type: "image/jpeg"
+)
+
+# David Thompson
+tutor_david_thompson = User.create!(
+  first_name: "David",
+  last_name: "Thompson",
+  email: "david.thompson@studyspark.com",
+  password: "password123",
+  tutor: true,
+  date_of_birth: "1994-01-30",
+  bio: "Engineering student, physics and math specialist"
+)
+tutor_david_thompson.profile_picture.attach(
+  io: URI.open("https://res.cloudinary.com/dirgjwkty/image/upload/v1749643564/arthur-littm_g5gjnq.jpg"),
+  filename: "david_thompson.jpg",
+  content_type: "image/jpeg"
+)
+
+# Christopher Wilson
+tutor_christopher_wilson = User.create!(
+  first_name: "Christopher",
+  last_name: "Wilson",
+  email: "christopher.wilson@studyspark.com",
+  password: "password123",
+  tutor: true,
+  date_of_birth: "1996-04-25",
+  bio: "Computer Science graduate working in tech"
+)
+tutor_christopher_wilson.profile_picture.attach(
+  io: URI.open("https://res.cloudinary.com/dirgjwkty/image/upload/v1749613888/lwg21_lmu6ce.jpg"),
+  filename: "christopher_wilson.jpg",
+  content_type: "image/jpeg"
+)
+
+# Daniel Brown
+tutor_daniel_brown = User.create!(
+  first_name: "Daniel",
+  last_name: "Brown",
+  email: "daniel.brown@studyspark.com",
+  password: "password123",
+  tutor: true,
+  date_of_birth: "1990-01-01",
+  bio: "Experienced in multiple subjects, patient teaching style"
+)
+tutor_daniel_brown.profile_picture.attach(
+  io: URI.open("https://res.cloudinary.com/dirgjwkty/image/upload/v1749643652/8090140_kvg5v4.png"),
+  filename: "daniel_brown.png",
+  content_type: "image/png"
+)
+
+
 
 # Create learners
 learner_developer = User.create!(first_name: "Test Learner", last_name: "Dev", email: "learner@test.com", password: "password123", tutor: false, date_of_birth: "1995-03-15", bio: "Math tutor with 5+ years experience" )

@@ -71,8 +71,8 @@ function showCurrentCard(materialIndex) {
     // Update counter
     const counter = document.getElementById(`card-counter-${materialIndex}`);
     if (counter) {
-      counter.textContent = currentCardIndex[materialIndex] + 1;
-    }
+      counter.textContent = Math.min(currentCardIndex[materialIndex] + 1, totalCards);
+}
   }
   
   // Check if all cards are completed
@@ -204,7 +204,9 @@ function markSolved(event, flashcardId, solved, materialIndex) {
       
       // Update progress
       updateProgress(materialIndex);
-      
+      document.querySelector(`[data-flashcard-id="${flashcardId}"]`).style.display = "none";
+      showCurrentCard(materialIndex);
+      nextCard(materialIndex);
 
     } else {
       throw new Error(data.message || 'Unknown error occurred');

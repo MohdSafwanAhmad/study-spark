@@ -64,7 +64,7 @@ tutor_sarah_johnson = User.create!(
   password: "password123",
   tutor: true,
   date_of_birth: "1995-03-15",
-  bio: "Math tutor with 5+ years experience"
+  bio: "Computer Science graduate working in tech. I aim to spark curiosity through labs, models, and everyday connections to biology, helping students grasp both foundational and advanced topics."
 )
 tutor_sarah_johnson.profile_picture.attach(
   io: URI.open("https://res.cloudinary.com/dirgjwkty/image/upload/v1749644057/cveneziani_kireew.jpg"),
@@ -80,7 +80,8 @@ tutor_emily_rodriguez = User.create!(
   password: "password123",
   tutor: true,
   date_of_birth: "1988-11-08",
-  bio: "Former high school English teacher"
+  bio: "Former high school English teacher. I have a passion for literature and writing, and I love helping students find their voice through essays, analysis, and vocabulary development."
+
 )
 tutor_emily_rodriguez.profile_picture.attach(
   io: URI.open("https://res.cloudinary.com/dirgjwkty/image/upload/v1749613888/73177352_edulwi.jpg"),
@@ -96,7 +97,7 @@ tutor_jessica_kim = User.create!(
   password: "password123",
   tutor: true,
   date_of_birth: "1990-05-12",
-  bio: "Native Spanish speaker with education degree"
+  bio: "Native Spanish speaker with education degree. I bring cultural context and interactive exercises to the classroom, helping students achieve fluency through immersion and practice."
 )
 tutor_jessica_kim.profile_picture.attach(
   io: URI.open("https://res.cloudinary.com/dirgjwkty/image/upload/v1749613888/207014929_cruzve.png"),
@@ -112,7 +113,8 @@ tutor_amanda_garcia = User.create!(
   password: "password123",
   tutor: true,
   date_of_birth: "1989-08-14",
-  bio: "Psychology major with tutoring certification"
+  bio: "Psychology major with tutoring certification. I focus on making complex theories accessible and relatable, with a student-centered, discussion-based approach."
+
 )
 tutor_amanda_garcia.profile_picture.attach(
   io: URI.open("https://res.cloudinary.com/dirgjwkty/image/upload/v1749613888/IMG_2893.jpg_thltt6.jpg"),
@@ -128,7 +130,7 @@ tutor_ashley_davis = User.create!(
   password: "password123",
   tutor: true,
   date_of_birth: "1991-12-18",
-  bio: "History enthusiast with Master's degree"
+  bio: "History enthusiast with Master's degree. I love connecting past events to current global trends and making history come alive through storytelling and critical analysis."
 )
 tutor_ashley_davis.profile_picture.attach(
   io: URI.open("https://res.cloudinary.com/dirgjwkty/image/upload/v1749643837/28513469_c8kjpj.jpg"),
@@ -144,7 +146,7 @@ tutor_michael_chen = User.create!(
   password: "password123",
   tutor: true,
   date_of_birth: "1992-07-22",
-  bio: "Biology PhD student, passionate about science education"
+  bio: "Biology PhD student, passionate about science education. I aim to spark curiosity through labs, models, and everyday connections to biology, helping students grasp both foundational and advanced topics."
 )
 tutor_michael_chen.profile_picture.attach(
   io: URI.open("https://res.cloudinary.com/dirgjwkty/image/upload/v1749613888/38663325_dbvaz9.jpg"),
@@ -160,7 +162,7 @@ tutor_robert_martinez = User.create!(
   password: "password123",
   tutor: true,
   date_of_birth: "1993-09-03",
-  bio: "Chemistry major with lab research experience"
+  bio: "Chemistry major with lab research experience. I offer structured, clear instruction in chemical principles and problem-solving strategies, making complex reactions approachable."
 )
 tutor_robert_martinez.profile_picture.attach(
   io: URI.open("https://res.cloudinary.com/dirgjwkty/image/upload/v1749613888/33919848_rplef6.jpg"),
@@ -176,7 +178,7 @@ tutor_david_thompson = User.create!(
   password: "password123",
   tutor: true,
   date_of_birth: "1994-01-30",
-  bio: "Engineering student, physics and math specialist"
+  bio: "Engineering student, physics and math specialist. I specialize in helping students build strong problem-solving skills and confidence in math fundamentals, from pre-algebra to geometry. My approach combines structured lessons with engaging real-world applications."
 )
 tutor_david_thompson.profile_picture.attach(
   io: URI.open("https://res.cloudinary.com/dirgjwkty/image/upload/v1749643564/arthur-littm_g5gjnq.jpg"),
@@ -192,7 +194,8 @@ tutor_christopher_wilson = User.create!(
   password: "password123",
   tutor: true,
   date_of_birth: "1996-04-25",
-  bio: "Computer Science graduate working in tech"
+  bio: "Computer Science graduate working in tech. I aim to spark curiosity through labs, models, and everyday connections to biology, helping students grasp both foundational and advanced topics."
+
 )
 tutor_christopher_wilson.profile_picture.attach(
   io: URI.open("https://res.cloudinary.com/dirgjwkty/image/upload/v1749613888/lwg21_lmu6ce.jpg"),
@@ -208,7 +211,7 @@ tutor_daniel_brown = User.create!(
   password: "password123",
   tutor: true,
   date_of_birth: "1990-01-01",
-  bio: "Experienced in multiple subjects, patient teaching style"
+  bio: "Experienced in multiple subjects, patient teaching style. I’m adaptable to various learning styles and subjects, providing a supportive environment that fosters academic growth."
 )
 tutor_daniel_brown.profile_picture.attach(
   io: URI.open("https://res.cloudinary.com/dirgjwkty/image/upload/v1749643652/8090140_kvg5v4.png"),
@@ -223,7 +226,8 @@ tutor_fernando_villarreal = User.create!(
   password: "password123",
   tutor: true,
   date_of_birth: "1994-02-23",
-  bio: "Protect human among call scene within policy since."
+  bio: "Protect human among call scene within policy since. I work with students at their own pace, using creative and interactive strategies to make learning enjoyable and effective."
+
 )
 tutor_fernando_villarreal.profile_picture.attach(
   io: URI.open("https://res.cloudinary.com/dirgjwkty/image/upload/v1749653457/rodloboz_igxbnk.jpg"),
@@ -239,7 +243,7 @@ tutor_joseph_duran = User.create!(
   password: "password123",
   tutor: true,
   date_of_birth: "1989-08-05",
-  bio: "How arrive get four adult evening."
+  bio: "How arrive get four adult evening. I work with students at their own pace, using creative and interactive strategies to make learning enjoyable and effective."
 )
 tutor_joseph_duran.profile_picture.attach(
   io: URI.open("https://res.cloudinary.com/dirgjwkty/image/upload/v1749653457/juliends_r4voqu.jpg"),
@@ -255,7 +259,8 @@ tutor_roger_garza = User.create!(
   password: "password123",
   tutor: true,
   date_of_birth: "2000-12-02",
-  bio: "Plant agency successful now crime we."
+  bio: "Plant agency successful now crime we. I work with students at their own pace, using creative and interactive strategies to make learning enjoyable and effective."
+
 )
 tutor_roger_garza.profile_picture.attach(
   io: URI.open("https://res.cloudinary.com/dirgjwkty/image/upload/v1748030027/xkccwahyvm1rxdme9toz.jpg"),
@@ -271,7 +276,8 @@ tutor_maria_smith = User.create!(
   password: "password123",
   tutor: true,
   date_of_birth: "1993-04-14",
-  bio: "Population little century center discover clearly."
+  bio: "Population little century center discover clearly. I work with students at their own pace, using creative and interactive strategies to make learning enjoyable and effective."
+
 )
 tutor_maria_smith.profile_picture.attach(
   io: URI.open("https://res.cloudinary.com/dirgjwkty/image/upload/v1749653461/28513469_lopms9.jpg"),
@@ -287,7 +293,8 @@ tutor_sabrina_johnson = User.create!(
   password: "password123",
   tutor: true,
   date_of_birth: "1995-06-22",
-  bio: "Democratic board foreign role show employee walk response finish able different."
+  bio: "Democratic board foreign role show employee walk response finish able different. I work with students at their own pace, using creative and interactive strategies to make learning enjoyable and effective."
+
 )
 tutor_sabrina_johnson.profile_picture.attach(
   io: URI.open("https://res.cloudinary.com/dirgjwkty/image/upload/v1749653460/37805251_hoofqn.png"),
@@ -303,7 +310,8 @@ tutor_angela_acosta = User.create!(
   password: "password123",
   tutor: true,
   date_of_birth: "1998-09-30",
-  bio: "Public even different most offer method southern pattern she away."
+  bio: "Public even different most offer method southern pattern she away. I work with students at their own pace, using creative and interactive strategies to make learning enjoyable and effective."
+
 )
 tutor_angela_acosta.profile_picture.attach(
   io: URI.open("https://res.cloudinary.com/dirgjwkty/image/upload/v1749653457/43337020_yx09qo.png"),
@@ -319,7 +327,8 @@ tutor_matthew_vance = User.create!(
   password: "password123",
   tutor: true,
   date_of_birth: "2000-11-23",
-  bio: "Believe audience line prepare market that cell very without yet tough."
+  bio: "Believe audience line prepare market that cell very without yet tough. I work with students at their own pace, using creative and interactive strategies to make learning enjoyable and effective."
+
 )
 tutor_matthew_vance.profile_picture.attach(
   io: URI.open("https://res.cloudinary.com/dirgjwkty/image/upload/v1749653460/414418_r8fhe8.jpg"),
@@ -335,7 +344,8 @@ tutor_james_stewart = User.create!(
   password: "password123",
   tutor: true,
   date_of_birth: "1989-10-12",
-  bio: "Sense president medical season finish bad suggest group else arm child operation design education."
+  bio: "Sense president medical season finish bad suggest group else arm child operation design education. I work with students at their own pace, using creative and interactive strategies to make learning enjoyable and effective."
+
 )
 tutor_james_stewart.profile_picture.attach(
   io: URI.open("https://res.cloudinary.com/dirgjwkty/image/upload/v1749653460/grmnlrt_y7hqui.jpg"),
@@ -351,7 +361,8 @@ tutor_jacob_sandoval = User.create!(
   password: "password123",
   tutor: true,
   date_of_birth: "1999-08-08",
-  bio: "System head allow activity you skill health remain question identify simple guess ahead."
+  bio: "System head allow activity you skill health remain question identify simple guess ahead. I work with students at their own pace, using creative and interactive strategies to make learning enjoyable and effective."
+
 )
 tutor_jacob_sandoval.profile_picture.attach(
   io: URI.open("https://res.cloudinary.com/dirgjwkty/image/upload/v1749653460/db0sch_xhdtq7.jpg"),
@@ -367,7 +378,8 @@ tutor_paul_mckinney = User.create!(
   password: "password123",
   tutor: true,
   date_of_birth: "1993-01-20",
-  bio: "Whole assume attack fear security deal upon respond."
+  bio: "Whole assume attack fear security deal upon respond. I work with students at their own pace, using creative and interactive strategies to make learning enjoyable and effective."
+
 )
 tutor_paul_mckinney.profile_picture.attach(
   io: URI.open("https://res.cloudinary.com/dirgjwkty/image/upload/v1749653458/cedricmenteau_aoukmk.jpg"),
@@ -383,7 +395,8 @@ tutor_christopher_anderson = User.create!(
   password: "password123",
   tutor: true,
   date_of_birth: "1996-12-10",
-  bio: "Street beat property reflect rate method each."
+  bio: "Street beat property reflect rate method each. I work with students at their own pace, using creative and interactive strategies to make learning enjoyable and effective."
+
 )
 tutor_christopher_anderson.profile_picture.attach(
   io: URI.open("https://res.cloudinary.com/dirgjwkty/image/upload/v1749653458/Martin-Alexander_sa1nvs.jpg"),
@@ -399,7 +412,7 @@ tutor_paul_daniels = User.create!(
   password: "password123",
   tutor: true,
   date_of_birth: "1999-04-12",
-  bio: "Though more piece work hour opportunity word single sometimes many."
+  bio: "Though more piece work hour opportunity word single sometimes many. I work with students at their own pace, using creative and interactive strategies to make learning enjoyable and effective."
 )
 tutor_paul_daniels.profile_picture.attach(
   io: URI.open("https://res.cloudinary.com/dirgjwkty/image/upload/v1749653457/pdunleav_bmvoyc.jpg"),

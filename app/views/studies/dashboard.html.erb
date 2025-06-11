@@ -1,11 +1,11 @@
 <div class="container">
   <div class="d-flex justify-content-between align-items-center mb-4">
-    <h2 class="mb-0" style="color: #714288;">Welcome back <%= current_user.first_name %>! Here are your subjects:</h2>
+    <h2 class="mb-0" style="color: #714288;">Welcome <%= current_user.first_name %></h2>
   </div>
   <div class="row">
     <% @studies.each do |study| %>
       <% most_recent_session = study.tutoring_sessions.order(start_time: :desc).first %>
-      <% percent_complete = study.fake_percent_complete %>
+      <% percent_complete = study.progress %>
       <div class="col-md-4 mb-4">
         <%= link_to study_path(study), class: "text-decoration-none text-dark" do %>
           <div class="subject-card card p-3 mb-3 d-flex flex-column h-100">

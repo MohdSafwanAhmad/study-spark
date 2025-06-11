@@ -5,7 +5,7 @@
     <%= form_with url: tutors_path, method: :get, local: true, class: "filter-form" do %>
       <div class="row align-items-end">
         <div class="col-md-8">
-          <%= label_tag :subject_id, "Subject", class: "form-label" %>
+          <%= label_tag :subject_id, "Subjects", class: "form-label" %>
           <%= select_tag :subject_id, options_for_select([["All Subjects", ""], ["My Subjects", "my_subjects"]] + Subject.all.map { |s| [s.name, s.id] }, params[:subject_id]), class: "form-select" %>
         </div>
         <div class="col-md-4">
@@ -26,7 +26,6 @@
           <div class="card-body">
             <h5 class="card-title"><%= tutor.first_name %> <%= tutor.last_name %></h5>
 
-            <%# Filtered expertise subjects %>
             <p class="expertise small text-muted">
               <strong>Expertise:</strong>
               <ul class="list-unstyled mb-0">
@@ -41,13 +40,16 @@
                   end
                 %>
                 <% expertises.each do |expertise| %>
-                  <li><%= expertise.subject.name %> <%= expertise.tutor_rate.present? ? "- $#{expertise.tutor_rate}" : "" %></li>
+                  <li>
+                    <%= expertise.subject.name %>
+                    <%= expertise.tutor_rate.present? ? "- $#{'%.2f' % expertise.rate_in_dollars}" : "" %>
+                  </li>
                 <% end %>
               </ul>
             </p>
 
             <% if tutor.bio.present? %>
-              <p class="text-muted small mt-2"><%= tutor.bio %></p>
+              <p class="bio"><%= tutor.bio %></p>
             <% end %>
           </div>
 

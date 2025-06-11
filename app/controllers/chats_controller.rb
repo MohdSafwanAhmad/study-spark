@@ -2,7 +2,7 @@ class ChatsController < ApplicationController
   def index
     @study = Study.find(params[:study_id])
     @chats = @study.chats.order(:created_at)
-    @chat = Chat.new
+    @chat = Chat.new(prompt: !current_user.tutor?)
   end
 
   def create
@@ -13,7 +13,7 @@ class ChatsController < ApplicationController
     if @chat.save
       respond_to do |format|
         format.turbo_stream do
-          render turbo_stream: turbo_stream.append(:chats, partial: "chats/chat", locals: { chat: @chat })
+          render turbo_stream: turbo_stream.append(:chats, partial: "chats/chat", locals: { chat: @chat, current_user: current_user, study: @chat.study })
         end
         format.html { redirect_to chats_path }
       end
@@ -25,6 +25,6 @@ class ChatsController < ApplicationController
   private
 
   def chat_params
-    params.require(:chat).permit(:user_question)
+    params.require(:chat).permit(:user_question, :prompt)
   end
 end

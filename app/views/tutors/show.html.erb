@@ -41,9 +41,8 @@
               </h5>
               <p class="card-text">
                 <i class="fas fa-dollar-sign me-1"></i>
-                <%= expertise.tutor_rate.present? ? "#{expertise.tutor_rate} / hour" : "Rate not provided" %>
+                <%= expertise.tutor_rate.present? ? "$#{'%.2f' % expertise.rate_in_dollars} / hour" : "Rate not provided" %>
               </p>
-
               <% if current_user == @tutor %>
                 <div class="mt-2 d-flex justify-content-center gap-2">
                   <%= link_to fa_icon("edit", text: "Edit"), edit_expertise_path(expertise), data: { turbo_frame: "expertise_#{expertise.id}" }, class: "btn btn-sm btn-outline-primary" %>

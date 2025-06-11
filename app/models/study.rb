@@ -4,7 +4,7 @@ class Study < ApplicationRecord
   belongs_to :subject
   has_many :materials
   has_many :tutoring_sessions
-  has_many :chats
+  has_many :chats, dependent: :destroy
 
   def fake_percent_complete
     require 'zlib'

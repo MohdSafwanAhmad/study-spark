@@ -1,85 +1,72 @@
 <div class="container my-5">
   <div class="tutor-card">
-    <div class="tutor-info text-center">
+    <div class="tutor-info">
       <% if @tutor.profile_picture.attached? %>
         <%= image_tag @tutor.profile_picture, class: "rounded-circle shadow mb-3", size: "150x150" %>
       <% end %>
 
       <h1 class="text-purple"><%= @tutor.first_name %> <%= @tutor.last_name %></h1>
 
-
       <% if @tutor.bio.present? %>
-        <p class="bio"><strong>Bio:</strong> <%= @tutor.bio %></p>
+        <p class="bio">
+          <i class="fas fa-user-graduate text-purple me-1"></i>
+          <strong>Bio:</strong> <%= @tutor.bio %>
+        </p>
       <% end %>
     </div>
 
     <hr>
 
-    <h2 class="text-purple">Expertise</h2>
-    <div class="row">
-      <% @tutor.expertises.includes(:subject).each do |expertise| %>
-        <turbo-frame id="expertise_<%= expertise.id %>" class="col-md-4 mb-3">
-          <% if current_user == @tutor && params[:edit_id].to_i == expertise.id %>
-            <%= form_with(model: expertise, local: false) do |form| %>
-              <div class="card h-100">
-                <div class="card-body d-flex flex-column">
-                  <div class="mb-3">
-                    <%= form.label :subject_id, "Subject" %>
-                    <%= form.collection_select :subject_id, Subject.all, :id, :name, {}, class: "form-select" %>
-                  </div>
-                  <div class="mb-3">
-                    <%= form.label :tutor_rate, "Hourly Rate ($)" %>
-                    <%= form.number_field :tutor_rate, step: 0.01, class: "form-control" %>
-                  </div>
-                  <div class="mt-auto d-flex justify-content-between">
-                    <%= form.submit "Save", class: "btn btn-primary" %>
-                    <%= link_to "Cancel", tutor_path(current_user), data: { turbo_frame: "_top" }, class: "btn btn-secondary" %>
-                  </div>
-                </div>
-              </div>
-            <% end %>
-          <% else %>
-            <div class="card h-100">
-              <div class="card-body d-flex flex-column">
-                <h5 class="card-title"><%= expertise.subject.name %></h5>
-                <% if expertise.tutor_rate.present? %>
-                  <p class="card-text">$<%= expertise.tutor_rate %> / hour</p>
-                <% else %>
-                  <p class="card-text text-muted">Rate not provided</p>
-                <% end %>
+    <h2 class="text-purple">
+      <i class="fas fa-chalkboard-teacher me-2"></i>Expertise
+    </h2>
 
-                <% if current_user == @tutor %>
-                  <div class="mt-auto d-flex align-items-center justify-content-end">
-                    <%= link_to "Edit", edit_expertise_path(expertise), data: { turbo_frame: "expertise_#{expertise.id}" }, class: "btn btn-sm btn-outline-primary me-2" %>
-                    <%= button_to "Delete", expertise_path(expertise), method: :delete, data: { turbo_confirm: "Are you sure?" }, class: "btn btn-sm btn-outline-danger" %>
-                  </div>
-                <% end %>
-              </div>
+    <div class="row expertise">
+      <% @tutor.expertises.includes(:subject).each do |expertise| %>
+        <div class="col-md-4 mb-3">
+          <div class="card h-100">
+            <div class="card-body d-flex flex-column justify-content-between">
+              <h5 class="card-title">
+                <i class="fas fa-book-open me-1"></i>
+                <%= expertise.subject.name %>
+              </h5>
+              <p class="card-text">
+                <i class="fas fa-dollar-sign me-1"></i>
+                <%= expertise.tutor_rate.present? ? "#{expertise.tutor_rate} / hour" : "Rate not provided" %>
+              </p>
+
+              <% if current_user == @tutor %>
+                <div class="mt-2 d-flex justify-content-center gap-2">
+                  <%= link_to fa_icon("edit", text: "Edit"), edit_expertise_path(expertise), data: { turbo_frame: "expertise_#{expertise.id}" }, class: "btn btn-sm btn-outline-primary" %>
+                  <%= button_to fa_icon("trash", text: "Delete"), expertise_path(expertise), method: :delete, data: { turbo_confirm: "Are you sure?" }, class: "btn btn-sm btn-outline-danger" %>
+                </div>
+              <% end %>
             </div>
-          <% end %>
-        </turbo-frame>
+          </div>
+        </div>
       <% end %>
     </div>
 
     <% if current_user == @tutor %>
-      <div class="mt-4">
-        <%= link_to "Add Expertise", new_expertise_path, class: "btn btn-purple" %>
+      <div class="mt-4 text-center">
+        <%= link_to fa_icon("plus-circle", text: "Add Expertise"), new_expertise_path, class: "btn btn-purple" %>
       </div>
-    <% end %>
 
-    <% if current_user == @tutor %>
       <hr class="my-5">
-      <h2 class="text-purple">My Learners</h2>
+      <h2 class="text-purple"><i class="fas fa-users me-2"></i>My Learners</h2>
 
       <% if @learners.any? %>
         <div class="row">
           <% @learners.each do |learner| %>
             <div class="col-md-4 mb-3">
-              <div class="card">
+              <div class="card h-100">
                 <div class="card-body">
                   <h5 class="card-title"><%= learner.first_name %> <%= learner.last_name %></h5>
-                  <p class="card-text"><strong>Email:</strong> <%= learner.email %></p>
-                  <%= link_to "View Profile", learner_path(learner), class: "btn btn-outline-primary btn-sm" %>
+                  <p class="card-text">
+                    <i class="fas fa-envelope me-1"></i>
+                    <strong>Email:</strong> <%= learner.email %>
+                  </p>
+                  <%= link_to fa_icon("user", text: "View Profile"), learner_path(learner), class: "btn btn-outline-primary btn-sm" %>
                 </div>
               </div>
             </div>

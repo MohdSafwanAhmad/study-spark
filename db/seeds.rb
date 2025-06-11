@@ -9,13 +9,14 @@
 #   end
 # Clear existing data
 puts "Cleaning database..."
+
+Chat.destroy_all
 TutoringSession.destroy_all
 Material.destroy_all
 Expertise.destroy_all
 Study.destroy_all
 User.destroy_all
 Subject.destroy_all
-
 puts "Creating subjects..."
 
 # Grade 8 Subjects
@@ -214,6 +215,197 @@ tutor_daniel_brown.profile_picture.attach(
   filename: "daniel_brown.png",
   content_type: "image/png"
 )
+# Fernando Villarreal
+tutor_fernando_villarreal = User.create!(
+  first_name: "Fernando",
+  last_name: "Villarreal",
+  email: "fernando.villarreal@studyspark.com",
+  password: "password123",
+  tutor: true,
+  date_of_birth: "1994-02-23",
+  bio: "Protect human among call scene within policy since."
+)
+tutor_fernando_villarreal.profile_picture.attach(
+  io: URI.open("https://res.cloudinary.com/dirgjwkty/image/upload/v1749653457/rodloboz_igxbnk.jpg"),
+  filename: "fernando_villarreal.jpg",
+  content_type: "image/jpeg"
+)
+
+# Joseph Duran
+tutor_joseph_duran = User.create!(
+  first_name: "Joseph",
+  last_name: "Duran",
+  email: "joseph.duran@studyspark.com",
+  password: "password123",
+  tutor: true,
+  date_of_birth: "1989-08-05",
+  bio: "How arrive get four adult evening."
+)
+tutor_joseph_duran.profile_picture.attach(
+  io: URI.open("https://res.cloudinary.com/dirgjwkty/image/upload/v1749653457/juliends_r4voqu.jpg"),
+  filename: "joseph_duran.jpg",
+  content_type: "image/jpeg"
+)
+
+# Roger Garza
+tutor_roger_garza = User.create!(
+  first_name: "Roger",
+  last_name: "Garza",
+  email: "roger.garza@studyspark.com",
+  password: "password123",
+  tutor: true,
+  date_of_birth: "2000-12-02",
+  bio: "Plant agency successful now crime we."
+)
+tutor_roger_garza.profile_picture.attach(
+  io: URI.open("https://res.cloudinary.com/dirgjwkty/image/upload/v1748030027/xkccwahyvm1rxdme9toz.jpg"),
+  filename: "roger_garza.jpg",
+  content_type: "image/jpeg"
+)
+
+# Maria Smith
+tutor_maria_smith = User.create!(
+  first_name: "Maria",
+  last_name: "Smith",
+  email: "maria.smith@studyspark.com",
+  password: "password123",
+  tutor: true,
+  date_of_birth: "1993-04-14",
+  bio: "Population little century center discover clearly."
+)
+tutor_maria_smith.profile_picture.attach(
+  io: URI.open("https://res.cloudinary.com/dirgjwkty/image/upload/v1749653461/28513469_lopms9.jpg"),
+  filename: "maria_smith.jpg",
+  content_type: "image/jpeg"
+)
+
+# Sabrina Johnson
+tutor_sabrina_johnson = User.create!(
+  first_name: "Sabrina",
+  last_name: "Johnson",
+  email: "sabrina.johnson@studyspark.com",
+  password: "password123",
+  tutor: true,
+  date_of_birth: "1995-06-22",
+  bio: "Democratic board foreign role show employee walk response finish able different."
+)
+tutor_sabrina_johnson.profile_picture.attach(
+  io: URI.open("https://res.cloudinary.com/dirgjwkty/image/upload/v1749653460/37805251_hoofqn.png"),
+  filename: "sabrina_johnson.png",
+  content_type: "image/png"
+)
+
+# Angela Acosta
+tutor_angela_acosta = User.create!(
+  first_name: "Angela",
+  last_name: "Acosta",
+  email: "angela.acosta@studyspark.com",
+  password: "password123",
+  tutor: true,
+  date_of_birth: "1998-09-30",
+  bio: "Public even different most offer method southern pattern she away."
+)
+tutor_angela_acosta.profile_picture.attach(
+  io: URI.open("https://res.cloudinary.com/dirgjwkty/image/upload/v1749653457/43337020_yx09qo.png"),
+  filename: "angela_acosta.png",
+  content_type: "image/png"
+)
+
+# Matthew Vance
+tutor_matthew_vance = User.create!(
+  first_name: "Matthew",
+  last_name: "Vance",
+  email: "matthew.vance@studyspark.com",
+  password: "password123",
+  tutor: true,
+  date_of_birth: "2000-11-23",
+  bio: "Believe audience line prepare market that cell very without yet tough."
+)
+tutor_matthew_vance.profile_picture.attach(
+  io: URI.open("https://res.cloudinary.com/dirgjwkty/image/upload/v1749653460/414418_r8fhe8.jpg"),
+  filename: "matthew_vance.jpg",
+  content_type: "image/jpeg"
+)
+
+# James Stewart
+tutor_james_stewart = User.create!(
+  first_name: "James",
+  last_name: "Stewart",
+  email: "james.stewart@studyspark.com",
+  password: "password123",
+  tutor: true,
+  date_of_birth: "1989-10-12",
+  bio: "Sense president medical season finish bad suggest group else arm child operation design education."
+)
+tutor_james_stewart.profile_picture.attach(
+  io: URI.open("https://res.cloudinary.com/dirgjwkty/image/upload/v1749653460/grmnlrt_y7hqui.jpg"),
+  filename: "james_stewart.jpg",
+  content_type: "image/jpeg"
+)
+
+# Jacob Sandoval
+tutor_jacob_sandoval = User.create!(
+  first_name: "Jacob",
+  last_name: "Sandoval",
+  email: "jacob.sandoval@studyspark.com",
+  password: "password123",
+  tutor: true,
+  date_of_birth: "1999-08-08",
+  bio: "System head allow activity you skill health remain question identify simple guess ahead."
+)
+tutor_jacob_sandoval.profile_picture.attach(
+  io: URI.open("https://res.cloudinary.com/dirgjwkty/image/upload/v1749653460/db0sch_xhdtq7.jpg"),
+  filename: "jacob_sandoval.jpg",
+  content_type: "image/jpeg"
+)
+
+# Paul Mckinney
+tutor_paul_mckinney = User.create!(
+  first_name: "Paul",
+  last_name: "Mckinney",
+  email: "paul.mckinney@studyspark.com",
+  password: "password123",
+  tutor: true,
+  date_of_birth: "1993-01-20",
+  bio: "Whole assume attack fear security deal upon respond."
+)
+tutor_paul_mckinney.profile_picture.attach(
+  io: URI.open("https://res.cloudinary.com/dirgjwkty/image/upload/v1749653458/cedricmenteau_aoukmk.jpg"),
+  filename: "paul_mckinney.jpg",
+  content_type: "image/jpeg"
+)
+
+# Christopher Anderson
+tutor_christopher_anderson = User.create!(
+  first_name: "Christopher",
+  last_name: "Anderson",
+  email: "christopher.anderson@studyspark.com",
+  password: "password123",
+  tutor: true,
+  date_of_birth: "1996-12-10",
+  bio: "Street beat property reflect rate method each."
+)
+tutor_christopher_anderson.profile_picture.attach(
+  io: URI.open("https://res.cloudinary.com/dirgjwkty/image/upload/v1749653458/Martin-Alexander_sa1nvs.jpg"),
+  filename: "christopher_anderson.jpg",
+  content_type: "image/jpeg"
+)
+
+# Paul Daniels
+tutor_paul_daniels = User.create!(
+  first_name: "Paul",
+  last_name: "Daniels",
+  email: "paul.daniels@studyspark.com",
+  password: "password123",
+  tutor: true,
+  date_of_birth: "1999-04-12",
+  bio: "Though more piece work hour opportunity word single sometimes many."
+)
+tutor_paul_daniels.profile_picture.attach(
+  io: URI.open("https://res.cloudinary.com/dirgjwkty/image/upload/v1749653457/pdunleav_bmvoyc.jpg"),
+  filename: "paul_daniels.jpg",
+  content_type: "image/jpeg"
+)
 
 
 
@@ -310,6 +502,43 @@ expertise_amanda_garcia_psychology_10 = Expertise.create!(user: tutor_amanda_gar
 # Daniel Brown - Multi-subject
 expertise_daniel_brown_pre_algebra_8 = Expertise.create!(user: tutor_daniel_brown, subject: subject_grade8_pre_algebra, tutor_rate: 2400)
 expertise_daniel_brown_ela_8 = Expertise.create!(user: tutor_daniel_brown, subject: subject_grade8_english_language_arts, tutor_rate: 2600)
+
+expertise_maria_smith_pre_algebra_8 = Expertise.create!(user: tutor_maria_smith, subject: subject_grade8_pre_algebra, tutor_rate: 3970)
+expertise_maria_smith_french_i_9 = Expertise.create!(user: tutor_maria_smith, subject: subject_grade9_french_i, tutor_rate: 3442)
+
+expertise_sabrina_johnson_english_language_arts_8 = Expertise.create!(user: tutor_sabrina_johnson, subject: subject_grade8_english_language_arts, tutor_rate: 3308)
+expertise_sabrina_johnson_algebra_ii_10 = Expertise.create!(user: tutor_sabrina_johnson, subject: subject_grade10_algebra_ii, tutor_rate: 2945)
+
+expertise_angela_acosta_science_8 = Expertise.create!(user: tutor_angela_acosta, subject: subject_grade8_science, tutor_rate: 3169)
+expertise_angela_acosta_chemistry_10 = Expertise.create!(user: tutor_angela_acosta, subject: subject_grade10_chemistry, tutor_rate: 3366)
+
+expertise_matthew_vance_world_history_8 = Expertise.create!(user: tutor_matthew_vance, subject: subject_grade8_world_history, tutor_rate: 3120)
+expertise_matthew_vance_physics_10 = Expertise.create!(user: tutor_matthew_vance, subject: subject_grade10_physics, tutor_rate: 2617)
+
+expertise_james_stewart_geography_8 = Expertise.create!(user: tutor_james_stewart, subject: subject_grade8_geography, tutor_rate: 3279)
+expertise_james_stewart_pre_calculus_10 = Expertise.create!(user: tutor_james_stewart, subject: subject_grade10_pre_calculus, tutor_rate: 2531)
+
+expertise_jacob_sandoval_health_education_8 = Expertise.create!(user: tutor_jacob_sandoval, subject: subject_grade8_health_education, tutor_rate: 3261)
+expertise_jacob_sandoval_ap_english_language_10 = Expertise.create!(user: tutor_jacob_sandoval, subject: subject_grade10_ap_english_language, tutor_rate: 2729)
+
+expertise_paul_mckinney_algebra_i_9 = Expertise.create!(user: tutor_paul_mckinney, subject: subject_grade9_algebra_i, tutor_rate: 3589)
+expertise_paul_mckinney_us_history_10 = Expertise.create!(user: tutor_paul_mckinney, subject: subject_grade10_us_history, tutor_rate: 3183)
+
+expertise_christopher_anderson_geometry_9 = Expertise.create!(user: tutor_christopher_anderson, subject: subject_grade9_geometry, tutor_rate: 2753)
+expertise_christopher_anderson_psychology_10 = Expertise.create!(user: tutor_christopher_anderson, subject: subject_grade10_psychology, tutor_rate: 3881)
+
+expertise_paul_daniels_science_9 = Expertise.create!(user: tutor_paul_daniels, subject: subject_grade9_science, tutor_rate: 3745)
+expertise_paul_daniels_spanish_ii_10 = Expertise.create!(user: tutor_paul_daniels, subject: subject_grade10_spanish_ii, tutor_rate: 3285)
+
+expertise_fernando_villarreal_english_literature_9 = Expertise.create!(user: tutor_fernando_villarreal, subject: subject_grade9_english_literature, tutor_rate: 3200)
+expertise_fernando_villarreal_geometry_10 = Expertise.create!(user: tutor_fernando_villarreal, subject: subject_grade10_geometry, tutor_rate: 3832)
+
+expertise_joseph_duran_world_cultures_9 = Expertise.create!(user: tutor_joseph_duran, subject: subject_grade9_world_cultures, tutor_rate: 3964)
+
+expertise_roger_garza_spanish_i_9 = Expertise.create!(user: tutor_roger_garza, subject: subject_grade9_spanish_i, tutor_rate: 3307)
+
+puts "Created #{Expertise.count} expertises"
+
 
 puts "Created #{Expertise.count} expertises"
 

@@ -1,19 +1,14 @@
 .chatbot {
-  background: white;
-  margin-top: 9px;
-  height: calc(100vh - 75px);
+  background: none;
+  margin-left: auto;
+  margin-right: auto;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
   flex-grow: 1;
-  max-width: 700px;
-  margin: 0 auto;
-
-  h1 {
-    border-bottom: 1px solid $gray-200;
-    margin-bottom: 0;
-    padding: 1rem;
-  }
+  max-width: 900px;
+  border-radius: 18px;
+  padding: 32px 0 24px 0;
 
   #questions {
     height: 100%;
@@ -37,13 +32,41 @@
 
   .user-question {
     align-self: flex-end;
-    background: $blue;
-    color: $light-gray;
+    background: #FFD966;
+    color: #333;
+    border: 2px solid #FFD966;
+    border-radius: 16px;
+    padding: 8px 16px;
+    margin-bottom: 2px;
+    max-width: 70%;
+    word-break: break-word;
+    font-weight: 500;
+  }
+
+  .tutor-question {
+    align-self: flex-end;
+    background: #FFB6B6;
+    color: #fff;
+    border: 2px solid #FFB6B6;
+    border-radius: 16px;
+    padding: 8px 16px;
+    margin-bottom: 2px;
+    max-width: 70%;
+    word-break: break-word;
+    font-weight: 500;
   }
 
   .ai-answer {
     align-self: flex-start;
-    background: $gray-200;
+    background: #f8f8fa;
+    color: #000000;
+    border: 2px solid #b39ddb;
+    border-radius: 16px;
+    padding: 8px 16px;
+    margin-bottom: 2px;
+    max-width: 70%;
+    word-break: break-word;
+    font-weight: 500;
   }
 
   #new_question {
@@ -56,10 +79,14 @@
   }
 }
 
+// .chatbot .subject-card {
+//   margin-top: 3rem;
+// }
+
 #chats {
   height: 400px;
   overflow-y: auto;
-  background: #f8f8fa;
+  background: #f8f8fa00;
   border-radius: 12px;
   padding: 24px 16px 16px 16px;
   margin-bottom: 1rem;
@@ -112,11 +139,23 @@ input, textarea {
   position: sticky;
   bottom: 0;
   background: #fff;
-  padding: 16px 0 0 0;
+  padding: 0;
   z-index: 10;
+  width: 100%;
 }
 
+.chat-input-bar form {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+#chat_user_question,
 .chat-input {
+  flex: 1 1 auto;
+  min-width: 0;
+  width: 100%;
   border-radius: 24px !important;
   border: 1.5px solid #e0d7f7 !important;
   font-size: 1.1em;
@@ -124,6 +163,7 @@ input, textarea {
   background: #f8f8fa;
   color: #222;
   box-shadow: none;
+  resize: none;
 }
 
 .chat-submit-btn {
@@ -135,9 +175,31 @@ input, textarea {
   border: none;
   font-size: 1.1em;
   transition: background 0.2s;
+  white-space: nowrap;
 }
 
 .chat-submit-btn:hover, .chat-submit-btn:focus {
   background: #6d1b7b;
   color: #fff;
 }
+
+.chat-right {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+}
+
+.chat-bubble-right {
+  text-align: right;
+  margin-left: auto;
+}
+
+.chat-bubble-left {
+  text-align: left;
+  margin-right: auto;
+}
+
+.user-question, .tutor-question, .ai-answer {
+  align-self: unset;
+}
+

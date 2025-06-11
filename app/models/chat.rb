@@ -3,6 +3,7 @@ class Chat < ApplicationRecord
   belongs_to :user
 
   validates :user_question, presence: true
+  
   after_create :maybe_fetch_ai_answer
 
   after_create_commit do

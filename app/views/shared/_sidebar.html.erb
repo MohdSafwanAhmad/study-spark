@@ -20,7 +20,7 @@
             <% if current_user.studies.any? %>
             <% current_user.studies.each do |study| %>
               <li>
-                <%= link_to study_path(study), class: "sidebar-link #{'active' if current_page?(study_path(study))}" do %>
+                <%= link_to study_path(study), class: "sidebar-link #{'active' if current_page?(study_path(study)) || request.path == study_chats_path(study)}" do %>
                   <i class="fa-solid fa-book me-2"></i>
                     <span>Grade <%= study.subject.grade_level %> | <%= study.subject.name %></span>
                 <% end %>

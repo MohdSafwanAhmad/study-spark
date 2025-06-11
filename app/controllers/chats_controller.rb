@@ -13,7 +13,7 @@ class ChatsController < ApplicationController
     if @chat.save
       respond_to do |format|
         format.turbo_stream do
-          render turbo_stream: turbo_stream.append(:chats, partial: "chats/chat", locals: { chat: @chat })
+          render turbo_stream: turbo_stream.append(:chats, partial: "chats/chat", locals: { chat: @chat, current_user: current_user, study: @chat.study })
         end
         format.html { redirect_to chats_path }
       end

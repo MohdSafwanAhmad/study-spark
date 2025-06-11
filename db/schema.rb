@@ -10,7 +10,6 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-
 ActiveRecord::Schema[7.1].define(version: 2025_06_11_162430) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -51,10 +50,9 @@ ActiveRecord::Schema[7.1].define(version: 2025_06_11_162430) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.bigint "user_id"
-
+    t.boolean "ai_prompt"
     t.boolean "to_ai"
     t.boolean "prompt"
-
     t.index ["study_id"], name: "index_chats_on_study_id"
     t.index ["user_id"], name: "index_chats_on_user_id"
   end
@@ -238,6 +236,15 @@ ActiveRecord::Schema[7.1].define(version: 2025_06_11_162430) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "tutor_availabilities", force: :cascade do |t|
+    t.bigint "user_id", null: false
+    t.datetime "start_time"
+    t.datetime "end_time"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["user_id"], name: "index_tutor_availabilities_on_user_id"
+  end
+
   create_table "tutoring_sessions", force: :cascade do |t|
     t.datetime "start_time"
     t.datetime "end_time"
@@ -283,6 +290,7 @@ ActiveRecord::Schema[7.1].define(version: 2025_06_11_162430) do
   add_foreign_key "solid_queue_scheduled_executions", "solid_queue_jobs", column: "job_id", on_delete: :cascade
   add_foreign_key "studies", "subjects"
   add_foreign_key "studies", "users"
+  add_foreign_key "tutor_availabilities", "users"
   add_foreign_key "tutoring_sessions", "expertises"
   add_foreign_key "tutoring_sessions", "studies"
 end

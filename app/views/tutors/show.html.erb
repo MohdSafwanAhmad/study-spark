@@ -1,6 +1,15 @@
 <div class="container my-5">
-  <div class="tutor-card">
-    <div class="tutor-info">
+  <div class="tutor-card position-relative">
+
+    <% if current_user != @tutor %>
+      <div class="position-absolute top-0 end-0 m-3">
+        <%= link_to new_tutoring_session_path(tutor_id: @tutor.id), class: "btn btn-warning text-white fw-semibold shadow" do %>
+          <i class="fas fa-calendar-check me-2"></i> Book Session
+        <% end %>
+      </div>
+    <% end %>
+
+    <div class="tutor-info text-center">
       <% if @tutor.profile_picture.attached? %>
         <%= image_tag @tutor.profile_picture, class: "rounded-circle shadow mb-3", size: "150x150" %>
       <% end %>

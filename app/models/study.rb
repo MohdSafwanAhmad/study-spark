@@ -10,4 +10,8 @@ class Study < ApplicationRecord
     require 'zlib'
     ((Zlib.crc32(id.to_s) % 71) + 20)
   end
+
+  def current_tutor
+    tutoring_sessions.includes(expertise: :user).last&.expertise&.user
+  end
 end

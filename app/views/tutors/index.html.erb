@@ -1,88 +1,66 @@
-<%# Tutors Index Page %>
-<div class="container">
-  <h1>Our Tutors</h1>
+<div class="container py-5">
+  <h1 class="mb-4 text-center text-purple">Our Tutors</h1>
 
-  <div class="filter-tabs mb-4">
+  <div class="filter-tabs mb-5">
     <%= form_with url: tutors_path, method: :get, local: true, class: "filter-form" do %>
       <div class="row align-items-end">
         <div class="col-md-8">
           <%= label_tag :subject_id, "Subject", class: "form-label" %>
-          <%= select_tag :subject_id, options_for_select([
-            ["All Subjects", ""],
-            ["My Subjects", "my_subjects"]
-          ] + Subject.all.map { |s| [s.name, s.id] }, params[:subject_id]), class: "form-select" %>
+          <%= select_tag :subject_id, options_for_select([["All Subjects", ""], ["My Subjects", "my_subjects"]] + Subject.all.map { |s| [s.name, s.id] }, params[:subject_id]), class: "form-select" %>
         </div>
-        <div class="col-md-4 d-flex align-items-end">
-          <%= submit_tag "Filter", class: "btn btn-purple w-100 ms-2" %>
+        <div class="col-md-4">
+          <%= submit_tag "Filter", class: "btn btn-purple w-100" %>
         </div>
       </div>
     <% end %>
   </div>
 
-  <div class="tutors-grid">
-    <%# learner_subject_ids = current_user.study_subjects.pluck(:id) %>
+  <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-4">
     <% @tutors.each do |tutor| %>
-      <%# matching_expertises = tutor.expertises.includes(:subject).where(subject_id: learner_subject_ids) %>
-      <div class="tutor-card">
-        <div class="tutor-info">
-          <h2><%= tutor.first_name %> <%= tutor.last_name %></h2>
-          <p class="email"><%= tutor.email %></p>
-          
-          <%# Display expertise subjects %>
-          <p class="expertise">
-            <strong>Expertise:</strong>
-            <ul>
-              <% 
-                # Determine which expertises to show
-                if params[:subject_id] == "my_subjects" && user_signed_in?
-                  learner_subject_ids = current_user.study_subjects.pluck(:id)
-                  expertises = tutor.expertises.includes(:subject).where(subject_id: learner_subject_ids)
-                elsif params[:subject_id].present? && params[:subject_id] != ""
-                  expertises = tutor.expertises.includes(:subject).where(subject_id: params[:subject_id])
-                else
-                  expertises = tutor.expertises.includes(:subject)
-                end
-              %>
-              <% expertises.each do |expertise| %>
-                <li>
-                  <%= expertise.subject.name %>
-                  <% if expertise.tutor_rate.present? %>
-                    - $<%= expertise.tutor_rate %>
-                  <% end %>
-                </li>
-              <% end %>
-            </ul>
-          </p>
-
-          <% if tutor.bio.present? %>
-            <p class="bio"><%= tutor.bio %></p>
+      <div class="col">
+        <div class="card h-100 shadow-sm text-center">
+          <% if tutor.profile_picture.attached? %>
+            <%= image_tag tutor.profile_picture, class: "rounded-circle mx-auto mt-3", style: "width: 120px; height: 120px; object-fit: cover;" %>
           <% end %>
 
-          <%= link_to "View Profile", tutor_path(tutor), class: "button" %>
-          <%= link_to "Book Session", new_tutoring_session_path(tutor_id: tutor.id), class: "button" %>
+          <div class="card-body">
+            <h5 class="card-title"><%= tutor.first_name %> <%= tutor.last_name %></h5>
+
+            <%# Filtered expertise subjects %>
+            <p class="expertise small text-muted">
+              <strong>Expertise:</strong>
+              <ul class="list-unstyled mb-0">
+                <%
+                  if params[:subject_id] == "my_subjects" && user_signed_in?
+                    learner_subject_ids = current_user.study_subjects.pluck(:id)
+                    expertises = tutor.expertises.includes(:subject).where(subject_id: learner_subject_ids)
+                  elsif params[:subject_id].present? && params[:subject_id] != ""
+                    expertises = tutor.expertises.includes(:subject).where(subject_id: params[:subject_id])
+                  else
+                    expertises = tutor.expertises.includes(:subject)
+                  end
+                %>
+                <% expertises.each do |expertise| %>
+                  <li><%= expertise.subject.name %> <%= expertise.tutor_rate.present? ? "- $#{expertise.tutor_rate}" : "" %></li>
+                <% end %>
+              </ul>
+            </p>
+
+            <% if tutor.bio.present? %>
+              <p class="text-muted small mt-2"><%= tutor.bio %></p>
+            <% end %>
+          </div>
+
+          <div class="card-footer bg-white border-top-0 d-flex justify-content-center gap-2">
+            <%= link_to "View Profile", tutor_path(tutor), class: "btn btn-outline-primary btn-sm" %>
+            <%= link_to "Book Session", new_tutoring_session_path(tutor_id: tutor.id), class: "btn btn-purple btn-sm" %>
+          </div>
         </div>
       </div>
     <% end %>
   </div>
 
   <% if @tutors.empty? %>
-    <p class="no-tutors">No tutors available at the moment.</p>
+    <p class="text-muted mt-5 text-center">No tutors available at the moment.</p>
   <% end %>
 </div>
-
-<script>
-  document.addEventListener("DOMContentLoaded", function() {
-    const sortBtn = document.getElementById("sort-price-btn");
-    const sortField = document.querySelector("input[name='sort']");
-    if (sortBtn && sortField) {
-      sortBtn.addEventListener("click", function() {
-        if (sortField.value === "price_desc") {
-          sortField.value = "price_asc";
-        } else {
-          sortField.value = "price_desc";
-        }
-        this.form.submit();
-      });
-    }
-  });
-</script>

@@ -3,7 +3,7 @@ class Chat < ApplicationRecord
   belongs_to :user
 
   validates :user_question, presence: true
-  after_create :fetch_ai_answer
+  after_create :fetch_ai_answer, if: :ai_prompt?
 
   after_create_commit do
     broadcast_append_to "chats_study_#{study_id}", target: "chats"
@@ -13,5 +13,9 @@ class Chat < ApplicationRecord
 
   def fetch_ai_answer
     ChatbotJob.perform_later(self)
+  end
+
+  def ai_prompt?
+    self.ai_prompt
   end
 end

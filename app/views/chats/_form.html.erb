@@ -1,6 +1,10 @@
 <div class="chat-input-bar mt-3">
-  <%= simple_form_for [@study, chat], html: { class: "d-flex align-items-center gap-2" } do |f| %>
-    <%= f.input :user_question, label: false, placeholder: "Type your question...", input_html: { class: "form-control chat-input", autocomplete: "off", style: "flex: 1;" } %>
-    <%= f.button :submit, "Ask", class: "btn btn-purple chat-submit-btn" %>
+  <%= simple_form_for [@study, chat], html: { class: "d-flex align-items-center gap-2 w-100" } do |f| %>
+    <%= f.input_field :user_question, as: :text, class: "form-control flex-grow-1", placeholder: "Type your question...", autocomplete: "off" %>
+    <div class="form-check ms-2">
+      <%= f.check_box :ai_prompt, { checked: true, class: "form-check-input", id: "ai_prompt_checkbox" }, "1", "0" %>
+      <%= f.label :ai_prompt, "AI Response", class: "form-check-label", for: "ai_prompt_checkbox" %>
+    </div>
+    <%= f.button :submit, "Ask", class: "btn btn-purple" %>
   <% end %>
 </div>

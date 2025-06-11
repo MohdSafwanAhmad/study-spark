@@ -41,7 +41,10 @@
                   end
                 %>
                 <% expertises.each do |expertise| %>
-                  <li><%= expertise.subject.name %> <%= expertise.tutor_rate.present? ? "- $#{expertise.tutor_rate}" : "" %></li>
+                  <li>
+                    <%= expertise.subject.name %>
+                    <%= expertise.tutor_rate.present? ? "- $#{'%.2f' % expertise.rate_in_dollars}" : "" %>
+                  </li>
                 <% end %>
               </ul>
             </p>

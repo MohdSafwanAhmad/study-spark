@@ -26,7 +26,6 @@
           <div class="card-body">
             <h5 class="card-title"><%= tutor.first_name %> <%= tutor.last_name %></h5>
 
-            <%# Filtered expertise subjects %>
             <p class="expertise small text-muted">
               <strong>Expertise:</strong>
               <ul class="list-unstyled mb-0">
@@ -47,7 +46,7 @@
             </p>
 
             <% if tutor.bio.present? %>
-              <p class="text-muted small mt-2"><%= tutor.bio %></p>
+              <p class="bio"><%= tutor.bio %></p>
             <% end %>
           </div>
 

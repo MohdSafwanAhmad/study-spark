@@ -2,14 +2,12 @@
   background: none;
   margin-left: auto;
   margin-right: auto;
-  height: calc(100vh - 120px);
   display: flex;
   flex-direction: column;
   justify-content: space-between;
   flex-grow: 1;
-  max-width: 700px;
+  max-width: 900px;
   border-radius: 18px;
-  box-shadow: 0 4px 24px rgba(80, 80, 120, 0.08);
   padding: 32px 0 24px 0;
 
   #questions {
@@ -204,3 +202,4 @@ input, textarea {
 .user-question, .tutor-question, .ai-answer {
   align-self: unset;
 }
+

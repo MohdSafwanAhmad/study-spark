@@ -64,6 +64,16 @@ ActiveRecord::Schema[7.1].define(version: 2025_06_10_202324) do
     t.index ["user_id"], name: "index_expertises_on_user_id"
   end
 
+  create_table "flashcards", force: :cascade do |t|
+    t.string "question"
+    t.string "answer"
+    t.boolean "solved"
+    t.bigint "material_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["material_id"], name: "index_flashcards_on_material_id"
+  end
+
   create_table "materials", force: :cascade do |t|
     t.string "name"
     t.string "description"
@@ -72,6 +82,7 @@ ActiveRecord::Schema[7.1].define(version: 2025_06_10_202324) do
     t.bigint "study_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.text "raw_content"
     t.index ["study_id"], name: "index_materials_on_study_id"
   end
 
@@ -257,6 +268,7 @@ ActiveRecord::Schema[7.1].define(version: 2025_06_10_202324) do
   add_foreign_key "chats", "users"
   add_foreign_key "expertises", "subjects"
   add_foreign_key "expertises", "users"
+  add_foreign_key "flashcards", "materials"
   add_foreign_key "materials", "studies"
   add_foreign_key "solid_queue_blocked_executions", "solid_queue_jobs", column: "job_id", on_delete: :cascade
   add_foreign_key "solid_queue_claimed_executions", "solid_queue_jobs", column: "job_id", on_delete: :cascade

@@ -1,5 +1,5 @@
 <% if user_signed_in? %>
-  <nav id="sidebarMenu" class="sidebar d-flex flex-column flex-shrink-0 bg-light position-fixed" style="width: 250px; height: 100vh; z-index: 1040;">
+  <nav id="sidebarMenu" class="sidebar d-flex flex-column flex-shrink-0 bg-light position-fixed" style="width: 300px; height: 100vh; z-index: 1040; padding-left: 2rem; padding-right: 2rem;">  
     <div class="sidebar-logo">
       <div class="mascot-circle">
         <img src="https://res.cloudinary.com/dgx2lulyv/image/upload/v1749479161/Transparent_Logo_jsvqfa.png" alt="StudySpark Bunny" />
@@ -10,21 +10,19 @@
       <ul class="sidebar-nav list-unstyled">
         <li>
           <%= link_to dashboard_path, class: "sidebar-link #{'active' if current_page?(dashboard_path)}" do %>
-            <i class="bi bi-house-door"></i>
-            <span>My Dashboard</span>
+            <i class="fa-solid fa-wand-magic-sparkles me-2"></i>            <span>My Dashboard</span>
           <% end %>
         </li>
         <li class="my-studies-toggle" data-bs-toggle="collapse" data-bs-target="#studiesCollapse" aria-expanded="true" aria-controls="studiesCollapse">
           <span>My Studies</span>
-          <i class="fa-solid fa-chevron-down transition" id="studiesCollapseArrow"></i>
-        </li>
-        <ul class="collapse show my-studies-list" id="studiesCollapse">
-          <% if current_user.studies.any? %>
+          <i class="fa-solid fa-book me-2"></i>        </li>
+          <ul class="collapse show my-studies-list list-unstyled" id="studiesCollapse" style="list-style: none;">
+            <% if current_user.studies.any? %>
             <% current_user.studies.each do |study| %>
               <li>
                 <%= link_to study_path(study), class: "sidebar-link #{'active' if current_page?(study_path(study))}" do %>
-                  <i class="bi bi-journal-bookmark"></i>
-                  <span>Grade <%= study.subject.grade_level %> | <%= study.subject.name %></span>
+                  <i class="fa-solid fa-book me-2"></i>
+                    <span>Grade <%= study.subject.grade_level %> | <%= study.subject.name %></span>
                 <% end %>
               </li>
             <% end %>
@@ -37,7 +35,7 @@
       <ul class="sidebar-nav list-unstyled">
         <li>
           <%= link_to tutors_path, class: "sidebar-link #{'active' if controller_name == 'tutors'}" do %>
-            <i class="bi bi-person-video3"></i>
+            <i class="fa-solid fa-person-chalkboard me-2"></i>
             <span>Browse Tutors</span>
           <% end %>
         </li>

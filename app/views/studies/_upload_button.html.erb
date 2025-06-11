@@ -1,0 +1,12 @@
+<!-- _upload_button.html.erb -->
+<div class="upload-section">
+  <label for="file-upload" class="btn btn-outline-purple btn-sm d-flex align-items-center gap-1 cursor-pointer">
+    <span class="fs-5">&#43;</span>
+    <span>Upload & Generate</span>
+  </label>
+
+  <!-- Hidden form for file upload -->
+  <%= form_with url: study_materials_path(@study), multipart: true, local: true, id: "upload-form", class: "d-none" do |form| %>
+    <%= form.file_field "material[file]", id: "file-upload", accept: ".pdf", onchange: "document.getElementById('upload-form').submit();" %>
+  <% end %>
+</div>

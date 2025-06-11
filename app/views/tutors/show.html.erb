@@ -1,8 +1,12 @@
 <div class="container my-5">
   <div class="tutor-card">
-    <div class="tutor-info">
+    <div class="tutor-info text-center">
+      <% if @tutor.profile_picture.attached? %>
+        <%= image_tag @tutor.profile_picture, class: "rounded-circle shadow mb-3", size: "150x150" %>
+      <% end %>
+
       <h1 class="text-purple"><%= @tutor.first_name %> <%= @tutor.last_name %></h1>
-      <p class="email"><strong>Email:</strong> <%= @tutor.email %></p>
+
 
       <% if @tutor.bio.present? %>
         <p class="bio"><strong>Bio:</strong> <%= @tutor.bio %></p>
@@ -65,7 +69,6 @@
 
     <% if current_user == @tutor %>
       <hr class="my-5">
-
       <h2 class="text-purple">My Learners</h2>
 
       <% if @learners.any? %>

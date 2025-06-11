@@ -14,7 +14,7 @@
     <div class="participants mt-2" style="display: flex; gap: 1.5rem;">
       <div style="display: flex; align-items: center;">
         <div class="avatar" style="background: #FFD966; border-radius: 50%; width: 36px; height: 36px; display: flex; align-items: center; justify-content: center; font-weight: bold; color: #333; margin-right: 8px;">
-          <%= @study.user.first_name.first %>
+          <%= @study.user&.first_name&.first || "?" %>
         </div>
         <div>
           <strong><%= @study.user.first_name %> <%= @study.user.last_name %></strong>

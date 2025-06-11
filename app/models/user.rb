@@ -1,4 +1,5 @@
 class User < ApplicationRecord
+  has_one_attached :profile_picture
   has_many :expertises, dependent: :destroy
   has_many :expertise_subjects, through: :expertises, source: :subject
   accepts_nested_attributes_for :expertises, allow_destroy: true

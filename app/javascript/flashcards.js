@@ -204,7 +204,7 @@ function markSolved(event, flashcardId, solved, materialIndex) {
       
       // Update progress
       updateProgress(materialIndex);
-      
+      document.querySelector(`[data-flashcard-id="${flashcardId}"]`).style.display = "none";
 
     } else {
       throw new Error(data.message || 'Unknown error occurred');

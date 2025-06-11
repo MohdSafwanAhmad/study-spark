@@ -5,6 +5,7 @@ Rails.application.routes.draw do
   root to: "pages#home"
 
   resources :studies do
+    resources :chats, only: %i[index create]
     member do
       get :upload_materials
       patch :attach_materials
@@ -32,9 +33,13 @@ Rails.application.routes.draw do
   end
 
   # Add study materials to an existing Study (subject)
-  get  'studies/:study_id/materials/new', to: 'materials#new', as: 'new_study_material'
-  post 'studies/:study_id/materials',     to: 'materials#create'
 
+  post 'studies/:study_id/materials', to: 'materials#create'
+
+  # Flashcards routes nested under materials
+  resources :materials, only: [] do
+    resources :flashcards, only: [:index, :create, :update]
+  end
 
   # Index and show for tutors
   # Index and show for a tutor to help a learner with study goals, etc.
@@ -42,4 +47,5 @@ Rails.application.routes.draw do
   resources :tutors, only: %i[index show]
   resources :learners, only: %i[index show]
 
+  # AI chatbot
 end

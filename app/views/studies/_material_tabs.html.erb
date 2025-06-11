@@ -1,0 +1,30 @@
+<!-- Tab Navigation -->
+<ul class="nav nav-tabs mb-3" id="materialTabs-<%= index %>" role="tablist">
+  <li class="nav-item" role="presentation">
+    <button class="nav-link active" id="summary-tab-<%= index %>" data-bs-toggle="tab" data-bs-target="#summary-<%= index %>" type="button" role="tab">
+      Summary
+    </button>
+  </li>
+  <li class="nav-item" role="presentation">
+    <button class="nav-link" id="flashcards-tab-<%= index %>" data-bs-toggle="tab" data-bs-target="#flashcards-<%= index %>" type="button" role="tab">
+      Flashcards
+    </button>
+  </li>
+  <li class="nav-item" role="presentation">
+    <button class="nav-link" id="quizzes-tab-<%= index %>" data-bs-toggle="tab" data-bs-target="#quizzes-<%= index %>" type="button" role="tab">
+      Quizzes
+    </button>
+  </li>
+</ul>
+
+<!-- Tab Content -->
+<div class="tab-content" id="materialTabsContent-<%= index %>">
+  <!-- Summary Tab -->
+  <%= render 'summary_tab', material: material, index: index %>
+
+  <!-- Flashcards Tab -->
+  <%= render 'flashcards_section', material: material, index: index %>
+
+  <!-- Quizzes Tab -->
+  <%= render 'quizzes_tab', material: material, index: index %>
+</div>

@@ -14,111 +14,13 @@
   <div class="row g-4 align-items-start">
     <!-- Study Materials Card -->
     <div class="col-lg-8">
-      <div class="subject-card p-4 h-100">
-        <div class="d-flex justify-content-between align-items-center mb-3">
-          <h2 class="h4 fw-bold mb-0">Study Materials</h2>
-          <% if @materials.any? %>
-            <%= link_to new_study_material_path(@study), class: "btn btn-outline-purple btn-sm d-flex align-items-center gap-1" do %>
-              <span class="fs-5">&#43;</span>
-              <span>Upload New Material</span>
-            <% end %>
-          <% end %>
-        </div>
-        <% if @materials.any? %>
-          <div class="d-flex flex-column gap-3">
-            <% @materials.each do |material| %>
-              <div class="border border-gray-200 rounded-lg p-4 hover:shadow-md transition duration-200">
-                <div class="flex items-start justify-between">
-                  <div class="flex-1">
-                    <h3 class="text-lg font-semibold text-gray-800 mb-2">
-                      <%= material.name %>
-                    </h3>
-                    <% if material.description.present? %>
-                      <p class="text-gray-600 mb-3">
-                        Description: <%= material.description %>
-                      </p>
-                      <% end %>
-                      <% if material.summary.present? %>
-                        <div class="material-summary">
-                          <% p markdown(material.summary) %>
-                          <% p material.summary %>
-                          Summary: <%= markdown(material.summary) %>
-                        </div>
-                      <% end %>
-                  </div>
-                </div>
-              </div>
-            <% end %>
-          </div>
-        <% else %>
-          <div class="text-center py-4 text-muted">
-            <p>No materials yet. Get started by uploading your first study material.</p>
-            <%= link_to "Upload Material", new_study_material_path(@study), class: "btn btn-purple btn-sm rounded-pill mt-2" %>
-          </div>
-        <% end %>
-      </div>
+      <%= render 'materials_section' %>
     </div>
 
-
-    <!-- Your Tutor Card or Available Tutors Card -->
+    <!-- Sidebar -->
     <div class="col-lg-4">
-      <% if @assigned_tutor %>
-        <div class="subject-card p-4 mb-4">
-          <h5 class="fw-bold mb-3 text-purple">Your Tutor for this Subject</h5>
-          <div class="subject-card p-3 mb-2">
-            <div class="fw-bold fs-5 mb-1"><%= @assigned_tutor.first_name %> <%= @assigned_tutor.last_name %></div>
-            <div class="text-muted small mb-2"><%= @assigned_tutor.email %></div>
-            <% if @assigned_tutor.bio.present? %>
-              <p class="mb-2 text-base"><%= @assigned_tutor.bio %></p>
-            <% end %>
-            <% if @upcoming_session %>
-              <div class="mb-2">
-                <span class="fw-semibold">Upcoming Session:</span>
-                <span class="fw-bold d-block mt-1"><%= @upcoming_session.start_time.strftime('%A, %b %d at %I:%M %p') %></span>
-              </div>
-            <% else %>
-              <div class="d-flex flex-column gap-2 mt-2">
-                <%= link_to "Book Session", new_tutoring_session_path(tutor_id: @assigned_tutor.id), class: "btn btn-purple btn-sm rounded-pill w-100" %>
-              </div>
-            <% end %>
-          </div>
-        </div>
-      <% else %>
-        <div class="subject-card p-4 mb-4">
-          <h5 class="fw-bold mb-3 text-purple">Available Tutors</h5>
-          <% if @available_tutors.any? %>
-            <div class="d-flex flex-column gap-3">
-              <% @available_tutors.each do |tutor| %>
-                <% expertise = tutor.expertises.find_by(subject: @study.subject) %>
-                <div class="subject-card p-3 mb-2">
-                  <div class="fw-bold fs-5 mb-1"><%= tutor.first_name %> <%= tutor.last_name %></div>
-                  <div class="text-muted small mb-2"><%= tutor.email %></div>
-                  <% if tutor.bio.present? %>
-                    <p class="mb-2 text-base"><%= tutor.bio %></p>
-                  <% end %>
-                  <div class="d-flex flex-column gap-2 mt-2">
-                    <%= link_to "Book Session", new_tutoring_session_path(tutor_id: tutor.id), class: "btn btn-purple btn-sm rounded-pill w-100" %>
-                  </div>
-                </div>
-              <% end %>
-            </div>
-          <% else %>
-            <div class="text-center py-4 text-muted">
-              <p>No tutors available for this subject yet.</p>
-            </div>
-          <% end %>
-        </div>
-      <% end %>
-
-      <!-- Study Progress Card -->
-      <div class="subject-card p-4 mt-4">
-        <h5 class="fw-bold mb-3 text-purple">Study Progress</h5>
-        <% percent_complete = @study.fake_percent_complete %>
-        <div class="progress mb-2">
-          <div class="progress-bar bg-purple" role="progressbar" style="width: <%= percent_complete %>%"></div>
-        </div>
-        <div class="fw-bold fs-5 text-center mt-2"><%= percent_complete %>% complete</div>
-      </div>
+      <%= render 'tutor_section' %>
+      <%= render 'progress_section' %>
     </div>
   </div>
 </div>

@@ -5,7 +5,7 @@
   <div class="row">
     <% @studies.each do |study| %>
       <% most_recent_session = study.tutoring_sessions.order(start_time: :desc).first %>
-      <% percent_complete = study.fake_percent_complete %>
+      <% percent_complete = study.progress %>
       <div class="col-md-4 mb-4">
         <%= link_to study_path(study), class: "text-decoration-none text-dark" do %>
           <div class="subject-card card p-3 mb-3 d-flex flex-column h-100">

@@ -10,11 +10,6 @@
       Flashcards
     </button>
   </li>
-  <li class="nav-item" role="presentation">
-    <button class="nav-link" id="quizzes-tab-<%= index %>" data-bs-toggle="tab" data-bs-target="#quizzes-<%= index %>" type="button" role="tab">
-      Quizzes
-    </button>
-  </li>
 </ul>
 
 <!-- Tab Content -->
@@ -26,5 +21,4 @@
   <%= render 'flashcards_section', material: material, index: index %>
 
   <!-- Quizzes Tab -->
-  <%= render 'quizzes_tab', material: material, index: index %>
 </div>

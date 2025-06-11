@@ -22,4 +22,8 @@ class Study < ApplicationRecord
       (flashcards_done.to_f / flashcards_total.to_f * 100).to_i
     end
   end
+
+  def current_tutor
+    tutoring_sessions.includes(expertise: :user).last&.expertise&.user
+  end
 end

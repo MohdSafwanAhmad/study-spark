@@ -2,7 +2,7 @@ class ChatsController < ApplicationController
   def index
     @study = Study.find(params[:study_id])
     @chats = @study.chats.order(:created_at)
-    @chat = Chat.new
+    @chat = Chat.new(prompt: !current_user.tutor?)
   end
 
   def create
@@ -25,6 +25,6 @@ class ChatsController < ApplicationController
   private
 
   def chat_params
-    params.require(:chat).permit(:user_question)
+    params.require(:chat).permit(:user_question, :prompt)
   end
 end

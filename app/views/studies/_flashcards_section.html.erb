@@ -8,39 +8,21 @@
       </div>
 
       <!-- Flashcards Progress -->
-      <% solved_count = material.flashcards.where(solved: true).count %>
-      <% total_count = material.flashcards.count %>
-      <div class="mb-3">
-        <div class="d-flex justify-content-between align-items-center mb-1">
-          <small class="text-muted">Progress</small>
-          <small class="fw-bold" id="progress-text-<%= index %>"><%= solved_count %>/<%= total_count %> mastered</small>
-        </div>
-        <div class="progress" style="height: 6px;">
-          <div class="progress-bar bg-purple" id="progress-bar-<%= index %>" style="width: <%= total_count > 0 ? (solved_count.to_f / total_count * 100) : 0 %>%"></div>
-        </div>
-      </div>
+      <%# <% solved_count = material.flashcards.where(solved: true).count %>
+      <%# <% total_count = material.flashcards.count %> 
+      <%# <div class="mb-3"> %>
+        <%# <div class="d-flex justify-content-between align-items-center mb-1"> %>
+          <%# <small class="text-muted">Progress</small> %>
+          <%# <small class="fw-bold" id="progress-text-<%= index"><%= solved_count/<%= total_count mastered</small> %> 
+        <%# </div> %>
+        <%# <div class="progress" style="height: 6px;"> %>
+          <%# <div class="progress-bar bg-purple" id="progress-bar-<%= index" style="width: <%= total_count > 0 ? (solved_count.to_f / total_count * 100) : 0%"></div>  %>
+        <%# </div> %>
+      <%# </div>  %>
 
       <!-- Single Flashcard Container -->
-      <div class="flashcard-study-container" id="flashcard-container-<%= index %>" data-material-id="<%= material.id %>">
+      <div class="flashcard-study-container" id="flashcard-container-<%= index %>" data-material-id="<%= material.id %>">        
         <!-- Navigation Controls -->
-        <div class="d-flex justify-content-between align-items-center mb-3">
-          <span class="text-muted">Card <span id="card-counter-<%= index %>">1</span> of <%= total_count %></span>
-          <div class="btn-group btn-group-sm">
-            <button class="btn btn-outline-secondary" 
-                    id="prev-btn-<%= index %>" 
-                    onclick="window.previousCard(<%= index %>)" 
-                    type="button"
-                    disabled>
-              <i class="fas fa-chevron-left"></i> Previous
-            </button>
-            <button class="btn btn-outline-secondary" 
-                    id="next-btn-<%= index %>" 
-                    onclick="window.nextCard(<%= index %>)"
-                    type="button">
-              Next <i class="fas fa-chevron-right"></i>
-            </button>
-          </div>
-        </div>
 
         <!-- Single Flashcard Display -->
         <% material.flashcards.each_with_index do |flashcard, card_index| %>
@@ -53,7 +35,7 @@
               <!-- Question Side (Always Visible Initially) -->
               <div class="flashcard-question" id="question-<%= index %>-<%= card_index %>">
                 <div class="flashcard-content">
-                  <h6 class="fw-bold mb-2 text-purple">Question <%= card_index + 1 %></h6>
+                  <h6 class="fw-bold mb-2 text-purple">Question</h6>
                   <p class="mb-3"><%= flashcard.question %></p>
                   <button class="btn btn-primary btn-sm" 
                           onclick="window.revealAnswer(<%= index %>, <%= card_index %>)"

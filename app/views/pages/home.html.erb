@@ -3,13 +3,25 @@
   <header class="navbar sticky-top navbar-expand-lg glass-nav shadow-sm border-bottom w-100">
     <div class="container-fluid d-flex justify-content-between align-items-center px-4">
 
-      <!-- Left: Brand -->
-     <!-- Left: Brand -->
+
 <div class="d-flex align-items-center">
-  <%= link_to root_path, class: "navbar-brand fw-bold fs-4 mb-0 me-4", data: { turbo: false } do %>
-    StudySpark
+  <%= link_to root_path, class: "navbar-brand d-flex align-items-center logo-hover text-decoration-none", data: { turbo: false } do %>
+    <%= image_tag(
+          "https://res.cloudinary.com/dirgjwkty/image/upload/v1749569642/Transparent_Logo_d8cyxa.png",
+          alt: "StudySpark Logo",
+          style: "height: 74px; margin-right: 0.35rem; object-fit: contain;",
+          class: "logo-img"
+        ) %>
+    <span class="logo-text fw-semibold fs-4 mb-0 align-middle">StudySpark</span>
   <% end %>
 </div>
+
+
+
+
+
+
+
 
 
      <!-- Center: Features & Login -->

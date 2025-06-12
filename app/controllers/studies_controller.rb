@@ -12,7 +12,7 @@ class StudiesController < ApplicationController
   def show
     # @study is set by before_action
 
-    @materials = @study.materials
+    @materials = @study.materials.order(created_at: :desc)
     @assigned_tutor = @study.tutoring_sessions.last&.expertise&.user
     @upcoming_session = @study.tutoring_sessions.order(start_time: :desc).first
     if @assigned_tutor
@@ -35,7 +35,7 @@ class StudiesController < ApplicationController
     @study.user = current_user
 
     if @study.save
-      redirect_to dashboard_path, notice: "Subject added to your studies!"
+      redirect_to study_path(@study), notice: "#{study.subject.name} has been added to your studies!"
     else
       render :new
     end

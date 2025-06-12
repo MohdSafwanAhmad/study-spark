@@ -3,11 +3,10 @@
   <div class="subject-card p-4 mb-4 position-relative">
     <div class="d-flex justify-content-between align-items-center mb-2">
       <h2 class="fw-bold text-purple mb-0" style="font-size: 2.2rem; line-height: 1.1;">Grade <%= @study.subject.grade_level %> | <%= @study.subject.name %></h2>
-      <div id="material-upload-spinner" class="d-none" style="display: flex; align-items: center; gap: 0.75rem; position: absolute; right: 2rem; top: 1.5rem; z-index: 10; background: none;">
-        <div class="spinner-border text-purple" role="status">
+      <div id="material-upload-spinner" class="d-none" style="display: flex; align-items: center; gap: 0.75rem; position: absolute; right: 2.5rem; top: 1rem; z-index: 10; background: none;">
+        <div class="spinner-border text-purple" role="status" style="width: 5rem; height: 5rem; border-width: 0.5rem;">
           <span class="visually-hidden">Loading...</span>
         </div>
-        <div class="spinner-message spinner-purple" style="font-size: 1.1rem; font-weight: 600;">Processing your material...</div>
       </div>
     </div>
     <div>

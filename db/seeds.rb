@@ -1,4 +1,13 @@
-# db/seeds.rb
+# This file should ensure the existence of records required to run the application in every environment (production,
+# development, test). The code here should be idempotent so that it can be executed at any point in every environment.
+# The data can then be loaded with the bin/rails db:seed command (or created alongside the database with db:setup).
+#
+# Example:
+#
+#   ["Action", "Comedy", "Drama", "Horror"].each do |genre_name|
+#     MovieGenre.find_or_create_by!(name: genre_name)
+#   end
+# Clear existing data
 puts "Cleaning database..."
 
 Chat.destroy_all
@@ -8,7 +17,6 @@ Expertise.destroy_all
 Study.destroy_all
 User.destroy_all
 Subject.destroy_all
-
 puts "Creating subjects..."
 
 # Grade 8 Subjects
@@ -235,7 +243,7 @@ tutor_joseph_duran = User.create!(
   password: "password123",
   tutor: true,
   date_of_birth: "1989-08-05",
-  bio: "How arrive get four adult evening. I work with students at their own pace, using creative and interactive strategies to make learning enjoyable and effective."
+  bio: "I work with students at their own pace, using creative and interactive strategies to make learning enjoyable and effective."
 )
 tutor_joseph_duran.profile_picture.attach(
   io: URI.open("https://res.cloudinary.com/dirgjwkty/image/upload/v1749653457/juliends_r4voqu.jpg"),
@@ -268,7 +276,7 @@ tutor_maria_smith = User.create!(
   password: "password123",
   tutor: true,
   date_of_birth: "1993-04-14",
-  bio: "Population little century center discover clearly. I work with students at their own pace, using creative and interactive strategies to make learning enjoyable and effective."
+  bio: "I work with students at their own pace, using creative and interactive strategies to make learning enjoyable and effective."
 
 )
 tutor_maria_smith.profile_picture.attach(
@@ -319,7 +327,7 @@ tutor_matthew_vance = User.create!(
   password: "password123",
   tutor: true,
   date_of_birth: "2000-11-23",
-  bio: "Believe audience line prepare market that cell very without yet tough. I work with students at their own pace, using creative and interactive strategies to make learning enjoyable and effective."
+  bio: "I work with students at their own pace, using creative and interactive strategies to make learning enjoyable and effective."
 
 )
 tutor_matthew_vance.profile_picture.attach(
@@ -336,7 +344,7 @@ tutor_james_stewart = User.create!(
   password: "password123",
   tutor: true,
   date_of_birth: "1989-10-12",
-  bio: "Sense president medical season finish bad suggest group else arm child operation design education. I work with students at their own pace, using creative and interactive strategies to make learning enjoyable and effective."
+  bio: "I work with students at their own pace, using creative and interactive strategies to make learning enjoyable and effective."
 
 )
 tutor_james_stewart.profile_picture.attach(
@@ -353,7 +361,7 @@ tutor_jacob_sandoval = User.create!(
   password: "password123",
   tutor: true,
   date_of_birth: "1999-08-08",
-  bio: "System head allow activity you skill health remain question identify simple guess ahead. I work with students at their own pace, using creative and interactive strategies to make learning enjoyable and effective."
+  bio: "I work with students at their own pace, using creative and interactive strategies to make learning enjoyable and effective."
 
 )
 tutor_jacob_sandoval.profile_picture.attach(
@@ -370,7 +378,7 @@ tutor_paul_mckinney = User.create!(
   password: "password123",
   tutor: true,
   date_of_birth: "1993-01-20",
-  bio: "Whole assume attack fear security deal upon respond. I work with students at their own pace, using creative and interactive strategies to make learning enjoyable and effective."
+  bio: "I work with students at their own pace, using creative and interactive strategies to make learning enjoyable and effective."
 
 )
 tutor_paul_mckinney.profile_picture.attach(
@@ -387,7 +395,7 @@ tutor_christopher_anderson = User.create!(
   password: "password123",
   tutor: true,
   date_of_birth: "1996-12-10",
-  bio: "Street beat property reflect rate method each. I work with students at their own pace, using creative and interactive strategies to make learning enjoyable and effective."
+  bio: "I work with students at their own pace, using creative and interactive strategies to make learning enjoyable and effective."
 
 )
 tutor_christopher_anderson.profile_picture.attach(
@@ -404,13 +412,26 @@ tutor_paul_daniels = User.create!(
   password: "password123",
   tutor: true,
   date_of_birth: "1999-04-12",
-  bio: "Though more piece work hour opportunity word single sometimes many. I work with students at their own pace, using creative and interactive strategies to make learning enjoyable and effective."
+  bio: "I work with students at their own pace, using creative and interactive strategies to make learning enjoyable and effective."
 )
 tutor_paul_daniels.profile_picture.attach(
   io: URI.open("https://res.cloudinary.com/dirgjwkty/image/upload/v1749653457/pdunleav_bmvoyc.jpg"),
   filename: "paul_daniels.jpg",
   content_type: "image/jpeg"
 )
+
+puts "Creating learner Safwan Ansari..."
+learner_safwan_ansari = User.create!(
+  first_name: "Safwan",
+  last_name: "Ansari",
+  email: "safwan.ansari@student.studyspark.com",
+  password: "password123",
+  tutor: false,
+  date_of_birth: "2010-03-15"
+)
+puts "Creating studies for Safwan..."
+Study.create!(user: learner_safwan_ansari, subject: subject_grade9_algebra_i, learning_objective: "Master solving linear equations with one variable")
+Study.create!(user: learner_safwan_ansari, subject: subject_grade9_science, learning_objective: "Understand the basics of the water cycle")
 
 puts "Creating expertises..."
 
@@ -494,56 +515,11 @@ expertise_joseph_duran_world_cultures_9 = Expertise.create!(user: tutor_joseph_d
 
 expertise_roger_garza_spanish_i_9 = Expertise.create!(user: tutor_roger_garza, subject: subject_grade9_spanish_i, tutor_rate: 3307)
 
-
-puts "Creating learner Safwan Ansari..."
-learner_safwan_ansari = User.create!(
-  first_name: "Safwan",
-  last_name: "Ansari",
-  email: "safwan.ansari@student.studyspark.com",
-  password: "password123",
-  tutor: false,
-  date_of_birth: "2010-03-15"
-)
-puts "Creating studies for Safwan..."
-Study.create!(user: learner_safwan_ansari, subject: subject_grade9_algebra_i, learning_objective: "Master solving linear equations with one variable")
-Study.create!(user: learner_safwan_ansari, subject: subject_grade9_science, learning_objective: "Understand the basics of the water cycle")
-
 puts "Created #{Expertise.count} expertises"
-
-puts "Assigning additional expertises for full subject coverage..."
-
-Expertise.create!(user: tutor_daniel_brown, subject: subject_grade8_pre_algebra, tutor_rate: 2600)
-Expertise.create!(user: tutor_sabrina_johnson, subject: subject_grade8_english_language_arts, tutor_rate: 2900)
-
-# New tutor Elena Nguyen
-new_tutor_elena = User.create!(
-  first_name: "Elena",
-  last_name: "Nguyen",
-  email: "elena.nguyen@studyspark.com",
-  password: "password123",
-  tutor: true,
-  date_of_birth: "1991-05-14",
-  bio: "Middle school history teacher with a passion for global studies. I help students discover how past events shape our present and future."
-)
-# Placeholder: new_tutor_elena.profile_picture.attach(...)
-
-# New tutor Carlos Rivera
-new_tutor_carlos = User.create!(
-  first_name: "Carlos",
-  last_name: "Rivera",
-  email: "carlos.rivera@studyspark.com",
-  password: "password123",
-  tutor: true,
-  date_of_birth: "1987-11-02",
-  bio: "Geography and environmental science educator. I use maps, media, and storytelling to bring our planet's diversity into the classroom."
-)
-# Placeholder: new_tutor_carlos.profile_picture.attach(...)
-
-Expertise.create!(user: new_tutor_elena, subject: subject_grade8_world_history, tutor_rate: 2850)
-Expertise.create!(user: new_tutor_carlos, subject: subject_grade8_geography, tutor_rate: 2700)
-
 
 puts "\n=== SEEDING COMPLETED ==="
 puts "#{User.where(tutor: true).count} tutors created"
+puts "#{User.where(tutor: false).count} learners created"
 puts "#{Subject.count} subjects created"
 puts "#{Expertise.count} expertises created"
+puts "#{Study.count} studies created"

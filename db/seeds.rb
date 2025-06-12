@@ -431,7 +431,21 @@ learner_safwan_ansari = User.create!(
 )
 puts "Creating studies for Safwan..."
 Study.create!(user: learner_safwan_ansari, subject: subject_grade9_algebra_i, learning_objective: "Master solving linear equations with one variable")
-Study.create!(user: learner_safwan_ansari, subject: subject_grade9_science, learning_objective: "Understand the basics of the water cycle")
+Study.create!(user: learner_safwan_ansari, subject: subject_grade9_science, learning_objective: "Understand the concepts of Collision and Momentum")
+
+
+puts "Creating Backup learner Safwan Ansari..."
+learner_safwan_ansari = User.create!(
+  first_name: "Safwan",
+  last_name: "Ansari",
+  email: "safwan_ansari@student.studyspark.com",
+  password: "password123",
+  tutor: false,
+  date_of_birth: "2010-03-15"
+)
+puts "Creating studies for Safwan..."
+Study.create!(user: learner_safwan_ansari, subject: subject_grade9_algebra_i, learning_objective: "Master solving linear equations with one variable")
+Study.create!(user: learner_safwan_ansari, subject: subject_grade9_science, learning_objective: "Understand the concepts of Collision and Momentum")
 
 puts "Creating expertises..."
 

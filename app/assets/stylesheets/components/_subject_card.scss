@@ -18,17 +18,57 @@
   }
 
   .progress {
-    background: #eafaf3;
+    background: #f3ebff;
     height: 5px;
     border-radius: 4px;
   }
 
   .progress-bar {
-    background: linear-gradient(90deg, #20c997 0%, #38ef7d 100%);
-    box-shadow: 0 1px 4px #20c99733;
+    background: linear-gradient(90deg, #714288 0%, #9873B9 100%);
+    box-shadow: 0 1px 4px #71428833;
   }
 
   .text-danger {
     color: #d7263d !important;
   }
+}
+
+.add-subject-card .add-subject-card-inner {
+  min-height: 220px;
+  border: 2px dashed #714288;
+  background: #faf7fc;
+  transition: background 0.2s, border-color 0.2s;
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+.add-subject-card .fa-plus {
+  font-size: 2.5rem;
+  color: #714288;
+  transition: color 0.2s;
+}
+.add-subject-card .fw-bold {
+  color: #714288;
+  transition: color 0.2s;
+}
+.add-subject-card .add-subject-card-inner:hover {
+  background: #f3ebff !important;
+  border-color: #9873B9 !important;
+  box-shadow: 0 2px 12px 0 #9873b91a;
+}
+.add-subject-card .add-subject-card-inner:hover .fa-plus,
+.add-subject-card .add-subject-card-inner:hover .fw-bold {
+  color: #9873B9 !important;
+}
+
+.add-subject-card:hover {
+  border-color: #9873B9 !important;
+  background: #f3ebff !important;
+  box-shadow: 0 2px 12px 0 #9873b91a;
+}
+.add-subject-card:hover .fa-plus,
+.add-subject-card:hover .fw-bold {
+  color: #9873B9 !important;
 } 

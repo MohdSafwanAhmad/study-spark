@@ -12,7 +12,7 @@ class StudiesController < ApplicationController
   def show
     # @study is set by before_action
 
-    @materials = @study.materials
+    @materials = @study.materials.order(created_at: :desc)
     @assigned_tutor = @study.tutoring_sessions.last&.expertise&.user
     @upcoming_session = @study.tutoring_sessions.order(start_time: :desc).first
     if @assigned_tutor

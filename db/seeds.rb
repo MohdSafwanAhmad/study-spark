@@ -431,7 +431,7 @@ learner_safwan_ansari = User.create!(
 )
 puts "Creating studies for Safwan..."
 Study.create!(user: learner_safwan_ansari, subject: subject_grade9_algebra_i, learning_objective: "Master solving linear equations with one variable")
-Study.create!(user: learner_safwan_ansari, subject: subject_grade9_science, learning_objective: "Understand the basics of the water cycle")
+Study.create!(user: learner_safwan_ansari, subject: subject_grade9_science, learning_objective: "Understand the basics collisions and momentum")
 
 puts "Creating expertises..."
 

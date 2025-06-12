@@ -13,7 +13,7 @@
               <div class="d-flex justify-content-between align-items-start">
                 <div>
                   <div class="fw-bold fs-5"> <%= study.subject.name %> | Grade <%= study.subject.grade_level %></div>
-                  <div class="text-muted small mb-2">with <%= most_recent_session&.expertise&.user ? "#{most_recent_session.expertise.user.first_name} #{most_recent_session.expertise.user.last_name}" : "No tutor assigned" %></div>
+                  <div class="text-muted small mb-2">with <%= most_recent_session&.expertise&.user ? "#{most_recent_session.expertise.user.first_name} #{most_recent_session.expertise.user.last_name}" || "No tutor assigned" %></div>
                 </div>
               </div>
               <div class="d-flex align-items-center mt-2 mb-1">

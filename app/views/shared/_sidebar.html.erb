@@ -1,7 +1,7 @@
 <% if user_signed_in? %>
   <nav id="sidebarMenu" class="sidebar d-flex flex-column flex-shrink-0 bg-light position-fixed" style="width: 300px; height: 100vh; z-index: 1040; padding-left: 2rem; padding-right: 2rem;">  
     <div class="sidebar-logo mt-2 mb-1">
-      <%= link_to dashboard_path do %>
+      <%= link_to root_path, data: { turbo: false } do %>
         <div class="mascot-circle">
           <img src="https://res.cloudinary.com/dgx2lulyv/image/upload/v1749479161/Transparent_Logo_jsvqfa.png" alt="StudySpark Bunny" />
         </div>

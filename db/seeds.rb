@@ -89,17 +89,17 @@ tutor_emily_rodriguez.profile_picture.attach(
   content_type: "image/jpeg"
 )
 
-# Jessica Kim
-tutor_jessica_kim = User.create!(
-  first_name: "Jessica",
-  last_name: "Kim",
-  email: "jessica.kim@studyspark.com",
+# Naika Estriplet
+tutor_naika_estriplet = User.create!(
+  first_name: "Naïka",
+  last_name: "Estriplet",
+  email: "naika.estriplet@studyspark.com",
   password: "password123",
   tutor: true,
   date_of_birth: "1990-05-12",
   bio: "Native Spanish speaker with education degree. I bring cultural context and interactive exercises to the classroom, helping students achieve fluency through immersion and practice."
 )
-tutor_jessica_kim.profile_picture.attach(
+tutor_naika_estriplet.profile_picture.attach(
   io: URI.open("https://res.cloudinary.com/dirgjwkty/image/upload/v1749613888/207014929_cruzve.png"),
   filename: "jessica_kim.png",
   content_type: "image/png"
@@ -456,9 +456,13 @@ expertise_david_thompson_pre_calculus_10 = Expertise.create!(user: tutor_david_t
 expertise_david_thompson_algebra_ii_10 = Expertise.create!(user: tutor_david_thompson, subject: subject_grade10_algebra_ii, tutor_rate: 3400)
 expertise_david_thompson_geometry_10 = Expertise.create!(user: tutor_david_thompson, subject: subject_grade10_geometry, tutor_rate: 3500)
 
-# Jessica Kim - Spanish specialist
-expertise_jessica_kim_spanish_i_9 = Expertise.create!(user: tutor_jessica_kim, subject: subject_grade9_spanish_i, tutor_rate: 2900)
-expertise_jessica_kim_spanish_ii_10 = Expertise.create!(user: tutor_jessica_kim, subject: subject_grade10_spanish_ii, tutor_rate: 3300)
+# Naika Estriplet - Spanish specialist
+expertise_naika_estriplet_spanish_i_9 = Expertise.create!(user: tutor_naika_estriplet, subject: subject_grade9_spanish_i, tutor_rate: 2900)
+expertise_naika_estriplet_spanish_ii_10 = Expertise.create!(user: tutor_naika_estriplet, subject: subject_grade10_spanish_ii, tutor_rate: 3300)
+expertise_naika_estriplet_spanish_ii_10 = Expertise.create!(user: tutor_naika_estriplet, subject: subject_grade10_spanish_ii, tutor_rate: 3300)
+
+# Naika Estriplet - Science Expertise
+expertise_naika_estriplet_grade9_science = Expertise.create!(user: tutor_naika_estriplet, subject: subject_grade9_science, tutor_rate: 2700)
 
 # Robert Martinez - Chemistry/Science
 expertise_robert_martinez_chemistry_10 = Expertise.create!(user: tutor_robert_martinez, subject: subject_grade10_chemistry, tutor_rate: 3800)

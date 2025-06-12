@@ -1,0 +1,5 @@
+meta_product_name: "StudySpark"
+meta_title: "Learn Smart, Achieve More"
+meta_description: "Enhance your learning experience by turning your study materials into notes and flashcards, review them with AI or a tutor."
+meta_image: "cover.png" # should exist in `app/assets/images/`
+twitter_account: "@product_twitter_account" # required for Twitter Cards

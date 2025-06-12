@@ -94,20 +94,12 @@
           <%= form.submit "Generate Flashcards", class: "btn btn-purple rounded-pill" %>
         <% end %>
       </div>
-      <div class="spinner-overlay d-none" id="flashcards-spinner-<%= index %>">
-        <div class="d-flex flex-column align-items-center justify-content-center w-100 h-100">
-          <div class="spinner-border text-purple" role="status">
-            <span class="visually-hidden">Loading...</span>
-          </div>
-          <div class="spinner-message spinner-purple">Generating flashcards...</div>
-        </div>
-      </div>
       <script>
         document.addEventListener('DOMContentLoaded', function() {
           var form = document.getElementById('generate-flashcards-form-<%= index %>');
           if (form) {
             form.addEventListener('submit', function() {
-              var spinner = document.getElementById('flashcards-spinner-<%= index %>');
+              var spinner = document.getElementById('material-upload-spinner');
               var content = document.getElementById('no-flashcards-content-<%= index %>');
               if (spinner) spinner.classList.remove('d-none');
               if (content) content.style.display = 'none';

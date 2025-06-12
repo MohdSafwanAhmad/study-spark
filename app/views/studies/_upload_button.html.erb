@@ -12,14 +12,7 @@
 </div>
 <script>
 function showMaterialUploadSpinner() {
-  // Hide the material info content and show the spinner overlay
   var spinner = document.getElementById('material-upload-spinner');
-  var content = document.getElementById('material-info-content');
-  if (spinner) {
-    spinner.classList.remove('d-none');
-  }
-  if (content) {
-    content.style.display = 'none';
-  }
+  if (spinner) spinner.classList.remove('d-none');
 }
 </script>

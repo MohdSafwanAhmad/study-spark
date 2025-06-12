@@ -1,10 +1,10 @@
 <% if user_signed_in? %>
   <nav id="sidebarMenu" class="sidebar d-flex flex-column flex-shrink-0 bg-light position-fixed" style="width: 300px; height: 100vh; z-index: 1040; padding-left: 2rem; padding-right: 2rem;">  
-    <div class="sidebar-logo">
+    <div class="sidebar-logo mt-2 mb-1">
       <div class="mascot-circle">
         <img src="https://res.cloudinary.com/dgx2lulyv/image/upload/v1749479161/Transparent_Logo_jsvqfa.png" alt="StudySpark Bunny" />
       </div>
-      <h2 class="mt-2 mb-0" style="font-size: 1.1rem; letter-spacing: 1px;">StudySpark</h2>
+      <h2 class="mt-2 mb-3" style="font-size: 1.1rem; letter-spacing: 1px;">StudySpark</h2>
     </div>
     <div class="sidebar-menu mt-3 d-flex flex-column h-100">
       <ul class="sidebar-nav list-unstyled">
@@ -13,10 +13,12 @@
             <i class="fa-solid fa-wand-magic-sparkles me-2"></i>            <span>My Dashboard</span>
           <% end %>
         </li>
-        <li class="my-studies-toggle" data-bs-toggle="collapse" data-bs-target="#studiesCollapse" aria-expanded="true" aria-controls="studiesCollapse" style="display: flex; align-items: center; gap: 0.5rem; cursor: pointer;">
-          <i class="fa-solid fa-book me-2"></i>
-          <span>My Studies</span>
-          <i class="fa-solid fa-circle-chevron-down" id="studiesCollapseArrow" style="transition: transform 0.2s;"></i>
+        <li>
+          <div class="sidebar-link my-studies-toggle d-flex align-items-center" data-bs-toggle="collapse" data-bs-target="#studiesCollapse" aria-expanded="true" aria-controls="studiesCollapse" style="gap: 0.5rem; cursor: pointer;">
+            <i class="fa-solid fa-bars me-2"></i>
+            <span>My Studies</span>
+            <i class="fa-solid fa-circle-chevron-down" id="studiesCollapseArrow" style="transition: transform 0.2s; margin-left: auto;"></i>
+          </div>
         </li>
         <ul class="collapse show my-studies-list list-unstyled" id="studiesCollapse" style="list-style: none;">
           <% if current_user.studies.any? %>
@@ -39,10 +41,13 @@
             <span>Browse Tutors</span>
           <% end %>
         </li>
+        <li>
+          <%= link_to destroy_user_session_path, data: { turbo_method: :delete }, class: "sidebar-link" do %>
+            <i class="fa-solid fa-power-off me-2"></i>
+            <span>Log out</span>
+          <% end %>
+        </li>
       </ul>
-      <div class="logout-button">
-        <%= link_to "Log out", destroy_user_session_path, data: { turbo_method: :delete } %>
-      </div>
     </div>
     <script>
       document.addEventListener('DOMContentLoaded', function() {

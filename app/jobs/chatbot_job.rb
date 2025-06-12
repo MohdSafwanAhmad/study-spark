@@ -86,7 +86,7 @@ class ChatbotJob < ApplicationJob
 
     # [Answer Guidelines]
     system_prompt += "[Answer Guidelines]\n"
-    system_prompt += "- Keep answers to 3–4 well-structured sentences.\n"
+    system_prompt += "- Keep responses consise, maximum to 2-3 well-structured sentences.\n"
     system_prompt += "- If the question needs more depth, ask the student if they'd like you to expand.\n"
     system_prompt += "- Format responses clearly using:\n"
     system_prompt += "  • Bullet points for lists\n"

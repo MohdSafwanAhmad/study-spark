@@ -1,6 +1,6 @@
 <!-- _flashcards_section.html.erb -->
 <div class="tab-pane fade" id="flashcards-<%= index %>" role="tabpanel">
-  <div class="subject-card p-3">
+  <div class="subject-card p-3 position-relative">
     <% if material.flashcards.any? %>
       <!-- Generate More Button -->
       <div class="d-flex justify-content-between align-items-center mb-3">
@@ -86,14 +86,27 @@
 
     <% else %>
       <!-- No Flashcards State -->
-      <div class="text-center py-4">
+      <div class="text-center py-4" id="no-flashcards-content-<%= index %>">
         <i class="fas fa-cards-blank fs-1 mb-3 d-block text-muted"></i>
         <h6 class="fw-bold mb-2">Ready to create flashcards?</h6>
         <p class="text-muted mb-3">Generate interactive flashcards from your study material to improve retention.</p>
-        <%= form_with url: material_flashcards_path(material), method: :post, local: true do |form| %>
+        <%= form_with url: material_flashcards_path(material), method: :post, local: true, html: { id: "generate-flashcards-form-#{index}" } do |form| %>
           <%= form.submit "Generate Flashcards", class: "btn btn-purple rounded-pill" %>
         <% end %>
       </div>
+      <script>
+        document.addEventListener('DOMContentLoaded', function() {
+          var form = document.getElementById('generate-flashcards-form-<%= index %>');
+          if (form) {
+            form.addEventListener('submit', function() {
+              var spinner = document.getElementById('material-upload-spinner');
+              var content = document.getElementById('no-flashcards-content-<%= index %>');
+              if (spinner) spinner.classList.remove('d-none');
+              if (content) content.style.display = 'none';
+            });
+          }
+        });
+      </script>
     <% end %>
   </div>
 </div>

@@ -7,6 +7,12 @@
 
   <!-- Hidden form for file upload -->
   <%= form_with url: study_materials_path(@study), multipart: true, local: true, id: "upload-form", class: "d-none" do |form| %>
-    <%= form.file_field "material[file]", id: "file-upload", accept: ".pdf", onchange: "document.getElementById('upload-form').submit();" %>
+    <%= form.file_field "material[file]", id: "file-upload", accept: ".pdf", onchange: "showMaterialUploadSpinner(); document.getElementById('upload-form').submit();" %>
   <% end %>
 </div>
+<script>
+function showMaterialUploadSpinner() {
+  var spinner = document.getElementById('material-upload-spinner');
+  if (spinner) spinner.classList.remove('d-none');
+}
+</script>

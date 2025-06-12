@@ -1,9 +1,11 @@
 <% if user_signed_in? %>
   <nav id="sidebarMenu" class="sidebar d-flex flex-column flex-shrink-0 bg-light position-fixed" style="width: 300px; height: 100vh; z-index: 1040; padding-left: 2rem; padding-right: 2rem;">  
     <div class="sidebar-logo mt-2 mb-1">
-      <div class="mascot-circle">
-        <img src="https://res.cloudinary.com/dgx2lulyv/image/upload/v1749479161/Transparent_Logo_jsvqfa.png" alt="StudySpark Bunny" />
-      </div>
+      <%= link_to dashboard_path do %>
+        <div class="mascot-circle">
+          <img src="https://res.cloudinary.com/dgx2lulyv/image/upload/v1749479161/Transparent_Logo_jsvqfa.png" alt="StudySpark Bunny" />
+        </div>
+      <% end %>
       <h2 class="mt-2 mb-3" style="font-size: 1.1rem; letter-spacing: 1px;">StudySpark</h2>
     </div>
     <div class="sidebar-menu mt-3 d-flex flex-column h-100">

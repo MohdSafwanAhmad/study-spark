@@ -1,7 +1,9 @@
 <!-- _material_info.html.erb -->
-<div class="subject-card p-3 mb-3">
-  <div class="fw-bold fs-5 mb-1"><%= material.name %></div>
-  <% if material.description.present? %>
-    <p class="mb-2 text-base"><%= material.description %></p>
-  <% end %>
+<div class="subject-card p-3 mb-3 position-relative">
+  <div id="material-info-content">
+    <div class="fw-bold fs-5 mb-1"><%= material.name %></div>
+    <% if material.description.present? %>
+      <p class="mb-2 text-base"><%= material.description %></p>
+    <% end %>
+  </div>
 </div>

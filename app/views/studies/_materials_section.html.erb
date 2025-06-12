@@ -29,17 +29,17 @@
     <script>
       function showMaterialTabs(selectedIndex) {
         console.log(`Switching to material ${selectedIndex}`);
-        
+
         // Hide all material tabs
         document.querySelectorAll('.material-tabs').forEach(function(tab, index) {
           tab.style.display = 'none';
         });
-        
+
         // Show selected material tabs
         const selectedTab = document.getElementById('material-' + selectedIndex);
         if (selectedTab) {
           selectedTab.style.display = 'block';
-          
+
           // Initialize flashcards for this material after a short delay
           setTimeout(() => {
             if (typeof window.initializeFlashcards === 'function') {
@@ -48,7 +48,7 @@
           }, 200);
         }
       }
-      
+
       // Make function globally available
       window.showMaterialTabs = showMaterialTabs;
     </script>

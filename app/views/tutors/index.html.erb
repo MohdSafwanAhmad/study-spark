@@ -1,68 +1,109 @@
+
 <div class="container py-5">
-  <h1 class="mb-4 text-center text-purple">Our Tutors</h1>
+  <h1 class="mb-4 text-center text-purple">
+    <i class="fa fa-chalkboard-teacher me-2"></i>
+    Our Tutors
+  </h1>
 
   <div class="filter-tabs mb-5">
     <%= form_with url: tutors_path, method: :get, local: true, class: "filter-form" do %>
       <div class="row align-items-end">
         <div class="col-md-8">
           <%= label_tag :subject_id, "Subjects", class: "form-label" %>
-          <%= select_tag :subject_id, options_for_select([["All Subjects", ""], ["My Subjects", "my_subjects"]] + Subject.all.map { |s| [s.name, s.id] }, params[:subject_id]), class: "form-select" %>
+          <%= select_tag :subject_id,
+                options_for_select(
+                  [["All Subjects",""], ["My Subjects","my_subjects"]] +
+                  Subject.all.map { |s| [s.name, s.id] },
+                  params[:subject_id]
+                ),
+                class: "form-select" %>
         </div>
         <div class="col-md-4">
-          <%= submit_tag "Filter", class: "btn btn-purple w-100" %>
+          <%= button_tag "Filter", class: "btn btn-purple w-100", type: :submit %>
         </div>
       </div>
     <% end %>
   </div>
 
-  <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-4">
+
+  <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-4 align-items-stretch">
     <% @tutors.each do |tutor| %>
-      <div class="col">
-        <div class="card h-100 shadow-sm text-center">
+      <div class="col d-flex">
+        <div class="card tutor-card d-flex flex-column h-100 text-center">
+
           <% if tutor.profile_picture.attached? %>
-            <%= image_tag tutor.profile_picture, class: "rounded-circle mx-auto mt-3", style: "width: 120px; height: 120px; object-fit: cover;" %>
+            <%= image_tag tutor.profile_picture,
+                  class: "rounded-circle mx-auto mt-3",
+                  style: "width:120px; height:120px; object-fit:cover;" %>
           <% end %>
 
-          <div class="card-body">
-            <h5 class="card-title"><%= tutor.first_name %> <%= tutor.last_name %></h5>
+          <div class="card-body flex-grow-1">
 
-            <p class="expertise small text-muted">
+
+            <h5 class="card-title text-purple-dark">
+              <%= tutor.first_name %> <%= tutor.last_name %>
+            </h5>
+
+
+            <%
+              # Filter based on params
+              if params[:subject_id] == "my_subjects" && user_signed_in?
+                learner_ids = current_user.study_subjects.pluck(:id)
+                expertises = tutor.expertises.includes(:subject)
+                                    .where(subject_id: learner_ids)
+              elsif params[:subject_id].present?
+                expertises = tutor.expertises.includes(:subject)
+                                    .where(subject_id: params[:subject_id])
+              else
+                expertises = tutor.expertises.includes(:subject)
+              end
+
+              grouped = expertises.group_by { |e| e.subject.name }
+            %>
+
+            <!-- Expertise list -->
+            <p class="expertise small text-purple mb-3">
               <strong>Expertise:</strong>
               <ul class="list-unstyled mb-0">
-                <%
-                  if params[:subject_id] == "my_subjects" && user_signed_in?
-                    learner_subject_ids = current_user.study_subjects.pluck(:id)
-                    expertises = tutor.expertises.includes(:subject).where(subject_id: learner_subject_ids)
-                  elsif params[:subject_id].present? && params[:subject_id] != ""
-                    expertises = tutor.expertises.includes(:subject).where(subject_id: params[:subject_id])
-                  else
-                    expertises = tutor.expertises.includes(:subject)
-                  end
-                %>
-                <% expertises.each do |expertise| %>
-                  <li>
-                    <%= expertise.subject.name %>
-                    <%= expertise.tutor_rate.present? ? "- $#{'%.2f' % expertise.rate_in_dollars}" : "" %>
-                  </li>
+                <% grouped.each do |subject_name, group| %>
+                  <% group.each do |exp| %>
+                    <li class="text-purple">
+                      <%= subject_name %>
+                      <% if group.size > 1 %>
+                        <small>(Grade <%= exp.subject.grade_level %>)</small>
+                      <% end %>
+                      <%= exp.tutor_rate.present? ?
+                            "- $#{'%.2f' % exp.rate_in_dollars}" : "" %>
+                    </li>
+                  <% end %>
                 <% end %>
               </ul>
             </p>
 
+            <!-- Bio -->
             <% if tutor.bio.present? %>
               <p class="bio"><%= tutor.bio %></p>
             <% end %>
+
           </div>
 
-          <div class="card-footer bg-white border-top-0 d-flex justify-content-center gap-2">
-            <%= link_to "View Profile", tutor_path(tutor), class: "btn btn-outline-primary btn-sm" %>
-            <%= link_to "Book Session", new_tutoring_session_path(tutor_id: tutor.id), class: "btn btn-purple btn-sm" %>
+          <!-- Footer buttons -->
+          <div class="card-footer bg-white border-top-0
+                      d-flex justify-content-center gap-2 mt-auto">
+            <%= link_to "View Profile", tutor_path(tutor),
+                        class: "btn btn-outline-primary btn-sm" %>
+            <%= link_to "Book Session", new_tutoring_session_path(tutor_id: tutor.id),
+                        class: "btn btn-purple btn-sm" %>
           </div>
+
         </div>
       </div>
     <% end %>
   </div>
 
   <% if @tutors.empty? %>
-    <p class="text-muted mt-5 text-center">No tutors available at the moment.</p>
+    <p class="text-muted mt-5 text-center">
+      No tutors available at the moment.
+    </p>
   <% end %>
 </div>

@@ -1,66 +1,154 @@
+<!-- app/views/studies/show.html.erb -->
 <div class="container py-4">
-  <!-- Combined Subject Name and Learning Objective Card -->
+  <!-- Subject Header Card -->
   <div class="subject-card p-4 mb-4">
     <div class="d-flex justify-content-between align-items-center mb-2">
-      <h2 class="fw-bold text-purple mb-0" style="font-size: 2.2rem; line-height: 1.1;">Grade <%= @study.subject.grade_level %> | <%= @study.subject.name %></h2>
+      <h2 class="fw-bold text-purple mb-0" style="font-size: 2.2rem; line-height: 1.1;">
+        <i class="fas fa-folder-open me-2"></i>
+        Grade <%= @study.subject.grade_level %> | <%= @study.subject.name %>
+      </h2>
     </div>
     <div>
-      <h4 class="fw-bold mb-2">Learning Objective</h4>
+      <h6 class="fw-semibold mb-2 text-purple">
+        <i class="fas fa-bullseye me-2"></i>Learning Objective
+      </h6>
       <p class="mb-0 text-base"><%= @study.learning_objective %></p>
     </div>
   </div>
 
   <div class="row g-4 align-items-start">
-    <!-- Study Materials Card -->
+    <!-- Study Materials Column -->
     <div class="col-lg-8">
-      <%= render 'materials_section' %>
+      <div class="subject-card p-4 h-100">
+        <div class="d-flex justify-content-between align-items-center mb-3">
+          <h2 class="h5 fw-bold text-purple mb-0">
+            <i class="fas fa-book me-2"></i>Study Materials
+          </h2>
+          <% if @materials.any? %>
+            <%= render 'upload_button' %>
+          <% end %>
+        </div>
+
+        <% if @materials.any? %>
+          <div class="mb-4">
+            <label for="materialSelect" class="form-label fw-semibold text-purple">
+              Select Material:
+            </label>
+            <select
+              id="materialSelect"
+              class="form-select"
+              onchange="showMaterialTabs(this.value)"
+            >
+              <% @materials.each_with_index do |material, index| %>
+                <option value="<%= index %>" <%= 'selected' if index.zero? %>>
+                  <%= material.name %>
+                </option>
+              <% end %>
+            </select>
+          </div>
+
+          <% @materials.each_with_index do |material, index| %>
+            <div
+              id="material-<%= index %>"
+              class="material-tabs"
+              style="<%= 'display:none;' unless index.zero? %>"
+            >
+              <%= render 'material_info', material: material %>
+              <%= render 'material_tabs', material: material, index: index %>
+            </div>
+          <% end %>
+
+          <script>
+            function showMaterialTabs(selectedIndex) {
+              document.querySelectorAll('.material-tabs').forEach(tab => {
+                tab.style.display = 'none';
+              });
+              const selected = document.getElementById('material-' + selectedIndex);
+              if (selected) {
+                selected.style.display = 'block';
+                setTimeout(() => {
+                  if (typeof window.initializeFlashcards === 'function') {
+                    window.initializeFlashcards(parseInt(selectedIndex));
+                  }
+                }, 200);
+              }
+            }
+            window.showMaterialTabs = showMaterialTabs;
+          </script>
+        <% else %>
+          <%= render 'no_materials_state' %>
+        <% end %>
+      </div>
     </div>
 
-    <!-- Sidebar -->
-    <div class="col-lg-4">
-      <!-- Chat with Sparky AI Card -->
+    <!-- Sidebar Column -->
+    <div class="col-lg-4 position-sticky" style="top:100px; z-index:1;">
+      <!-- Chat with SparkyAI -->
       <div class="subject-card p-4 mb-4">
-        <h5 class="fw-bold mb-3" style="color: #8e24aa;">Chat with SparkyAI</h5>
-        <div class="mb-2 text-muted">Get instant help or ask questions about this subject with our AI assistant.</div>
-        <%= link_to "Open Chat", study_chats_path(@study), class: "btn btn-primary w-100", style: "background: #8e24aa; border: none;" %>
+        <h5 class="fw-bold mb-3 text-purple">
+          <i class="fas fa-robot me-2"></i>Chat with SparkyAI
+        </h5>
+        <div class="mb-2 text-muted small">
+          Get instant help or ask questions about this subject with our AI assistant.
+        </div>
+        <%= link_to "Open Chat",
+                    study_chats_path(@study),
+                    class: "btn btn-purple w-100" %>
       </div>
 
       <% if @assigned_tutor %>
         <div class="subject-card p-4 mb-4">
-          <h5 class="fw-bold mb-3" style="color: #8e24aa;">Your Tutor for this Subject</h5>
+          <h5 class="fw-bold mb-3 text-purple">
+            <i class="fas fa-user-graduate me-2"></i>Your Tutor for this Subject
+          </h5>
           <div class="subject-card p-3 mb-2">
-            <div class="fw-bold fs-5 mb-1"><%= @assigned_tutor.first_name %> <%= @assigned_tutor.last_name %></div>
-            <div class="text-muted small mb-2"><%= @assigned_tutor.email %></div>
-            <% if @assigned_tutor.bio.present? %>
-              <p class="mb-2 text-base"><%= @assigned_tutor.bio %></p>
-            <% end %>
+            <div class="fw-bold fs-5 mb-2 d-flex align-items-center text-purple">
+              <% if @assigned_tutor.profile_picture.attached? %>
+                <%= image_tag @assigned_tutor.profile_picture,
+                              class: "rounded-circle shadow me-2",
+                              size: "40x40" %>
+              <% end %>
+              <%= @assigned_tutor.first_name %> <%= @assigned_tutor.last_name %>
+            </div>
             <% if @upcoming_session %>
               <div class="mb-2">
-                <span class="fw-semibold">Upcoming Session:</span>
-                <span class="fw-bold d-block mt-1"><%= @upcoming_session.start_time.strftime('%A, %b %d at %I:%M %p') %></span>
+                <span class="fw-semibold text-purple">
+                  <i class="fas fa-calendar-alt me-1"></i>Upcoming Session:
+                </span>
+                <span class="fw-bold d-block mt-1 small text-purple">
+                  <%= @upcoming_session.start_time.strftime('%A, %b %d at %I:%M %p') %>
+                </span>
               </div>
             <% else %>
               <div class="d-flex flex-column gap-2 mt-2">
-                <%= link_to "Book Session", new_tutoring_session_path(tutor_id: @assigned_tutor.id), class: "btn btn-purple btn-sm rounded-pill w-100" %>
+                <%= link_to "Book Session",
+                            new_tutoring_session_path(tutor_id: @assigned_tutor.id),
+                            class: "btn btn-purple btn-sm rounded-pill w-100" %>
               </div>
             <% end %>
           </div>
         </div>
       <% else %>
         <div class="subject-card p-4 mb-4">
-          <h5 class="fw-bold mb-3 text-purple">Available Tutors</h5>
+          <h5 class="fw-bold mb-3 text-purple">
+            <i class="fas fa-users me-2"></i>Available Tutors
+          </h5>
           <% if @available_tutors.any? %>
             <div class="d-flex flex-column gap-3">
               <% @available_tutors.each do |tutor| %>
-                <% expertise = tutor.expertises.find_by(subject: @study.subject) %>
                 <div class="subject-card p-3 mb-2">
-                  <div class="fw-bold fs-5 mb-1"><%= tutor.first_name %> <%= tutor.last_name %></div>
-                  <div class="text-muted small mb-2"><%= tutor.email %></div>
-                  <% if tutor.bio.present? %>
-                    <p class="mb-2 text-base"><%= tutor.bio %></p>
-                  <% end %>
+                  <div class="fw-bold fs-5 mb-1 d-flex align-items-center text-purple">
+                    <% if tutor.profile_picture.attached? %>
+                      <%= image_tag tutor.profile_picture,
+                                    class: "rounded-circle shadow me-2",
+                                    size: "40x40" %>
+                    <% end %>
+                    <%= tutor.first_name %> <%= tutor.last_name %>
+                  </div>
                   <div class="d-flex flex-column gap-2 mt-2">
-                    <%= link_to "Book Session", new_tutoring_session_path(tutor_id: tutor.id), class: "btn btn-purple btn-sm rounded-pill w-100" %>
+                    <%= link_to "Book Session",
+                                new_tutoring_session_path(tutor_id: tutor.id),
+                                class: "btn btn-purple btn-sm rounded-pill w-100" %>
                   </div>
                 </div>
               <% end %>
@@ -75,3 +163,10 @@
     </div>
   </div>
 </div>
+
+<style>
+  .nav-tabs .nav-link.active,
+  .nav-tabs .nav-link {
+    color: #714288 !important;
+  }
+</style>

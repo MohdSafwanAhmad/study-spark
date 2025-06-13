@@ -61,7 +61,7 @@
   document.addEventListener("turbo:frame-load", scrollChatsToBottom);
 
   // Use MutationObserver to scroll when new messages are added
-  document.addEventListener("DOMContentLoaded", function() {
+  document.addEventListener("turbo:load", function() {
     var chats = document.getElementById("chats");
     if (chats) {
       var observer = new MutationObserver(function(mutationsList, observer) {

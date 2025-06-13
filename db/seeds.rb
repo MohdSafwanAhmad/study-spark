@@ -519,7 +519,8 @@ puts "Created #{Expertise.count} expertises"
 puts "Seeding sessions, materials and flashcards for the demo…"
 TutoringSession.create!(expertise: expertise_naika_estriplet_grade9_science, study: study_safwan_science, start_time: "Tue, 18 Jun 2025 12:00:00")
 
-# Materials for Science
+
+# Materials for Safwan's Science
 file1 = File.open(Rails.root.join("db/demo/06012025_momentum_collision_5_0.pdf"))
 material1 = Material.create!(study: study_safwan_science)
 material1.process_file(file1)
@@ -540,7 +541,7 @@ flashcards = material2.flashcards.to_a
 flashcards.pop(3)
 flashcards.each { |f| f.update!(solved: true) }
 
-# Materials for Algebra
+# Materials for Safwan's Algebra
 material3 = Material.create!(study: study_safwan_algebra)
 material3.process_file(file2)
 material3.save!
@@ -552,6 +553,43 @@ material4.save!
 material4.generate_flashcards
 
 [material3, material4].each do |material|
+  material.flashcards.update_all(solved: true)
+end
+
+# Tutoring Session for Safwan's Backup
+TutoringSession.create!(expertise: expertise_naika_estriplet_grade9_science, study: study_safwan_backup_science, start_time: "Tue, 18 Jun 2025 11:00:00")
+
+# Materials for Safwan-Backup's Science
+material5 = Material.create!(study: study_safwan_backup_science)
+material5.process_file(file1)
+material5.save!
+material5.generate_flashcards
+
+flashcards = material5.flashcards.to_a
+flashcards.pop(3)
+flashcards.each { |f| f.update!(solved: true) }
+
+material6 = Material.create!(study: study_safwan_backup_science)
+material6.process_file(file2)
+material6.save!
+material6.generate_flashcards
+
+flashcards = material6.flashcards.to_a
+flashcards.pop(3)
+flashcards.each { |f| f.update!(solved: true) }
+
+# Materials for Safwan-Backup's Algebra
+material7 = Material.create!(study: study_safwan_backup_algebra)
+material7.process_file(file2)
+material7.save!
+material7.generate_flashcards
+
+material8 = Material.create!(study: study_safwan_backup_algebra)
+material8.process_file(file1)
+material8.save!
+material8.generate_flashcards
+
+[material7, material8].each do |material|
   material.flashcards.update_all(solved: true)
 end
 

@@ -1,13 +1,3 @@
-# This file should ensure the existence of records required to run the application in every environment (production,
-# development, test). The code here should be idempotent so that it can be executed at any point in every environment.
-# The data can then be loaded with the bin/rails db:seed command (or created alongside the database with db:setup).
-#
-# Example:
-#
-#   ["Action", "Comedy", "Drama", "Horror"].each do |genre_name|
-#     MovieGenre.find_or_create_by!(name: genre_name)
-#   end
-# Clear existing data
 puts "Cleaning database..."
 
 Chat.destroy_all
@@ -17,6 +7,7 @@ Expertise.destroy_all
 Study.destroy_all
 User.destroy_all
 Subject.destroy_all
+
 puts "Creating subjects..."
 
 # Grade 8 Subjects
@@ -429,13 +420,14 @@ learner_safwan_ansari = User.create!(
   tutor: false,
   date_of_birth: "2010-03-15"
 )
-puts "Creating studies for Safwan..."
-Study.create!(user: learner_safwan_ansari, subject: subject_grade9_algebra_i, learning_objective: "Master solving linear equations with one variable")
-Study.create!(user: learner_safwan_ansari, subject: subject_grade9_science, learning_objective: "Understand the concepts of Collision and Momentum")
+
+puts "Creating studies for Safwan Ansari..."
+study_safwan_algebra = Study.create!(user: learner_safwan_ansari, subject: subject_grade9_algebra_i, learning_objective: "Master solving linear equations with one variable")
+study_safwan_science = Study.create!(user: learner_safwan_ansari, subject: subject_grade9_science, learning_objective: "Understand the concepts of Collision and Momentum")
 
 
 puts "Creating Backup learner Safwan Ansari..."
-learner_safwan_ansari = User.create!(
+learner_safwan_ansari_backup = User.create!(
   first_name: "Safwan",
   last_name: "Ansari",
   email: "safwan_ansari@student.studyspark.com",
@@ -443,9 +435,9 @@ learner_safwan_ansari = User.create!(
   tutor: false,
   date_of_birth: "2010-03-15"
 )
-puts "Creating studies for Safwan..."
-Study.create!(user: learner_safwan_ansari, subject: subject_grade9_algebra_i, learning_objective: "Master solving linear equations with one variable")
-Study.create!(user: learner_safwan_ansari, subject: subject_grade9_science, learning_objective: "Understand the concepts of Collision and Momentum")
+puts "Creating studies for Safwan Ansari Backup..."
+study_safwan_backup_algebra = Study.create!(user: learner_safwan_ansari_backup, subject: subject_grade9_algebra_i, learning_objective: "Master solving linear equations with one variable")
+study_safwan_backup_science = Study.create!(user: learner_safwan_ansari_backup, subject: subject_grade9_science, learning_objective: "Understand the concepts of Collision and Momentum")
 
 puts "Creating expertises..."
 
@@ -535,9 +527,89 @@ expertise_roger_garza_spanish_i_9 = Expertise.create!(user: tutor_roger_garza, s
 
 puts "Created #{Expertise.count} expertises"
 
+puts "Seeding tutoring sessions, materials and flashcards for the demo…"
+TutoringSession.create!(expertise: expertise_naika_estriplet_grade9_science, study: study_safwan_science, start_time: "Tue, 18 Jun 2025 12:00:00")
+
+
+file1 = File.open(Rails.root.join("db/demo/06012025_momentum_collision_5_0.pdf"))
+material1 = Material.create!(study: study_safwan_science)
+material1.process_file(file1)
+material1.save!
+material1.generate_flashcards
+
+flashcards = material1.flashcards.to_a
+flashcards.pop(3)
+flashcards.each { |f| f.update!(solved: true) }
+
+file2 = File.open(Rails.root.join("db/demo/06062025_momentum_collision_5_1.pdf"))
+material2 = Material.create!(study: study_safwan_science)
+material2.process_file(file2)
+material2.save!
+material2.generate_flashcards
+
+flashcards = material2.flashcards.to_a
+flashcards.pop(3)
+flashcards.each { |f| f.update!(solved: true) }
+
+# Materials for Safwan's Algebra
+material3 = Material.create!(study: study_safwan_algebra)
+material3.process_file(file2)
+material3.save!
+material3.generate_flashcards
+
+material4 = Material.create!(study: study_safwan_algebra)
+material4.process_file(file1)
+material4.save!
+material4.generate_flashcards
+
+[material3, material4].each do |material|
+  material.flashcards.update_all(solved: true)
+end
+
+# Tutoring Session for Safwan's Backup
+TutoringSession.create!(expertise: expertise_naika_estriplet_grade9_science, study: study_safwan_backup_science, start_time: "Tue, 18 Jun 2025 11:00:00")
+
+# Materials for Safwan-Backup's Science
+material5 = Material.create!(study: study_safwan_backup_science)
+material5.process_file(file1)
+material5.save!
+material5.generate_flashcards
+
+flashcards = material5.flashcards.to_a
+flashcards.pop(3)
+flashcards.each { |f| f.update!(solved: true) }
+
+material6 = Material.create!(study: study_safwan_backup_science)
+material6.process_file(file2)
+material6.save!
+material6.generate_flashcards
+
+flashcards = material6.flashcards.to_a
+flashcards.pop(3)
+flashcards.each { |f| f.update!(solved: true) }
+
+# Materials for Safwan-Backup's Algebra
+material7 = Material.create!(study: study_safwan_backup_algebra)
+material7.process_file(file2)
+material7.save!
+material7.generate_flashcards
+
+material8 = Material.create!(study: study_safwan_backup_algebra)
+material8.process_file(file1)
+material8.save!
+material8.generate_flashcards
+
+[material7, material8].each do |material|
+  material.flashcards.update_all(solved: true)
+end
+
+
 puts "\n=== SEEDING COMPLETED ==="
 puts "#{User.where(tutor: true).count} tutors created"
 puts "#{User.where(tutor: false).count} learners created"
 puts "#{Subject.count} subjects created"
 puts "#{Expertise.count} expertises created"
 puts "#{Study.count} studies created"
+puts "#{TutoringSession.count} tutoring sessions created"
+puts "#{Material.count} materials created"
+puts "#{Flashcard.count} flashcards created"

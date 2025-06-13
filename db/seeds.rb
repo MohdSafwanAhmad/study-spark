@@ -411,6 +411,17 @@ tutor_paul_daniels.profile_picture.attach(
   content_type: "image/jpeg"
 )
 
+puts "Creating learner Safwan Ansari..."
+learner_safwan_ansari = User.create!(
+  first_name: "Safwan",
+  last_name: "Ansari",
+  email: "safwan.ansari@student.studyspark.com",
+  password: "password123",
+  tutor: false,
+  date_of_birth: "2010-03-15"
+)
+
+puts "Creating studies for Safwan Ansari..."
 study_safwan_algebra = Study.create!(user: learner_safwan_ansari, subject: subject_grade9_algebra_i, learning_objective: "Master solving linear equations with one variable")
 study_safwan_science = Study.create!(user: learner_safwan_ansari, subject: subject_grade9_science, learning_objective: "Understand the concepts of Collision and Momentum")
 
@@ -516,11 +527,10 @@ expertise_roger_garza_spanish_i_9 = Expertise.create!(user: tutor_roger_garza, s
 
 puts "Created #{Expertise.count} expertises"
 
-puts "Seeding sessions, materials and flashcards for the demo…"
+puts "Seeding tutoring sessions, materials and flashcards for the demo…"
 TutoringSession.create!(expertise: expertise_naika_estriplet_grade9_science, study: study_safwan_science, start_time: "Tue, 18 Jun 2025 12:00:00")
 
 
-# Materials for Safwan's Science
 file1 = File.open(Rails.root.join("db/demo/06012025_momentum_collision_5_0.pdf"))
 material1 = Material.create!(study: study_safwan_science)
 material1.process_file(file1)
@@ -600,3 +610,6 @@ puts "#{User.where(tutor: false).count} learners created"
 puts "#{Subject.count} subjects created"
 puts "#{Expertise.count} expertises created"
 puts "#{Study.count} studies created"
+puts "#{TutoringSession.count} tutoring sessions created"
+puts "#{Material.count} materials created"
+puts "#{Flashcard.count} flashcards created"

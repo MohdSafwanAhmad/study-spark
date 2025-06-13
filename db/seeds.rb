@@ -2,6 +2,7 @@ puts "Cleaning database..."
 
 Chat.destroy_all
 TutoringSession.destroy_all
+Flashcard.destroy_all
 Material.destroy_all
 Expertise.destroy_all
 Study.destroy_all
@@ -428,7 +429,7 @@ study_safwan_science = Study.create!(user: learner_safwan_ansari, subject: subje
 
 puts "Creating Backup learner Safwan Ansari..."
 learner_safwan_ansari_backup = User.create!(
-  first_name: "Safwan",
+  first_name: "Safvan",
   last_name: "Ansari",
   email: "safwan_ansari@student.studyspark.com",
   password: "password123",
